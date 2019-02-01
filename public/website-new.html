@@ -11,7 +11,7 @@
 <body>
 
 <!-- Image and text -->
-
+<!--navigation bar-->
 <nav class="navbar navbar-dark bg-primary">
 
   <a href="website-ulst.html">
@@ -28,24 +28,68 @@
       <i class="fas fa-check fa-inverse"></i>
     </span>
   </a>
-
-
 </nav>
 
-<div class="container-fluid pt-2">
-  <form>
-    <div class="form-group">
-      <label for="name" class="font-weight-bold">Name</label>
-      <input id="name" type="text" class="form-control" placeholder="Name">
-    </div> <!-- form-group// -->
+<!--main body-->
+<div class="row container-fluid pt-2">
+  <!--left screen-->
+  <div class="col-md-2 hidden-md">
+    <table class="table">
+      <tbody>
+      <tr>
+        <td>
+          <div><a href="page-ulst.html">Address Book App</a></div>
+        </td>
+        <td align="right">
+          <a href="page-edit.html"><i class="fas fa-cog"></i></a>
+        </td>
+      </tr>
 
-    <div class="form-group" style="height: 100px;">
-      <label for="description" class="font-weight-bold">Description</label>
-      <textarea class="form-control" id="description" placeholder="Description" rows="5" type="text"></textarea>
-    </div> <!-- form-group// -->
-  </form>
-</div> <!-- container-fluid.// -->
+      <tr>
+        <td>
+          <div><a href="page-ulst.html">Blogger</a></div>
+        </td>
+        <td align="right">
+          <a href="page-edit.html"><i class="fas fa-cog"></i></a>
+        </td>
+      </tr>
 
+      <tr>
+        <td>
+          <div><a href="page-ulst.html">Blogging App</a></div>
+        </td>
+        <td align="right">
+          <a href="page-edit.html"><i class="fas fa-cog"></i></a>
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>
+          <div><a href="page-ulst.html">Script Testing App</a></div>
+        </td>
+        <td align="right">
+          <a href="page-edit.html"><i class="fas fa-cog"></i></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--right screen-->
+  <div class="col-md-9">
+    <form>
+      <div class="form-group">
+        <label for="name" class="font-weight-bold">Name</label>
+        <input id="name" type="text" class="form-control" placeholder="Name">
+      </div> <!-- form-group// -->
+
+      <div class="form-group" style="height: 100px;">
+        <label for="description" class="font-weight-bold">Description</label>
+        <textarea class="form-control" id="description" placeholder="Description" rows="5" type="text"></textarea>
+      </div> <!-- form-group// -->
+    </form>
+  </div> <!-- container-fluid.// -->
+</div>
 
 <nav class="navbar navbar-dark bg-primary fixed-bottom">
   <a class="navbar-brand font-weight-bold" href="#"></a>
