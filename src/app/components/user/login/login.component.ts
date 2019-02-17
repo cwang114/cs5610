@@ -20,16 +20,15 @@ export class LoginComponent implements OnInit {
   login() {
     let username = this.loginForm.value.username;
     let password = this.loginForm.value.password;
-    console.log(username);
-    console.log(password);
+    // console.log(username);
+    // console.log(password);
     let user = this.userService.findUserByCredentials(username, password);
-    this.router.navigate(['/user', user._id]);
-    // if(user){
-    //   this.router.navigate(['/user', user.username]);
-    // } else {
-    //   this.errorFlag = true;
-    //   this.errorMsg = "Login Failed.";
-    // }
+    if(user){
+      this.router.navigate(['/user', user._id]);
+    } else {
+      this.errorFlag = true;
+      this.errorMsg = "Login Failed.";
+    }
 
 
   }

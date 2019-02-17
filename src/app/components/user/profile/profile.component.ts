@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from 'src/app/user.service';
 import {User} from 'src/app/model/User';
 
@@ -10,12 +10,31 @@ import {User} from 'src/app/model/User';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  @Input() user: User;
-  constructor(private userService: UserService, private router: ActivatedRoute) { }
+  //properties
+  userId: String;
+  user = {};
+  username: String;
+  constructor(private userService: UserService, private router: ActivatedRoute, private outRouter: Router) { }
 
   ngOnInit() {
-    this.router.params.subscribe(params => this.user = this.userService.findUserById(params.uid));
+    console.log(this.router.params['value']);
+    //this.userId = this.router.params['value'].uid;
+    this.router.params.subscribe(
+      (params: any) => { 
+        // console.log(params);
+        this.userId = params['uid']});
+    this.user = this.userService.findUserById(this.userId);
+    this.username = this.user['username'];
+    // console.log(this.user);
   }
+  displayWebsites() {
+    let user = this.userService.findUserByUserName(this.username);
+    if (user) {
+      this.outRouter.navigate(['/user', user._id, 'website']);
+    }
+    
+  }
+
 
 }
 
