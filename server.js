@@ -35,10 +35,10 @@ dbServer(app);*/
 
 
 // For Build: Catch all other routes and return the index file -- BUILDING
-
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'dist/my-project/index.html'));
-});
+//
+// app.get('*', function (req, res) {
+//   res.sendFile(path.join(__dirname, 'dist/my-project/index.html'));
+// });
 
 
 
