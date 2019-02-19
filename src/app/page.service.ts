@@ -16,18 +16,45 @@ export class PageService {
 
   constructor() { }
   createPage(websiteId, page){
+    var lastId = this.pages[this.pages.length-1]._id;
+    page._id = (+(lastId)+1).toString();
+    page.websiteId = websiteId;
+    this.pages.push(page);
 
   }
   findPageByWebsiteId(websiteId){
+    let res = [];
+    for (var page of this.pages) {
+      if (page.websiteId === websiteId) {
+        res.push(page);
+      }
+    }
+    return res;
 
   }
   findPageById(pageId){
-
+    for (var page of this.pages) {
+      if (page._id === pageId) {
+        return page;
+      }
+    }
+    return null;
   }
   updatePage(pageId, page){
+    for (var i = 0; i < this.pages.length; i++) {
+      if (this.pages[i]._id === pageId) {
+        this.pages[i] = page;
+        return;
+      }
+    }
     
   }
   deletePage(pageId){
-    
+    for (var i = 0; i < this.pages.length; i++) {
+      if (this.pages[i]._id === pageId) {
+        this.pages.splice(i, 1);
+        return;
+      }
+    }
   }
 }

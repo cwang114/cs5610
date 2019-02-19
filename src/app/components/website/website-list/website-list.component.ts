@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import {ActivatedRoute, Router} from "@angular/router";
 import {WebsiteService} from 'src/app/website.service';
 import {Website} from 'src/app/model/Website';
@@ -23,7 +22,6 @@ export class WebsiteListComponent implements OnInit {
     console.log(this.websites);
   }
   goBack() {
-    
     this.router.navigate(['/user', this.userId]);
   }
   createNewWebsite() {
@@ -32,6 +30,10 @@ export class WebsiteListComponent implements OnInit {
   goToEditWebsite(websiteId) {
     this.router.navigate(['/user', this.userId, 'website', websiteId]);
   }
+  goToPageList(websiteId) {
+    this.router.navigate(['/user', this.userId, 'website', websiteId, 'page']);
+  }
+
 
 
 }

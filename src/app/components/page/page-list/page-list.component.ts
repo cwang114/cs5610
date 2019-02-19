@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {PageService} from 'src/app/page.service';
+import {Page} from 'src/app/model/Page';
 
 @Component({
   selector: 'app-page-list',
@@ -7,9 +10,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageListComponent implements OnInit {
 
-  constructor() { }
+  userId : String;
+  websiteId: String;
+  pages: Page[];
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private pageService: PageService) { }
 
   ngOnInit() {
+    this.activatedRoute.params
+      .subscribe( (params: any) => {
+        this.userId = params['uid'];
+        this.websiteId = params['wid'];
+        this.pages = this.pageService.findPageByWebsiteId(this.websiteId);
+
+      });
+
+    console.log(this.pages);
+  }
+  goBack() {
+    this.router.navigate(['user', this.userId, 'website']);
+  }
+  createNewPage() {
+    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', 'new']);
+  }
+  goToEditPage(pageId) {
+    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', pageId]);
+  }
+  goToWidgetList(pageId) {
+    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', pageId, 'widget']);
   }
 
 }

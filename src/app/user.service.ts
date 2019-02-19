@@ -16,7 +16,7 @@ export class UserService {
 
     {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia" },
 
-    {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi" }
+    {_id: "456", username: "jan", password: "jan", firstName: "Jose", lastName: "Annunzi" }
 
   ]
   api = {

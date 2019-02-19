@@ -323,7 +323,7 @@ var PageEditComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcGFnZS9wYWdlLWxpc3QvcGFnZS1saXN0LmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = ".dark {\n  color: black;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wYWdlL3BhZ2UtbGlzdC9wYWdlLWxpc3QuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQVk7QUFDZCIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcGFnZS9wYWdlLWxpc3QvcGFnZS1saXN0LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZGFyayB7XG4gIGNvbG9yOiBibGFjaztcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -334,7 +334,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  page-list works!\n</p>\n"
+module.exports = "<nav class=\"navbar navbar-light bg-light\">\n\n  <!--Go back to website-list-->\n  <a (click)=\"goBack()\" >\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Pages</span>\n\n  <a (click)=\"createNewPage()\" class=\"ml-auto\">\n    <span>\n      <i class=\"fas fa-plus dark\"></i>\n    </span>\n  </a>\n\n</nav>\n<div class=\"container-fluid scrollable-body\"\n     *ngFor=\"let page of pages\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div (click)=\"goToWidgetList(page._id)\">{{page.name}}</div>\n      </td>\n      <td align=\"right\">\n        <a (click)=\"goToEditPage(page._id)\" ><i class=\"fas fa-cog\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n\n</div> <!-- container-fluid.// -->\n\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n"
 
 /***/ }),
 
@@ -350,12 +350,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageListComponent", function() { return PageListComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_page_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/page.service */ "./src/app/page.service.ts");
+
+
 
 
 var PageListComponent = /** @class */ (function () {
-    function PageListComponent() {
+    function PageListComponent(activatedRoute, router, pageService) {
+        this.activatedRoute = activatedRoute;
+        this.router = router;
+        this.pageService = pageService;
     }
     PageListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params
+            .subscribe(function (params) {
+            _this.userId = params['uid'];
+            _this.websiteId = params['wid'];
+            _this.pages = _this.pageService.findPageByWebsiteId(_this.websiteId);
+        });
+        console.log(this.pages);
+    };
+    PageListComponent.prototype.goBack = function () {
+        this.router.navigate(['user', this.userId, 'website']);
+    };
+    PageListComponent.prototype.createNewPage = function () {
+        this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', 'new']);
+    };
+    PageListComponent.prototype.goToEditPage = function (pageId) {
+        this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', pageId]);
+    };
+    PageListComponent.prototype.goToWidgetList = function (pageId) {
+        this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', pageId, 'widget']);
     };
     PageListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -363,7 +390,7 @@ var PageListComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./page-list.component.html */ "./src/app/components/page/page-list/page-list.component.html"),
             styles: [__webpack_require__(/*! ./page-list.component.css */ "./src/app/components/page/page-list/page-list.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_page_service__WEBPACK_IMPORTED_MODULE_3__["PageService"]])
     ], PageListComponent);
     return PageListComponent;
 }());
@@ -855,7 +882,7 @@ module.exports = ".scrollable-body{\n  overflow: hidden;\n  overflow-y: scroll;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-dark bg-primary\">\n\n  <a (click)=\"goBack()\" >\n    <span>\n      <i class=\"fas fa-chevron-left fa-inverse\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3\">Websites</span>\n\n\n  <a (click)=\"createNewWebsite()\" class=\"ml-auto\">\n    <span>\n      <i class=\"fas fa-plus fa-inverse\"></i>\n    </span>\n  </a>\n\n\n</nav>\n\n<div class=\"container-fluid scrollable-body\"\n     *ngFor=\"let website of websites\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div><a>{{website.name}}</a></div>\n      </td>\n      <td align=\"right\">\n        <a (click)=\"goToEditWebsite(website._id)\" ><i class=\"fas fa-cog\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n\n</div> <!-- container-fluid.// -->\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n\n"
+module.exports = "<nav class=\"navbar navbar-dark bg-primary\">\n\n  <a (click)=\"goBack()\" >\n    <span>\n      <i class=\"fas fa-chevron-left fa-inverse\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3\">Websites</span>\n\n  <a (click)=\"createNewWebsite()\" class=\"ml-auto\">\n    <span>\n      <i class=\"fas fa-plus fa-inverse\"></i>\n    </span>\n  </a>\n</nav>\n\n<div class=\"container-fluid scrollable-body\"\n     *ngFor=\"let website of websites\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div (click)=\"goToPageList(website._id)\">{{website.name}}</div>\n      </td>\n      <td align=\"right\">\n        <a (click)=\"goToEditWebsite(website._id)\" ><i class=\"fas fa-cog\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n\n</div> <!-- container-fluid.// -->\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n\n"
 
 /***/ }),
 
@@ -898,6 +925,9 @@ var WebsiteListComponent = /** @class */ (function () {
     };
     WebsiteListComponent.prototype.goToEditWebsite = function (websiteId) {
         this.router.navigate(['/user', this.userId, 'website', websiteId]);
+    };
+    WebsiteListComponent.prototype.goToPageList = function (websiteId) {
+        this.router.navigate(['/user', this.userId, 'website', websiteId, 'page']);
     };
     WebsiteListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1401,14 +1431,45 @@ var PageService = /** @class */ (function () {
         ];
     }
     PageService.prototype.createPage = function (websiteId, page) {
+        var lastId = this.pages[this.pages.length - 1]._id;
+        page._id = (+(lastId) + 1).toString();
+        page.websiteId = websiteId;
+        this.pages.push(page);
     };
     PageService.prototype.findPageByWebsiteId = function (websiteId) {
+        var res = [];
+        for (var _i = 0, _a = this.pages; _i < _a.length; _i++) {
+            var page = _a[_i];
+            if (page.websiteId === websiteId) {
+                res.push(page);
+            }
+        }
+        return res;
     };
     PageService.prototype.findPageById = function (pageId) {
+        for (var _i = 0, _a = this.pages; _i < _a.length; _i++) {
+            var page = _a[_i];
+            if (page._id === pageId) {
+                return page;
+            }
+        }
+        return null;
     };
     PageService.prototype.updatePage = function (pageId, page) {
+        for (var i = 0; i < this.pages.length; i++) {
+            if (this.pages[i]._id === pageId) {
+                this.pages[i] = page;
+                return;
+            }
+        }
     };
     PageService.prototype.deletePage = function (pageId) {
+        for (var i = 0; i < this.pages.length; i++) {
+            if (this.pages[i]._id === pageId) {
+                this.pages.splice(i, 1);
+                return;
+            }
+        }
     };
     PageService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -1443,7 +1504,7 @@ var UserService = /** @class */ (function () {
             { _id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder" },
             { _id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley" },
             { _id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia" },
-            { _id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi" }
+            { _id: "456", username: "jan", password: "jan", firstName: "Jose", lastName: "Annunzi" }
         ];
         this.api = {
             'createUser': this.createUser,
