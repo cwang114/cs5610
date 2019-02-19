@@ -23,6 +23,9 @@ import {UserService} from './user.service';
 import {WebsiteService} from './website.service';
 import {PageService} from './page.service';
 import {WidgetService} from './widget.service';
+import {RouterModule} from '@angular/router';
+import {ProfilebarComponent} from './components/profilebar/profilebar.component';
+
 
 @NgModule({
   declarations: [
@@ -41,14 +44,22 @@ import {WidgetService} from './widget.service';
     WidgetEditComponent,
     WidgetHeaderComponent,
     WidgetImageComponent,
-    WidgetYoutubeComponent
+    WidgetYoutubeComponent,
+    ProfilebarComponent
   ],
   imports: [
+    RouterModule,
     AppRoutingModule,
     BrowserModule,
-    FormsModule,
+    FormsModule
   ],
   providers: [UserService, WebsiteService, PageService, WidgetService],
+  bootstrap: [AppComponent]
+})
+@NgModule({
+  imports: [WebsiteListComponent],
+  declarations: [WebsiteNewComponent],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

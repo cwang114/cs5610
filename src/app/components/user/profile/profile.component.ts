@@ -10,27 +10,20 @@ import {User} from 'src/app/model/User';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  //properties
-  userId: String;
-  user = {};
-  username: String;
+  
+  user: User;
+  
   constructor(private userService: UserService, private router: ActivatedRoute, private outRouter: Router) { }
 
   ngOnInit() {
-    console.log(this.router.params['value']);
-    //this.userId = this.router.params['value'].uid;
     this.router.params.subscribe(
-      (params: any) => { 
-        // console.log(params);
-        this.userId = params['uid']});
-    this.user = this.userService.findUserById(this.userId);
-    this.username = this.user['username'];
-    // console.log(this.user);
+      (params: any) => {
+        this.user = this.userService.findUserById(params['uid'])});
   }
   displayWebsites() {
-    let user = this.userService.findUserByUserName(this.username);
-    if (user) {
-      this.outRouter.navigate(['/user', user._id, 'website']);
+    if (this.user) {
+      let userId = this.user._id;
+      this.outRouter.navigate(['/user', userId, 'website']);
     }
     
   }

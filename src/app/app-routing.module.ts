@@ -15,6 +15,7 @@ import {WidgetEditComponent} from './components/widget/widget-edit/widget-edit.c
 
 // define the routings
 const routes: Routes = [
+  {path: '', redirectTo: '/login', pathMatch: 'full' },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'user/:uid', component: ProfileComponent},

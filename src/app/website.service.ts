@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import {Website} from './model/Website';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsiteService {
+  
   websites = [
 
     { "_id": "123", "name": "Facebook", "developerId": "456", "description": "Lorem" },
@@ -22,23 +24,49 @@ export class WebsiteService {
 
   ];
   constructor() { }
-  createWebsite(userId, website){
-
+  createWebsite(website){
+    website._id = Math.random().toString();
+    this.websites.push(website);
   }
 
+  
+
   findWebsitesByUser(userId) {
+    let res = [];
+    for (var website of this.websites)  {
+      if (website.developerId === userId) {
+        res.push(website);
+      }
+    }
+    return res;
 
   }
   findWebsiteById(websiteId){
+    for (var website of this.websites)  {
+      if (website._id === websiteId) {
+        return website;
+      }
+    }
+    return null;
 
   }
 
   updateWebsite(websiteId, website) {
-
+    for (var i = 0; i < this.websites.length; i++) {
+      if (this.websites[i]._id === websiteId) {
+        this.websites[i] = website;
+        return;
+      }
+    }
   }
 
   deleteWebsite(websiteId){
-    
+    for (var i = 0; i < this.websites.length; i++) {
+      if (this.websites[i]._id === websiteId) {
+        this.websites.splice(i,1);
+        return;
+      }
+    }
   }
 
 }

@@ -66,7 +66,12 @@ export class UserService {
 
   }
   deleteUser(userId){
-
+    for (var i = 0; i < this.users.length; i++) {
+      if (this.users[i]._id === userId) {
+        this.users.splice(i,1);
+        return;
+      }
+    }
   }
   
 
