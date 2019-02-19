@@ -12,25 +12,27 @@
         </a>
     </nav>
     <div class="container-fluid pt-2">
-      <form>
+      <form #f="ngForm">
         <div class="form-group">
           <label for="name" class="font-weight-bold">Name</label>
-          <input [(ngModel)]="name"
-                 name="name"
+          <input name="newName"
                  type="text"
                  class="form-control"
                  id="name"
-                 placeholder="Name">
+                 placeholder="Name"
+                 ngModel
+                 #newName="ngModel">
         </div> <!-- form-group// -->
 
         <div class="form-group">
           <label for="description" class="font-weight-bold">Description</label>
-          <textarea [(ngModel)]="description"
-                    name="description"
+          <textarea name="newDescription"
                     class="form-control"
                     id="description"
                     placeholder="Description"
-                    rows="5"></textarea>
+                    rows="5"
+                    ngModel
+                    #newDescription="ngModel"></textarea>
         </div> <!-- form-group// -->
 
       </form>

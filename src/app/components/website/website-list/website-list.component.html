@@ -18,7 +18,7 @@
 
 </nav>
 
-<div class="container-fluid pt-2 scrollable-body"
+<div class="container-fluid scrollable-body"
      *ngFor="let website of websites">
   <table class="table table-borderless">
     <tbody>
@@ -27,7 +27,7 @@
         <div><a>{{website.name}}</a></div>
       </td>
       <td align="right">
-        <a><i class="fas fa-cog"></i></a>
+        <a (click)="goToEditWebsite(website._id)" ><i class="fas fa-cog"></i></a>
       </td>
     </tr>
     </tbody>

@@ -5,15 +5,16 @@
 </div>
 
 <div class="container-fluid pt-2">
-  <form>
+  <form #f="ngForm">
     <div class="form-group">
       <label for="username" class="font-weight-bold">Username</label>
-      <input [(ngModel)]="user.username"
+      <input [ngModel]="user.username"
              name="username"
              type="text"
              class="form-control"
              id="username"
-             value="{{user.username}}">
+             ngModel
+             #username="ngModel">
     </div> <!-- form-group// -->
 
     <div class="form-group">
@@ -23,27 +24,29 @@
 
     <div class="form-group">
       <label for="firstname" class="font-weight-bold">First Name</label>
-      <input [(ngModel)]="user.firstName"
-             name="firstName"
-             id="firstname"
+      <input [ngModel]="user.firstName"
+             name="firstname"
              type="text"
              class="form-control"
-             value="{{user.firstName}}">
+             id="firstname"
+             ngModel
+             #firstname="ngModel">
     </div> <!-- form-group// -->
 
     <div class="form-group">
       <label for="lastname" class="font-weight-bold">Last Name</label>
-      <input [(ngModel)]="user.lastName"
-             name="lastName"
-             id="lastname"
+      <input [ngModel]="user.lastName"
+             name="lastname"
              type="text"
              class="form-control"
-             value="{{user.lastName}}">
+             id="lastname"
+             ngModel
+             #lastname="ngModel">
     </div> <!-- form-group// -->
 
     <div class="form-group">
       <button class="btn btn-primary btn-block"
-              (click)="displayWebsites()">Websites</button>
+              (click)="saveAndDisplayWebsites()">Websites</button>
       <!--<a class="btn btn-primary btn-block" type="submit" role="button">Websites</a>-->
     </div>
     <div class="form-group">

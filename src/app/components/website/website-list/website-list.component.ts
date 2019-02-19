@@ -20,6 +20,7 @@ export class WebsiteListComponent implements OnInit {
     this.activatedRoute.params
       .subscribe( (params: any) => { this.userId = params['uid']});
     this.websites = this.websiteService.findWebsitesByUser(this.userId);
+    console.log(this.websites);
   }
   goBack() {
     
@@ -27,6 +28,9 @@ export class WebsiteListComponent implements OnInit {
   }
   createNewWebsite() {
     this.router.navigate(['/user', this.userId, 'website', 'new']);
+  }
+  goToEditWebsite(websiteId) {
+    this.router.navigate(['/user', this.userId, 'website', websiteId]);
   }
 
 

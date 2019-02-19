@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {WebsiteService} from 'src/app/website.service';
 import {Website} from 'src/app/model/Website';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-website-new',
@@ -10,9 +11,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class WebsiteNewComponent implements OnInit {
 
+  @ViewChild('f') websiteForm: NgForm;
   userId: String;
-  name: String;
-  description: String;
 
   constructor(private websiteService : WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -21,7 +21,7 @@ export class WebsiteNewComponent implements OnInit {
       .subscribe( (params: any) => { this.userId = params['uid']});
   }
   saveWebsite() {
-    let website = new Website("", this.name, this.userId, this.description);
+    let website = new Website("", this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
     this.websiteService.createWebsite(website);
     this.router.navigate(['/user', this.userId, 'website']);
 

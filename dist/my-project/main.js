@@ -592,7 +592,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <nav class=\"navbar navbar-dark bg-primary\">\n    <a class=\"navbar-brand font-weight-bold\" href=\"#\">Profile</a>\n  </nav>\n</div>\n\n<div class=\"container-fluid pt-2\">\n  <form>\n    <div class=\"form-group\">\n      <label for=\"username\" class=\"font-weight-bold\">Username</label>\n      <input [(ngModel)]=\"user.username\"\n             name=\"username\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"username\"\n             value=\"{{user.username}}\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"email\" class=\"font-weight-bold\">Email</label>\n      <input id=\"email\" type=\"email\" class=\"form-control\" value=\"{{user.email}}\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"firstname\" class=\"font-weight-bold\">First Name</label>\n      <input [(ngModel)]=\"user.firstName\"\n             name=\"firstName\"\n             id=\"firstname\"\n             type=\"text\"\n             class=\"form-control\"\n             value=\"{{user.firstName}}\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"lastname\" class=\"font-weight-bold\">Last Name</label>\n      <input [(ngModel)]=\"user.lastName\"\n             name=\"lastName\"\n             id=\"lastname\"\n             type=\"text\"\n             class=\"form-control\"\n             value=\"{{user.lastName}}\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <button class=\"btn btn-primary btn-block\"\n              (click)=\"displayWebsites()\">Websites</button>\n      <!--<a class=\"btn btn-primary btn-block\" type=\"submit\" role=\"button\">Websites</a>-->\n    </div>\n    <div class=\"form-group\">\n      <a class=\"btn btn-danger btn-block\" routerLink=\"/login\" role=\"button\">Logout</a>\n    </div>\n  </form>\n\n</div> <!-- container-fluid.// -->\n\n\n\n\n<nav class=\"navbar navbar-dark bg-primary fixed-bottom p-3\">\n  <a class=\"navbar-brand font-weight-bold\" href=\"#\"></a>\n</nav>\n\n"
+module.exports = "<div>\n  <nav class=\"navbar navbar-dark bg-primary\">\n    <a class=\"navbar-brand font-weight-bold\" href=\"#\">Profile</a>\n  </nav>\n</div>\n\n<div class=\"container-fluid pt-2\">\n  <form #f=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"username\" class=\"font-weight-bold\">Username</label>\n      <input [ngModel]=\"user.username\"\n             name=\"username\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"username\"\n             ngModel\n             #username=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"email\" class=\"font-weight-bold\">Email</label>\n      <input id=\"email\" type=\"email\" class=\"form-control\" value=\"{{user.email}}\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"firstname\" class=\"font-weight-bold\">First Name</label>\n      <input [ngModel]=\"user.firstName\"\n             name=\"firstname\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"firstname\"\n             ngModel\n             #firstname=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"lastname\" class=\"font-weight-bold\">Last Name</label>\n      <input [ngModel]=\"user.lastName\"\n             name=\"lastname\"\n             type=\"text\"\n             class=\"form-control\"\n             id=\"lastname\"\n             ngModel\n             #lastname=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <button class=\"btn btn-primary btn-block\"\n              (click)=\"saveAndDisplayWebsites()\">Websites</button>\n      <!--<a class=\"btn btn-primary btn-block\" type=\"submit\" role=\"button\">Websites</a>-->\n    </div>\n    <div class=\"form-group\">\n      <a class=\"btn btn-danger btn-block\" routerLink=\"/login\" role=\"button\">Logout</a>\n    </div>\n  </form>\n\n</div> <!-- container-fluid.// -->\n\n\n\n\n<nav class=\"navbar navbar-dark bg-primary fixed-bottom p-3\">\n  <a class=\"navbar-brand font-weight-bold\" href=\"#\"></a>\n</nav>\n\n"
 
 /***/ }),
 
@@ -610,6 +610,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/user.service */ "./src/app/user.service.ts");
+/* harmony import */ var src_app_model_User__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/User */ "./src/app/model/User.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+
+
 
 
 
@@ -626,12 +630,27 @@ var ProfileComponent = /** @class */ (function () {
             _this.user = _this.userService.findUserById(params['uid']);
         });
     };
+    ProfileComponent.prototype.saveAndDisplayWebsites = function () {
+        this.saveUser();
+        this.displayWebsites();
+    };
+    ProfileComponent.prototype.saveUser = function () {
+        var username = this.profileForm.value.username;
+        var firstname = this.profileForm.value.firstname;
+        var lastname = this.profileForm.value.lastname;
+        var newUser = new src_app_model_User__WEBPACK_IMPORTED_MODULE_4__["User"](this.user._id, username, this.user.password, firstname, lastname);
+        this.userService.updateUser(this.user._id, newUser);
+    };
     ProfileComponent.prototype.displayWebsites = function () {
         if (this.user) {
             var userId = this.user._id;
             this.outRouter.navigate(['/user', userId, 'website']);
         }
     };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('f'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["NgForm"])
+    ], ProfileComponent.prototype, "profileForm", void 0);
     ProfileComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-profile',
@@ -665,7 +684,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid pt-5\">\n  <h1>Register</h1>\n  <form (ngSubmit)=\"createUser()\" #f=\"ngForm\">\n    <div class=\"form-group\">\n      <input placeholder=\"username\"\n             name=\"username\"\n             type=\"text\"\n             class=\"form-control\"\n             ngModel\n             required\n             #username=\"ngModel\"/>\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <input placeholder=\"password\"\n             name=\"password\"\n             type=\"password\"\n             class=\"form-control\"\n             ngModel\n             required\n             #password=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <input placeholder=\"verify password\"\n             name=\"password\"\n             type=\"password\"\n             class=\"form-control\"\n             ngModel\n             required\n             #password=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <a class=\"btn btn-primary btn-block\" routerLink=\"/profile\" type=\"submit\" role=\"button\">Register</a>\n    </div>\n    <div class=\"form-group\">\n      <a class=\"btn btn-danger btn-block\" routerLink=\"/login\" role=\"button\">Cancel</a>\n    </div>\n  </form>\n\n</div> <!-- container-fluid.// -->\n\n"
+module.exports = "<div class=\"container-fluid pt-5\">\n  <h1>Register</h1>\n  <form (ngSubmit)=\"createUser()\" #f=\"ngForm\">\n    <div class=\"form-group\">\n      <input placeholder=\"username\"\n             name=\"username\"\n             type=\"text\"\n             class=\"form-control\"\n             ngModel\n             required\n             #username=\"ngModel\"/>\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <input placeholder=\"password\"\n             name=\"password\"\n             type=\"password\"\n             class=\"form-control\"\n             ngModel\n             required\n             #password=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <input placeholder=\"verify password\"\n             name=\"password\"\n             type=\"password\"\n             class=\"form-control\"\n             ngModel\n             required\n             #password=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <button [disabled]=\"!f.valid\"\n              class=\"btn btn-primary btn-block\"\n              type=\"submit\">Register</button>\n    </div>\n    <div class=\"form-group\">\n      <a class=\"btn btn-danger btn-block\" routerLink=\"/login\" role=\"button\">Cancel</a>\n    </div>\n  </form>\n\n</div> <!-- container-fluid.// -->\n\n"
 
 /***/ }),
 
@@ -681,20 +700,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterComponent", function() { return RegisterComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var src_app_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/user.service */ "./src/app/user.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_model_User__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/User */ "./src/app/model/User.ts");
+
+
+
+
 
 
 var RegisterComponent = /** @class */ (function () {
-    function RegisterComponent() {
+    function RegisterComponent(userService, router) {
+        this.userService = userService;
+        this.router = router;
     }
     RegisterComponent.prototype.ngOnInit = function () {
     };
+    RegisterComponent.prototype.createUser = function () {
+        var username = this.registerForm.value.username;
+        var password = this.registerForm.value.password;
+        var user = new src_app_model_User__WEBPACK_IMPORTED_MODULE_5__["User"]("", username, password, "", "");
+        var userId = this.userService.createUser(user);
+        this.router.navigate(['user', userId]);
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('f'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgForm"])
+    ], RegisterComponent.prototype, "registerForm", void 0);
     RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-register',
             template: __webpack_require__(/*! ./register.component.html */ "./src/app/components/user/register/register.component.html"),
             styles: [__webpack_require__(/*! ./register.component.css */ "./src/app/components/user/register/register.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], RegisterComponent);
     return RegisterComponent;
 }());
@@ -721,7 +761,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  website-edit works!\n</p>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-md-4 d-none d-md-block border-right pr-0\">\n    <app-website-list></app-website-list>\n  </div>\n  <div class=\"col-md-8 pl-0\">\n    <nav class=\"navbar navbar-dark bg-primary\">\n      <div class=\"navbar-brand font-weight-bold\">Edit Website</div>\n      <a class=\"ml-auto\" (click)=\"updateWebsite()\" >\n            <span>\n              <i class=\"fas fa-check fa-inverse\"></i>\n            </span>\n      </a>\n    </nav>\n    <div class=\"container-fluid pt-2\">\n      <form #f=\"ngForm\">\n        <div class=\"form-group\">\n          <label for=\"name\" class=\"font-weight-bold\">Website Name</label>\n          <input name=\"newName\"\n                 type=\"text\"\n                 class=\"form-control\"\n                 id=\"name\"\n                 [ngModel]=\"displayOldName()\"\n                 ngModel\n                 #newName=\"ngModel\">\n        </div> <!-- form-group// -->\n\n        <div class=\"form-group\">\n          <label for=\"description\" class=\"font-weight-bold\">Website Description</label>\n          <textarea name=\"newDescription\"\n                    class=\"form-control\"\n                    id=\"description\"\n                    rows=\"5\"\n                    [ngModel]=\"displayOldDescription()\"\n                    ngModel\n                    #newDescription=\"ngModel\"></textarea>\n        </div> <!-- form-group// -->\n        <div class=\"form-group\">\n          <a class=\"btn btn-danger btn-block\" (click)=\"deleteWebsite()\" role=\"button\">Delete</a>\n        </div>\n\n      </form>\n    </div>\n  </div>\n</div>\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n"
 
 /***/ }),
 
@@ -737,20 +777,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WebsiteEditComponent", function() { return WebsiteEditComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_website_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/website.service */ "./src/app/website.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_model_Website__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/Website */ "./src/app/model/Website.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+
+
+
+
 
 
 var WebsiteEditComponent = /** @class */ (function () {
-    function WebsiteEditComponent() {
+    function WebsiteEditComponent(websiteService, activatedRoute, router) {
+        this.websiteService = websiteService;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
     }
     WebsiteEditComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params
+            .subscribe(function (params) {
+            console.log(params);
+            _this.userId = params['uid'];
+            _this.websiteId = params['wid'];
+            _this.oldWebsite = _this.websiteService.findWebsiteById(_this.websiteId);
+        });
     };
+    WebsiteEditComponent.prototype.updateWebsite = function () {
+        var website = new src_app_model_Website__WEBPACK_IMPORTED_MODULE_4__["Website"](this.websiteId, this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
+        this.websiteService.updateWebsite(this.websiteId, website);
+        this.router.navigate(['/user', this.userId, 'website']);
+    };
+    WebsiteEditComponent.prototype.deleteWebsite = function () {
+        this.websiteService.deleteWebsite(this.websiteId);
+        this.router.navigate(['/user', this.userId, 'website']);
+    };
+    WebsiteEditComponent.prototype.displayOldName = function () {
+        return this.oldWebsite.name;
+    };
+    WebsiteEditComponent.prototype.displayOldDescription = function () {
+        return this.oldWebsite.description;
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('f'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["NgForm"])
+    ], WebsiteEditComponent.prototype, "websiteForm", void 0);
     WebsiteEditComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-website-edit',
             template: __webpack_require__(/*! ./website-edit.component.html */ "./src/app/components/website/website-edit/website-edit.component.html"),
             styles: [__webpack_require__(/*! ./website-edit.component.css */ "./src/app/components/website/website-edit/website-edit.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_website_service__WEBPACK_IMPORTED_MODULE_2__["WebsiteService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], WebsiteEditComponent);
     return WebsiteEditComponent;
 }());
@@ -777,7 +855,7 @@ module.exports = ".scrollable-body{\n  overflow: hidden;\n  overflow-y: scroll;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-dark bg-primary\">\n\n  <a (click)=\"goBack()\" >\n    <span>\n      <i class=\"fas fa-chevron-left fa-inverse\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3\">Websites</span>\n\n\n  <a (click)=\"createNewWebsite()\" class=\"ml-auto\">\n    <span>\n      <i class=\"fas fa-plus fa-inverse\"></i>\n    </span>\n  </a>\n\n\n</nav>\n\n<div class=\"container-fluid pt-2 scrollable-body\"\n     *ngFor=\"let website of websites\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div><a>{{website.name}}</a></div>\n      </td>\n      <td align=\"right\">\n        <a><i class=\"fas fa-cog\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n\n</div> <!-- container-fluid.// -->\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n\n"
+module.exports = "<nav class=\"navbar navbar-dark bg-primary\">\n\n  <a (click)=\"goBack()\" >\n    <span>\n      <i class=\"fas fa-chevron-left fa-inverse\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3\">Websites</span>\n\n\n  <a (click)=\"createNewWebsite()\" class=\"ml-auto\">\n    <span>\n      <i class=\"fas fa-plus fa-inverse\"></i>\n    </span>\n  </a>\n\n\n</nav>\n\n<div class=\"container-fluid scrollable-body\"\n     *ngFor=\"let website of websites\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div><a>{{website.name}}</a></div>\n      </td>\n      <td align=\"right\">\n        <a (click)=\"goToEditWebsite(website._id)\" ><i class=\"fas fa-cog\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n\n</div> <!-- container-fluid.// -->\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n\n"
 
 /***/ }),
 
@@ -810,12 +888,16 @@ var WebsiteListComponent = /** @class */ (function () {
         this.activatedRoute.params
             .subscribe(function (params) { _this.userId = params['uid']; });
         this.websites = this.websiteService.findWebsitesByUser(this.userId);
+        console.log(this.websites);
     };
     WebsiteListComponent.prototype.goBack = function () {
         this.router.navigate(['/user', this.userId]);
     };
     WebsiteListComponent.prototype.createNewWebsite = function () {
         this.router.navigate(['/user', this.userId, 'website', 'new']);
+    };
+    WebsiteListComponent.prototype.goToEditWebsite = function (websiteId) {
+        this.router.navigate(['/user', this.userId, 'website', websiteId]);
     };
     WebsiteListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -850,7 +932,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-md-4 d-none d-md-block border-right pr-0\">\n    <app-website-list></app-website-list>\n  </div>\n  <div class=\"col-md-8 pl-0\">\n    <nav class=\"navbar navbar-dark bg-primary\">\n      <div class=\"navbar-brand font-weight-bold\">New Website</div>\n        <a class=\"ml-auto\" (click)=\"saveWebsite()\" >\n            <span>\n              <i class=\"fas fa-check fa-inverse\"></i>\n            </span>\n        </a>\n    </nav>\n    <div class=\"container-fluid pt-2\">\n      <form>\n        <div class=\"form-group\">\n          <label for=\"name\" class=\"font-weight-bold\">Name</label>\n          <input [(ngModel)]=\"name\"\n                 name=\"name\"\n                 type=\"text\"\n                 class=\"form-control\"\n                 id=\"name\"\n                 placeholder=\"Name\">\n        </div> <!-- form-group// -->\n\n        <div class=\"form-group\">\n          <label for=\"description\" class=\"font-weight-bold\">Description</label>\n          <textarea [(ngModel)]=\"description\"\n                    name=\"description\"\n                    class=\"form-control\"\n                    id=\"description\"\n                    placeholder=\"Description\"\n                    rows=\"5\"></textarea>\n        </div> <!-- form-group// -->\n\n      </form>\n    </div>\n  </div>\n</div>\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-md-4 d-none d-md-block border-right pr-0\">\n    <app-website-list></app-website-list>\n  </div>\n  <div class=\"col-md-8 pl-0\">\n    <nav class=\"navbar navbar-dark bg-primary\">\n      <div class=\"navbar-brand font-weight-bold\">New Website</div>\n        <a class=\"ml-auto\" (click)=\"saveWebsite()\" >\n            <span>\n              <i class=\"fas fa-check fa-inverse\"></i>\n            </span>\n        </a>\n    </nav>\n    <div class=\"container-fluid pt-2\">\n      <form #f=\"ngForm\">\n        <div class=\"form-group\">\n          <label for=\"name\" class=\"font-weight-bold\">Name</label>\n          <input name=\"newName\"\n                 type=\"text\"\n                 class=\"form-control\"\n                 id=\"name\"\n                 placeholder=\"Name\"\n                 ngModel\n                 #newName=\"ngModel\">\n        </div> <!-- form-group// -->\n\n        <div class=\"form-group\">\n          <label for=\"description\" class=\"font-weight-bold\">Description</label>\n          <textarea name=\"newDescription\"\n                    class=\"form-control\"\n                    id=\"description\"\n                    placeholder=\"Description\"\n                    rows=\"5\"\n                    ngModel\n                    #newDescription=\"ngModel\"></textarea>\n        </div> <!-- form-group// -->\n\n      </form>\n    </div>\n  </div>\n</div>\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n"
 
 /***/ }),
 
@@ -869,6 +951,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_website_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/website.service */ "./src/app/website.service.ts");
 /* harmony import */ var src_app_model_Website__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/Website */ "./src/app/model/Website.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+
 
 
 
@@ -886,10 +970,14 @@ var WebsiteNewComponent = /** @class */ (function () {
             .subscribe(function (params) { _this.userId = params['uid']; });
     };
     WebsiteNewComponent.prototype.saveWebsite = function () {
-        var website = new src_app_model_Website__WEBPACK_IMPORTED_MODULE_3__["Website"]("", this.name, this.userId, this.description);
+        var website = new src_app_model_Website__WEBPACK_IMPORTED_MODULE_3__["Website"]("", this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
         this.websiteService.createWebsite(website);
         this.router.navigate(['/user', this.userId, 'website']);
     };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('f'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["NgForm"])
+    ], WebsiteNewComponent.prototype, "websiteForm", void 0);
     WebsiteNewComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-website-new',
@@ -1241,6 +1329,31 @@ var WidgetListComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/model/User.ts":
+/*!*******************************!*\
+  !*** ./src/app/model/User.ts ***!
+  \*******************************/
+/*! exports provided: User */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function() { return User; });
+var User = /** @class */ (function () {
+    function User(id, username, password, firstName, lastName) {
+        this._id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    return User;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/model/Website.ts":
 /*!**********************************!*\
   !*** ./src/app/model/Website.ts ***!
@@ -1338,8 +1451,10 @@ var UserService = /** @class */ (function () {
         };
     }
     UserService.prototype.createUser = function (user) {
-        user._id = Math.random();
+        var lastId = this.users[this.users.length - 1]._id;
+        user._id = (+(lastId) + 1).toString();
         this.users.push(user);
+        return user._id;
     };
     UserService.prototype.findUserById = function (userId) {
         for (var _i = 0, _a = this.users; _i < _a.length; _i++) {
@@ -1370,8 +1485,8 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.updateUser = function (userId, user) {
         for (var i = 0; i < this.users.length; i++) {
-            if (user[i]._id === userId) {
-                user[i] = user;
+            if (this.users[i]._id === userId) {
+                this.users[i] = user;
                 return;
             }
         }
@@ -1424,7 +1539,8 @@ var WebsiteService = /** @class */ (function () {
         ];
     }
     WebsiteService.prototype.createWebsite = function (website) {
-        website._id = Math.random().toString();
+        var lastId = this.websites[this.websites.length - 1]._id;
+        website._id = (+(lastId) + 1).toString();
         this.websites.push(website);
     };
     WebsiteService.prototype.findWebsitesByUser = function (userId) {

@@ -24,8 +24,10 @@ export class UserService {
     'findUserById' : this.findUserById
   }
   createUser(user) {
-    user._id = Math.random();
+    var lastId = this.users[this.users.length-1]._id;
+    user._id = (+(lastId)+1).toString();
     this.users.push(user);
+    return user._id;
   }
 
   findUserById(userId) {
@@ -58,8 +60,8 @@ export class UserService {
 
   updateUser(userId, user){
     for (var i = 0; i < this.users.length; i++) {
-      if (user[i]._id === userId) {
-        user[i] = user;
+      if (this.users[i]._id === userId) {
+        this.users[i] = user;
         return;
       }
     }

@@ -25,7 +25,8 @@ export class WebsiteService {
   ];
   constructor() { }
   createWebsite(website){
-    website._id = Math.random().toString();
+    var lastId = this.websites[this.websites.length-1]._id;
+    website._id = (+(lastId)+1).toString();
     this.websites.push(website);
   }
 
