@@ -417,7 +417,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  page-new works!\n</p>\n"
+module.exports = "<nav class=\"navbar navbar-light bg-light\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">New Page</span>\n\n  <a class=\"ml-auto\" (click)=\"savePage()\" >\n    <span>\n      <i class=\"fas fa-check dark\"></i>\n    </span>\n  </a>\n</nav>\n\n\n<!--main body-->\n<div class=\"container-fluid pt-2\">\n  <form #f=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"pagename\" class=\"font-weight-bold\">Name</label>\n      <input id=\"pagename\"\n             name=\"pageName\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Page Name\"\n             ngModel\n             #pageName=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"pagetitle\" class=\"font-weight-bold\">Title</label>\n      <input id=\"pagetitle\"\n             name=\"pageTitle\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Page Title\"\n             ngModel\n             #pageTitle=\"ngModel\">\n    </div> <!-- form-group// -->\n  </form>\n</div>\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n\n"
 
 /***/ }),
 
@@ -433,20 +433,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageNewComponent", function() { return PageNewComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var src_app_page_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/page.service */ "./src/app/page.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_model_Page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/Page */ "./src/app/model/Page.ts");
+
+
+
+
 
 
 var PageNewComponent = /** @class */ (function () {
-    function PageNewComponent() {
+    function PageNewComponent(pageService, activatedRoute, router) {
+        this.pageService = pageService;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
     }
     PageNewComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params
+            .subscribe(function (params) {
+            _this.userId = params['uid'];
+            _this.websiteId = params['wid'];
+        });
     };
+    PageNewComponent.prototype.savePage = function () {
+        var name = this.pageForm.value.pageName;
+        var title = this.pageForm.value.pageTitle;
+        var page = new src_app_model_Page__WEBPACK_IMPORTED_MODULE_5__["Page"]("", name, this.websiteId, title);
+        this.pageService.createPage(this.websiteId, page);
+        this.goBack();
+    };
+    PageNewComponent.prototype.goBack = function () {
+        this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page']);
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('f'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgForm"])
+    ], PageNewComponent.prototype, "pageForm", void 0);
     PageNewComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-page-new',
             template: __webpack_require__(/*! ./page-new.component.html */ "./src/app/components/page/page-new/page-new.component.html"),
             styles: [__webpack_require__(/*! ./page-new.component.css */ "./src/app/components/page/page-new/page-new.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_page_service__WEBPACK_IMPORTED_MODULE_3__["PageService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], PageNewComponent);
     return PageNewComponent;
 }());
@@ -1353,6 +1386,30 @@ var WidgetListComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], WidgetListComponent);
     return WidgetListComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/model/Page.ts":
+/*!*******************************!*\
+  !*** ./src/app/model/Page.ts ***!
+  \*******************************/
+/*! exports provided: Page */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Page", function() { return Page; });
+var Page = /** @class */ (function () {
+    function Page(_id, name, websiteId, description) {
+        this._id = _id;
+        this.name = name;
+        this.websiteId = websiteId;
+        this.title = description;
+    }
+    return Page;
 }());
 
 
