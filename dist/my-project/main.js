@@ -278,7 +278,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  page-edit works!\n</p>\n"
+module.exports = "<nav class=\"navbar navbar-light bg-light\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Edit Page</span>\n\n  <a class=\"ml-auto\" (click)=\"updatePage()\" >\n    <span>\n      <i class=\"fas fa-check dark\"></i>\n    </span>\n  </a>\n</nav>\n\n<!--main body-->\n<div class=\"container-fluid pt-2\">\n  <form #f=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"pagename\" class=\"font-weight-bold\">Name</label>\n      <input id=\"pagename\"\n             name=\"pageName\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Page Name\"\n             [ngModel]=\"displayOldName()\"\n             ngModel\n             #pageName=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"pagetitle\" class=\"font-weight-bold\">Title</label>\n      <input id=\"pagetitle\"\n             name=\"pageTitle\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Page Title\"\n             [ngModel]=\"displayOldTitle()\"\n             ngModel\n             #pageTitle=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <a class=\"btn btn-danger btn-block\" (click)=\"deletePage()\" role=\"button\">Delete</a>\n    </div>\n  </form>\n\n</div>\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n"
 
 /***/ }),
 
@@ -294,20 +294,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageEditComponent", function() { return PageEditComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var src_app_model_Page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/Page */ "./src/app/model/Page.ts");
+/* harmony import */ var src_app_page_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/page.service */ "./src/app/page.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
+
 
 
 var PageEditComponent = /** @class */ (function () {
-    function PageEditComponent() {
+    function PageEditComponent(pageService, activatedRoute, router) {
+        this.pageService = pageService;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
     }
     PageEditComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params
+            .subscribe(function (params) {
+            // console.log(params);
+            _this.userId = params['uid'];
+            _this.websiteId = params['wid'];
+            _this.pageId = params['pid'];
+            _this.oldPage = _this.pageService.findPageById(_this.pageId);
+        });
     };
+    PageEditComponent.prototype.updatePage = function () {
+        var newName = this.pageForm.value.pageName;
+        var newTitle = this.pageForm.value.pageTitle;
+        var page = new src_app_model_Page__WEBPACK_IMPORTED_MODULE_3__["Page"](this.pageId, newName, this.websiteId, newTitle);
+        this.pageService.updatePage(this.pageId, page);
+        this.goBack();
+    };
+    PageEditComponent.prototype.deletePage = function () {
+        this.pageService.deletePage(this.pageId);
+        this.goBack();
+    };
+    PageEditComponent.prototype.goBack = function () {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+    };
+    PageEditComponent.prototype.displayOldName = function () {
+        return this.oldPage.name;
+    };
+    PageEditComponent.prototype.displayOldTitle = function () {
+        return this.oldPage.title;
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('f'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgForm"])
+    ], PageEditComponent.prototype, "pageForm", void 0);
     PageEditComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-page-edit',
             template: __webpack_require__(/*! ./page-edit.component.html */ "./src/app/components/page/page-edit/page-edit.component.html"),
             styles: [__webpack_require__(/*! ./page-edit.component.css */ "./src/app/components/page/page-edit/page-edit.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_page_service__WEBPACK_IMPORTED_MODULE_4__["PageService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], PageEditComponent);
     return PageEditComponent;
 }());
@@ -1482,9 +1528,9 @@ __webpack_require__.r(__webpack_exports__);
 var PageService = /** @class */ (function () {
     function PageService() {
         this.pages = [
-            { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
-            { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
-            { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" }
+            { "_id": "321", "name": "Post 1", "websiteId": "456", "title": "Lorem" },
+            { "_id": "432", "name": "Post 2", "websiteId": "456", "title": "Lorem" },
+            { "_id": "543", "name": "Post 3", "websiteId": "456", "title": "Lorem" }
         ];
     }
     PageService.prototype.createPage = function (websiteId, page) {
