@@ -34,8 +34,7 @@ module.exports = function(app) {
         list.push(website);
       }
     }
-    if (list.length == 0) res.status(404).send("websites not found");
-    else res.status(200).send(list);
+    res.status(200).send(list);
 
   }
   function findWebsiteById(req, res){

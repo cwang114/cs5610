@@ -31,8 +31,7 @@ module.exports = function(app) {
         list.push(page);
       }
     }
-    if (list.length == 0) res.status(404).send("pages not found");
-    else res.status(200).send(list);
+    res.status(200).send(list);
 
   }
   function findPageById(req, res){
