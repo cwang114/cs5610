@@ -18,74 +18,44 @@
 
 
 <!--list and switch-->
-<!--<div class="container-fluid pt-0"-->
-     <!--appSortable-->
-     <!--(newIndexes) = "getNewIndexes($event)"-->
-     <!--*ngFor="let widget of widgets">-->
-  <!--<table class="table table-borderless">-->
-    <!--<tbody>-->
-    <!--<tr>-->
-      <!--<td>-->
-        <!--<div [ngSwitch]="widget.widgetType">-->
+<div appSortable (newIndexes) = "onNewIndexes($event)">
+<div class="container-fluid pt-0"
+     *ngFor="let widget of widgets">
+  <table class="table table-borderless">
+    <tbody>
+    <tr>
+      <td>
+        <div [ngSwitch]="widget.widgetType">
 
-          <!--<div *ngSwitchCase="'HEADING'">-->
-            <!--&lt;!&ndash;display the header&ndash;&gt;-->
-            <!--<p [ngStyle]="{'font-size': widget.size+'00%'}">{{widget.text}}</p>-->
-          <!--</div>-->
+          <div *ngSwitchCase="'HEADING'">
+            <!--display the header-->
+            <p [ngStyle]="{'font-size': widget.size+'00%'}">{{widget.text}}</p>
+          </div>
 
-          <!--<div *ngSwitchCase="'YOUTUBE'">-->
-            <!--<iframe width="640" height="360" [src]="convertToSafeYoutubeUrl(widget.url)" frameborder="0" allowfullscreen></iframe>-->
-          <!--</div>-->
+          <div *ngSwitchCase="'YOUTUBE'">
+            <iframe width="640" height="360" [src]="convertToSafeYoutubeUrl(widget.url)" frameborder="0" allowfullscreen></iframe>
+          </div>
 
-          <!--<div *ngSwitchCase="'IMAGE'">-->
-            <!--&lt;!&ndash;display the image&ndash;&gt;-->
-            <!--<img [src]="widget.url"/>-->
-          <!--</div>-->
+          <div *ngSwitchCase="'IMAGE'">
+            <!--display the image-->
+            <img [src]="widget.url"/>
+          </div>
 
-          <!--<div *ngSwitchCase="'HTML'">-->
-            <!--&lt;!&ndash;display the html&ndash;&gt;-->
-            <!--Here should be html embedded page.-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</td>-->
-      <!--<td align="right">-->
-        <!--<a (click)="goToWidgetEdit(widget._id)" ><i class="fas fa-cog"></i></a>-->
-      <!--</td>-->
-    <!--</tr>-->
-    <!--</tbody>-->
-  <!--</table>-->
-<!--</div>-->
+          <div *ngSwitchCase="'HTML'">
+            <!--display the html-->
+            Here should be html embedded page.
+          </div>
+        </div>
+      </td>
+      <td align="right">
+        <a (click)="goToWidgetEdit(widget._id)" ><i class="fas fa-cog"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div>
 
-
-<ul appSortable
-    (newIndexes) = "onNewIndexes($event)"
-    *ngFor="let widget of widgets, let i = index"
-      [initialIndex] = "i">
-  <li>
-    <div [ngSwitch]="widget.widgetType">
-
-      <div *ngSwitchCase="'HEADING'">
-        <!--display the header-->
-        <p [ngStyle]="{'font-size': widget.size+'00%'}">{{widget.text}}</p>
-      </div>
-
-      <div *ngSwitchCase="'YOUTUBE'">
-        <iframe width="640" height="360" [src]="convertToSafeYoutubeUrl(widget.url)" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-      <div *ngSwitchCase="'IMAGE'">
-        <!--display the image-->
-        <img [src]="widget.url"/>
-      </div>
-
-      <div *ngSwitchCase="'HTML'">
-        <!--display the html-->
-        Here should be html embedded page.
-      </div>
-    </div>
-  </li>
-
-</ul>
 <div class="p-3">
 
 </div>

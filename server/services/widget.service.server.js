@@ -105,6 +105,7 @@ module.exports = function (app) {
     var startItem = widgetArray[startIndex];
     widgetArray.splice(startIndex, 1);
     widgetArray.splice(endIndex, 0, startItem);
+    widgets = widgetArray;
     res.status(200).send(widgetArray);
     return;
   }
