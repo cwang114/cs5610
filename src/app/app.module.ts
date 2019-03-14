@@ -27,6 +27,7 @@ import {WidgetService} from './widget.service';
 import {RouterModule} from '@angular/router';
 import {ProfilebarComponent} from './components/profilebar/profilebar.component';
 import {HttpClientModule} from '@angular/common/http';
+import { SortableDirective } from './sortable.directive';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {HttpClientModule} from '@angular/common/http';
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetYoutubeComponent,
-    ProfilebarComponent
+    ProfilebarComponent,
+    SortableDirective
   ],
   imports: [
     RouterModule,

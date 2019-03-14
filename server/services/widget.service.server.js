@@ -20,6 +20,8 @@ module.exports = function (app) {
   app.get('/api/widget/:widgetId', findWidgetById);
   app.put('/api/widget/:widgetId', updateWidget);
   app.delete('/api/widget/:widgetId', deleteWidget);
+  // sorting route
+  app.put('/api/page/:pageId/widget', sortWidget);  // '/page/:pageId/widget?initial=index1&final=index2'
 
   // function list
   function createWidget(req, res) {
@@ -91,6 +93,20 @@ module.exports = function (app) {
       }
     }
     res.status(404).send("Widget not fount by delete widget");
+  }
+
+  function sortWidget(req, res) {
+    var startIndex = req.query.initial;
+    var endIndex = req.query.final;
+    console.log("The startIndex received is: "+startIndex);
+    console.log("The endIndex received is: "+endIndex);
+
+    var widgetArray = req.body;
+    var startItem = widgetArray[startIndex];
+    widgetArray.splice(startIndex, 1);
+    widgetArray.splice(endIndex, 0, startItem);
+    res.status(200).send(widgetArray);
+    return;
   }
 
 }

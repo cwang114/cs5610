@@ -40,4 +40,12 @@ export class WidgetService {
     console.log("front widget service deleteWidget() called");
     return this.http.delete<Widget>(this.baseUrl + this.widgetApiUrl + widgetId);
   }
+
+  reorderWidgets(startIndex: Number, endIndex: Number, pageId, widgets): Observable<Widget[]> {
+    console.log("front widget service reorder Widget() called");
+    return this.http.put<Widget[]>(this.baseUrl + this.pageApiUrl + pageId +
+      '/widget?initial='+startIndex+
+      '&final='+endIndex, widgets);
+
+  }
 }
