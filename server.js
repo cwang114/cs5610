@@ -21,16 +21,14 @@ app.use(function(req, res, next) {
     next();
 });
 
+// environment setting
+var config = require('./env.json')[process.env.NODE_ENV || 'development'];
+console.log(config.BASE_URL);
+app.set('baseUrl', config.BASE_URL);
+
 // Port setting
 const port = process.env.PORT || '8070';
 app.set('port', port);
-
-const baseUrl = process.env.BASE_URL || 'https://webdev-cs5610-chuxuanwang.herokuapp.com';
-// const baseUrl = process.env.BASE_URL || 'http://localhost:8070';
-app.set('baseUrl', baseUrl);
-/**
- * TODO: set production config and change base url
- */
 
 // test the /api/test url
 require('./test')(app);
