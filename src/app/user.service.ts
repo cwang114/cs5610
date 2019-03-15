@@ -37,7 +37,9 @@ export class UserService {
   }
   findUserByCredentials(userName, password): Observable<User>{
     console.log("front user service findUserByCredentials() called");
-    return this.http.get<User>(this.baseUrl + this.userApiUrl + '?username=' + userName + '&password=' + password);
+    const url = this.baseUrl + this.userApiUrl + '?username=' + userName + '&password=' + password;
+    console.log(url);
+    return this.http.get<User>(url);
 
   }
 

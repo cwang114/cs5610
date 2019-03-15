@@ -131,6 +131,7 @@ module.exports = function (app) {
 
 
     widget.url = app.settings.baseUrl+'/images/'+filename;
+    // widget.url = 'images/'+filename;
     console.log("widget url is "+widget.url);
 
 

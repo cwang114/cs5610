@@ -27,10 +27,13 @@ export class WidgetImageComponent implements OnInit {
     this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
 
   }
+  goToFlickrSearch() {
+    this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widgetId, 'flickr']);
+  }
   updateWidget() {
-    let text = this.widgetForm.value.newText;
-    let url = this.widgetForm.value.newUrl;
-    let width = this.widgetForm.value.newWidth;
+    const text = this.widgetForm.value.newText;
+    const url = this.widgetForm.value.newUrl;
+    const width = this.widgetForm.value.newWidth;
     this.widget.text = text;
     this.widget.url = url;
     this.widget.width = width;
@@ -47,7 +50,7 @@ export class WidgetImageComponent implements OnInit {
   displayWidgetText() {
     return this.widget.text;
   }
-  displayWidgetWidth(){
+  displayWidgetWidth() {
     return this.widget.width;
   }
   displayWidgetUrl() {
