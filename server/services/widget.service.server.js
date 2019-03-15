@@ -135,7 +135,7 @@ module.exports = function (app) {
 
 
     updateWidgetById(widgetId, widget);
-    var callbackUrl = "/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
+    var callbackUrl = app.settings.baseUrl+"/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
     //console.log(app.settings.baseUrl);
     res.redirect(callbackUrl);
 
