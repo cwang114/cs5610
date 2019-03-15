@@ -25,11 +25,15 @@ app.use(function(req, res, next) {
 const port = process.env.PORT || '8070';
 app.set('port', port);
 
-const baseUrl = process.env.BASE_URL || 'http://localhost:8070';
+const baseUrl = process.env.BASE_URL || 'https://webdev-cs5610-chuxuanwang.herokuapp.com';
 app.set('baseUrl', baseUrl);
+/**
+ * TODO: set production config and change base url
+ */
 
 // test the /api/test url
 require('./test')(app);
+
 
 // import all the server files needed
 require('./server/app')(app);

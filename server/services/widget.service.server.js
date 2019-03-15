@@ -34,6 +34,7 @@ module.exports = function (app) {
     var path = require('path');
     res.sendFile(path.resolve(localpath));
   });
+
   // function list
   function createWidget(req, res) {
     var widget = req.body;
@@ -129,12 +130,8 @@ module.exports = function (app) {
     var widget = JSON.parse(widgetString);      // getWidgetById() returns a string!! need JSON.parse() to convert string to a valid json.
 
 
-
-    // widget.url = 'file://'+path+'.jpg';
     widget.url = app.settings.baseUrl+'/images/'+filename;
     console.log("widget url is "+widget.url);
-
-
 
 
     updateWidgetById(widgetId, widget);
