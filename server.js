@@ -46,7 +46,10 @@ app.get('*', function (req, res) {
 
 // Create HTTP server
 const server = http.createServer(app);
-server.listen( port , () => console.log('Running on port 8070'));
+if (process.env.NODE_ENV === 'development') {
+  server.listen( port , () => console.log('Running on port 8070'));
+}
+
 
 
 /*var dbServer = require('./test-mongodb/app');
