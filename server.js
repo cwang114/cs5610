@@ -22,14 +22,18 @@ app.use(function(req, res, next) {
 });
 
 // environment setting
-var config = require('./env.json')[process.env.NODE_ENV || 'development'];
+var env = process.env.NODE_ENV || 'development';
+app.set('env', env);
+var config = require('./env.json')[env];
 console.log(config.BASE_URL);
 app.set('baseUrl', config.BASE_URL);
 
 // Port setting
 const port = process.env.PORT || '8070';
 app.set('port', port);
-
+console.log(app);
+console.log(app.settings.env);
+console.log(app.settings.port);
 // test the /api/test url
 require('./test')(app);
 
@@ -46,9 +50,11 @@ app.get('*', function (req, res) {
 
 // Create HTTP server
 const server = http.createServer(app);
-if (process.env.NODE_ENV === 'development') {
+if (app.settings.env === 'development') {
+
   server.listen( port , () => console.log('Running on port 8070'));
 }
+
 
 
 
