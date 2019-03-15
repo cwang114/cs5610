@@ -1238,7 +1238,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"widget.widgetType\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header [widget]=\"widget\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image [widget]=\"widget\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube [widget]=\"widget\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-youtube>\n  </div>\n</div>\n"
+module.exports = "<div [ngSwitch]=\"widget.widgetType\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-youtube>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1387,6 +1387,10 @@ var WidgetHeaderComponent = /** @class */ (function () {
     ], WidgetHeaderComponent.prototype, "pageId", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], WidgetHeaderComponent.prototype, "widgetId", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", src_app_model_Widget__WEBPACK_IMPORTED_MODULE_2__["Widget"])
     ], WidgetHeaderComponent.prototype, "widget", void 0);
     WidgetHeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1422,7 +1426,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-light bg-light pb-2\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Widget Edit</span>\n\n  <a class=\"ml-auto\" (click)=\"updateWidget()\" >\n    <span>\n      <i class=\"fas fa-check fa-inverse\"></i>\n    </span>\n  </a>\n</nav>\n\n<!--main body-->\n<div class=\"container-fluid pt-2\">\n\n  <form #f=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"imagename\" class=\"font-weight-bold\">Name</label>\n      <input id=\"imagename\"\n             name=\"newName\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Header Name\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"imagetext\" class=\"font-weight-bold\">Text</label>\n      <input id=\"imagetext\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Image Text\"\n             name=\"newText\"\n             [ngModel]=\"displayWidgetText()\"\n             ngModel\n             #newText=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"imageurl\" class=\"font-weight-bold\">URL</label>\n      <input id=\"imageurl\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Image URL\"\n             name=\"newUrl\"\n             [ngModel]=\"displayWidgetUrl()\"\n             ngModel\n             #newUrl=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"imagewidth\" class=\"font-weight-bold\">Width</label>\n      <input id=\"imagewidth\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Image Width\"\n             name=\"newWidth\"\n             [ngModel]=\"displayWidgetWidth()\"\n             ngModel\n             #newWidth=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"fileToUpload\" class=\"font-weight-bold\">Upload</label>\n    </div>\n    <div class=\"form-group\">\n      <input type=\"file\"\n             name=\"fileToUpload\"\n             id=\"fileToUpload\">\n    </div>\n\n    <div class=\"form-group\">\n      <a class=\"btn btn-primary btn-block\" role=\"button\">Upload Image</a>\n    </div>\n\n    <div class=\"form-group\">\n      <a class=\"btn btn-danger btn-block\" (click)=\"deleteWidget()\" role=\"button\">Delete</a>\n    </div>\n  </form>\n\n</div>\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n"
+module.exports = "<nav class=\"navbar navbar-light bg-light pb-2\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Widget Edit</span>\n\n  <a class=\"ml-auto\" (click)=\"updateWidget()\" >\n    <span>\n      <i class=\"fas fa-check fa-inverse\"></i>\n    </span>\n  </a>\n</nav>\n\n<!--main body-->\n<div class=\"container-fluid pt-2\">\n\n  <form #f=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"imagename\" class=\"font-weight-bold\">Name</label>\n      <input id=\"imagename\"\n             name=\"newName\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Header Name\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"imagetext\" class=\"font-weight-bold\">Text</label>\n      <input id=\"imagetext\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Image Text\"\n             name=\"newText\"\n             [ngModel]=\"displayWidgetText()\"\n             ngModel\n             #newText=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"imageurl\" class=\"font-weight-bold\">URL</label>\n      <input id=\"imageurl\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Image URL\"\n             name=\"newUrl\"\n             [ngModel]=\"displayWidgetUrl()\"\n             ngModel\n             #newUrl=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"imagewidth\" class=\"font-weight-bold\">Width</label>\n      <input id=\"imagewidth\"\n             type=\"text\"\n             class=\"form-control\"\n             placeholder=\"Image Width\"\n             name=\"newWidth\"\n             [ngModel]=\"displayWidgetWidth()\"\n             ngModel\n             #newWidth=\"ngModel\">\n    </div> <!-- form-group// -->\n\n    <div class=\"form-group\">\n      <label for=\"fileToUpload\" class=\"font-weight-bold\">Upload</label>\n    </div>\n\n    <!--<div class=\"form-group\">-->\n      <!--<form ngNoForm-->\n            <!--action=\"{{baseUrl}}/api/upload\"-->\n            <!--method=\"post\"-->\n            <!--enctype=\"multipart/form-data\"-->\n            <!--(ngSubmit)=\"uploadImage()\">-->\n        <!--<input id=\"fileToUpload\" type=\"file\"/>-->\n        <!--<div class=\"form-group\">-->\n          <!--<a class=\"btn btn-primary btn-block\" type= \"submit\" role=\"button\">Upload Image</a>-->\n        <!--</div>-->\n      <!--</form>-->\n    <!--</div>-->\n    <form ngNoForm action=\"{{baseUrl}}/api/upload\" method=\"post\" enctype=\"multipart/form-data\">\n      <input id=\"fileToUpload\" name=\"imageAdded\" type=\"file\" class=\"form-control\"/>\n      <input name=\"widgetId\" value=\"{{widgetId}}\" style=\"display: none\"/>\n      <input name=\"websiteId\" value=\"{{websiteId}}\" style=\"display: none\"/>\n      <input name=\"pageId\" value=\"{{pageId}}\" style=\"display: none\"/>\n      <input name=\"userId\" value=\"{{userId}}\" style=\"display: none\"/>\n      <button type=\"submit\" class=\"btn btn-block btn-primary\">Upload Image</button>\n      <br/>\n    </form>\n\n\n\n    <div class=\"form-group\">\n      <a class=\"btn btn-danger btn-block\" (click)=\"deleteWidget()\" role=\"button\">Delete</a>\n    </div>\n  </form>\n\n</div>\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n"
 
 /***/ }),
 
@@ -1442,6 +1446,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var src_app_widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/widget.service */ "./src/app/widget.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../../environments/environment */ "./src/environments/environment.ts");
+
 
 
 
@@ -1452,6 +1458,7 @@ var WidgetImageComponent = /** @class */ (function () {
     function WidgetImageComponent(widgetService, router) {
         this.widgetService = widgetService;
         this.router = router;
+        this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].baseUrl;
     }
     WidgetImageComponent.prototype.ngOnInit = function () {
     };
@@ -1497,6 +1504,10 @@ var WidgetImageComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
     ], WidgetImageComponent.prototype, "pageId", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], WidgetImageComponent.prototype, "widgetId", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", src_app_model_Widget__WEBPACK_IMPORTED_MODULE_2__["Widget"])
@@ -1611,6 +1622,10 @@ var WidgetYoutubeComponent = /** @class */ (function () {
     ], WidgetYoutubeComponent.prototype, "pageId", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], WidgetYoutubeComponent.prototype, "widgetId", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", src_app_model_Widget__WEBPACK_IMPORTED_MODULE_3__["Widget"])
     ], WidgetYoutubeComponent.prototype, "widget", void 0);
     WidgetYoutubeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1646,7 +1661,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-light bg-light pb-2\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Widgets</span>\n\n  <!--to widget choose-->\n  <a class=\"ml-auto\" (click)=\"goToWidgetChoose()\" >\n    <span>\n      <i class=\"fas fa-plus dark\"></i>\n    </span>\n  </a>\n</nav>\n\n\n<!--list and switch-->\n<div appSortable (newIndexes) = \"onNewIndexes($event)\">\n<div class=\"container-fluid pt-0\"\n     *ngFor=\"let widget of widgets\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div [ngSwitch]=\"widget.widgetType\">\n\n          <div *ngSwitchCase=\"'HEADING'\">\n            <!--display the header-->\n            <p [ngStyle]=\"{'font-size': widget.size+'00%'}\">{{widget.text}}</p>\n          </div>\n\n          <div *ngSwitchCase=\"'YOUTUBE'\">\n            <iframe width=\"640\" height=\"360\" [src]=\"convertToSafeYoutubeUrl(widget.url)\" frameborder=\"0\" allowfullscreen></iframe>\n          </div>\n\n          <div *ngSwitchCase=\"'IMAGE'\">\n            <!--display the image-->\n            <img [src]=\"widget.url\"/>\n          </div>\n\n          <div *ngSwitchCase=\"'HTML'\">\n            <!--display the html-->\n            Here should be html embedded page.\n          </div>\n        </div>\n      </td>\n      <td align=\"right\">\n        <a (click)=\"goToWidgetEdit(widget._id)\" ><i class=\"fas fa-cog\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n</div>\n\n<div class=\"p-3\">\n\n</div>\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n\n\n\n\n\n\n\n\n"
+module.exports = "<nav class=\"navbar navbar-light bg-light pb-2\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Widgets</span>\n\n  <!--to widget choose-->\n  <a class=\"ml-auto\" (click)=\"goToWidgetChoose()\" >\n    <span>\n      <i class=\"fas fa-plus dark\"></i>\n    </span>\n  </a>\n</nav>\n\n\n<!--list and switch-->\n<div appSortable (newIndexes) = \"onNewIndexes($event)\">\n<div class=\"container-fluid pt-0\"\n     *ngFor=\"let widget of widgets\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div [ngSwitch]=\"widget.widgetType\">\n\n          <div *ngSwitchCase=\"'HEADING'\">\n            <!--display the header-->\n            <p [ngStyle]=\"{'font-size': widget.size+'00%'}\">{{widget.text}}</p>\n          </div>\n\n          <div *ngSwitchCase=\"'YOUTUBE'\">\n            <iframe width=\"640\" height=\"360\" [src]=\"convertToSafeYoutubeUrl(widget.url)\" frameborder=\"0\" allowfullscreen></iframe>\n          </div>\n\n          <div *ngSwitchCase=\"'IMAGE'\">\n            <!--display the image-->\n            <img [src]=\"convertToSafeUrl(widget.url)\"/>\n          </div>\n\n          <div *ngSwitchCase=\"'HTML'\">\n            <!--display the html-->\n            Here should be html embedded page.\n          </div>\n        </div>\n      </td>\n      <td align=\"right\">\n        <a (click)=\"goToWidgetEdit(widget._id)\" ><i class=\"fas fa-cog\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n</div>\n\n<div class=\"p-3\">\n\n</div>\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n\n\n\n\n\n\n\n\n"
 
 /***/ }),
 
@@ -1689,13 +1704,14 @@ var WidgetListComponent = /** @class */ (function () {
             _this.pageId = params['pid'];
         });
         this.widgetService.findWidgetsByPage(this.pageId).subscribe(function (widgets) { return _this.widgets = widgets; });
+        console.log(this.widgets);
     };
     // get the array from sortable.directive.js.
     WidgetListComponent.prototype.onNewIndexes = function (newIndexes) {
         this.startIndex = newIndexes.startIndex;
         this.endIndex = newIndexes.endIndex;
-        console.log("The startindex frontend is " + this.startIndex);
-        console.log("The endIndex frontend is " + this.endIndex);
+        // console.log("The startindex frontend is "+this.startIndex);
+        // console.log("The endIndex frontend is "+this.endIndex);
         this.widgetService.reorderWidgets(this.startIndex, this.endIndex, this.pageId, this.widgets)
             .subscribe();
     };
@@ -1716,6 +1732,9 @@ var WidgetListComponent = /** @class */ (function () {
         }
         url = "https://www.youtube.com/embed/" + id;
         //console.log(url);
+        return this.convertToSafeUrl(url);
+    };
+    WidgetListComponent.prototype.convertToSafeUrl = function (url) {
         return this._sanitizer.bypassSecurityTrustResourceUrl(url);
     };
     WidgetListComponent.prototype.goBack = function () {

@@ -38,7 +38,7 @@
 
           <div *ngSwitchCase="'IMAGE'">
             <!--display the image-->
-            <img [src]="widget.url"/>
+            <img [src]="convertToSafeUrl(widget.url)"/>
           </div>
 
           <div *ngSwitchCase="'HTML'">

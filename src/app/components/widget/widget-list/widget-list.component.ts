@@ -39,14 +39,16 @@ export class WidgetListComponent implements OnInit {
     this.widgetService.findWidgetsByPage(this.pageId).subscribe(
       widgets => this.widgets = widgets
     );
+    console.log(this.widgets);
+
   }
   // get the array from sortable.directive.js.
 
   onNewIndexes(newIndexes) {
     this.startIndex = newIndexes.startIndex;
     this.endIndex = newIndexes.endIndex;
-    console.log("The startindex frontend is "+this.startIndex);
-    console.log("The endIndex frontend is "+this.endIndex);
+    // console.log("The startindex frontend is "+this.startIndex);
+    // console.log("The endIndex frontend is "+this.endIndex);
     this.widgetService.reorderWidgets(this.startIndex, this.endIndex, this.pageId, this.widgets)
       .subscribe();
   }
@@ -69,6 +71,9 @@ export class WidgetListComponent implements OnInit {
     }
     url = "https://www.youtube.com/embed/"+id;
     //console.log(url);
+    return this.convertToSafeUrl(url);
+  }
+  convertToSafeUrl(url) {
     return this._sanitizer.bypassSecurityTrustResourceUrl(url);
   }
   goBack() {

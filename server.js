@@ -25,6 +25,9 @@ app.use(function(req, res, next) {
 const port = process.env.PORT || '8070';
 app.set('port', port);
 
+const baseUrl = process.env.BASE_URL || 'http://localhost:8070';
+app.set('baseUrl', baseUrl);
+
 // test the /api/test url
 require('./test')(app);
 
