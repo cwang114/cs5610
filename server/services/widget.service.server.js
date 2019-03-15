@@ -27,8 +27,8 @@ module.exports = function (app) {
   // route of reordering the widgets
   app.put('/api/page/:pageId/widget', sortWidget);  // '/page/:pageId/widget?initial=index1&final=index2'
   // route of upload the image
-  app.post("/api/upload/", upload.single('imageAdded'), uploadImage);  // the upload.single has to include the name of file uploading element in html
-  app.get("/images/:fileName", (req, res) => {
+  app.post('/api/upload/', upload.single('imageAdded'), uploadImage);  // the upload.single has to include the name of file uploading element in html
+  app.get('/images/:fileName', (req, res) => {
     var fileName = req.params["fileName"];
     var localpath = __dirname+'/../../public/images/'+fileName;
     var path = require('path');
