@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from "rxjs";
+
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +15,11 @@ export class FlickrService {
   constructor(private http: HttpClient) {
   }
 
-  searchPhotos(searchTerm: any) {
+  searchPhotos(searchTerm: string): Observable<string> {
     const url = this.flickerUrl
       .replace('API_KEY', this.key)
       .replace('TEXT', searchTerm);
-    return this.http.get(url);
+    console.log('Inside front end service, the url is ' + url);
+    return this.http.get(url, { responseType: 'text' });
   }
 }

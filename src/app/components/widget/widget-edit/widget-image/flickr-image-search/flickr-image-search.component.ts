@@ -12,18 +12,18 @@ import {WidgetService} from '../../../../../widget.service';
 export class FlickrImageSearchComponent implements OnInit {
 
   photos: any;
-  searchText: String;
+  searchText: string;
   userId: String;
   websiteId: String;
   pageId: String;
   widgetId: String;
   widget: Widget;
-  photoResponse: any;
+
   constructor(private flickrService: FlickrService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
               private widgetService: WidgetService) {
-    this.photos = [];
+    this.photos = {};
   }
 
   ngOnInit() {
@@ -35,6 +35,9 @@ export class FlickrImageSearchComponent implements OnInit {
         this.pageId = params['pid'];
         this.widgetId = params['wgid'];
       });
+    this.widgetService.findWidgetById(this.widgetId).subscribe(
+      widget => this.widget = widget
+    );
   }
 
   searchPhotos() {
@@ -42,20 +45,18 @@ export class FlickrImageSearchComponent implements OnInit {
       .searchPhotos(this.searchText)
       .subscribe(
         val => {
-          this.photoResponse = val;
+          val = val.replace('jsonFlickrApi(', '');
+          val = val.substring(0, val.length - 1); // remove the last parenthese
+          const fasdf = JSON.parse(val);
+          this.photos = fasdf.photos;
         }
       );
-    console.log("val is " + this.photoResponse);
-    this.photoResponse = this.photoResponse.replace("jsonFlickrApi(", "").substring(0, this.photoResponse.length - 1);
-    this.photoResponse = JSON.parse(this.photoResponse);
-    console.log(this.photoResponse);
-
   }
   selectPhoto(photo) {
     let url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
-    url += '/' + photo.id + '_' + photo.secret + '_b.jpg';
-    const widget = { widgetId: this.widgetId, widgetType: 'IMAGE', pageId: this.pageId, url: url};
-    this.widgetService.updateWidget(this.widgetId, widget).subscribe(
+    url += '/' + photo.id + '_' + photo.secret + '_m.jpg';
+    this.widget.url = url;
+    this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(
       () => this.goBack());
   }
   goBack() {
