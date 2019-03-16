@@ -31,9 +31,7 @@ app.set('baseUrl', config.BASE_URL);
 // Port setting
 const port = process.env.PORT || '8070';
 app.set('port', port);
-console.log(app);
-console.log(app.settings.env);
-console.log(app.settings.port);
+
 // test the /api/test url
 require('./test')(app);
 
