@@ -50,10 +50,8 @@ app.get('*', function (req, res) {
 
 // Create HTTP server
 const server = http.createServer(app);
-if (app.settings.env === 'development') {
+server.listen( port , () => console.log('Running on port 8070'));
 
-  server.listen( port , () => console.log('Running on port 8070'));
-}
 
 
 
