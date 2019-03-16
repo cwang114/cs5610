@@ -98,9 +98,8 @@ module.exports = function (app) {
     var startItem = widgetArray[startIndex];
     widgetArray.splice(startIndex, 1);
     widgetArray.splice(endIndex, 0, startItem);
-    widgets = widgetArray;
+    widgets = updateOrder(widgets, widgetArray);
     res.status(200).send(widgetArray);
-    return;
   }
 
   function uploadImage(req, res) {
@@ -171,6 +170,18 @@ module.exports = function (app) {
       }
     }
     return curSite;
+  }
+  function updateOrder(widgets, internalArray) {
+    var ptr = 0;
+    var widgetPtr = 0;
+    while (ptr < internalArray.length) {
+      if (widgets[widgetPtr].pageId === internalArray[ptr].pageId) {
+        widgets[widgetPtr++] = internalArray[ptr++];
+      } else {
+        widgetPtr++;
+      }
+    }
+    return widgets;
   }
 
 }
