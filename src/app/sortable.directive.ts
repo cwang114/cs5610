@@ -30,9 +30,9 @@ export class SortableDirective implements AfterViewInit {
       },
       stop: function (event, ui) {
         console.log('New position: ' + ui.item.index());
-        console.log("startIndex in sortable is "+refe.initialIndex);
-        console.log("endIndex in sortable is "+ui.item.index());
-        var newArr = {
+        console.log('startIndex in sortable is ' + refe.initialIndex);
+        console.log('endIndex in sortable is ' + ui.item.index());
+        const newArr = {
           startIndex: refe.initialIndex,
           endIndex: ui.item.index()
         };

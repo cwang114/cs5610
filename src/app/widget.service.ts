@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Widget} from './model/Widget';
 import {environment} from '../environments/environment';
 import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,14 +13,14 @@ export class WidgetService {
   pageApiUrl = '/api/page/';
 
   constructor(private http: HttpClient) { }
-  createWidget(widget, pageId){
+  createWidget(widget, pageId) {
     console.log('front widget service createWidget() called');
     return this.http.post<Widget>(
       this.baseUrl + this.pageApiUrl + pageId + '/widget',
       widget);
   }
 
-  findWidgetsByPage(pageId): Observable<Widget[]>{
+  findWidgetsByPage(pageId): Observable<Widget[]> {
     console.log('front widget service findWidgetByPage() called');
     return this.http.get<Widget[]>(this.baseUrl + this.pageApiUrl + pageId + '/widget');
 
@@ -36,7 +36,7 @@ export class WidgetService {
     return this.http.put<Widget>(this.baseUrl + this.widgetApiUrl + widgetId, widget);
   }
 
-  deleteWidget(widgetId){
+  deleteWidget(widgetId) {
     console.log('front widget service deleteWidget() called');
     return this.http.delete<Widget>(this.baseUrl + this.widgetApiUrl + widgetId);
   }
@@ -44,8 +44,8 @@ export class WidgetService {
   reorderWidgets(startIndex: Number, endIndex: Number, pageId, widgets): Observable<Widget[]> {
     console.log('front widget service reorder Widget() called');
     return this.http.put<Widget[]>(this.baseUrl + this.pageApiUrl + pageId +
-      '/widget?initial='+startIndex+
-      '&final='+endIndex, widgets);
+      '/widget?initial=' + startIndex +
+      '&final=' + endIndex, widgets);
 
   }
 }

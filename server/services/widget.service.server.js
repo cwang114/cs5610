@@ -114,6 +114,9 @@ module.exports = function (app) {
     // extract attributes from req.file
     var myFile = req.file;
     console.log(myFile);
+    if(myFile == null) {
+      return;
+    }
     var originalname = myFile.originalname; // file name on user's computer
     var filename = myFile.filename; // new file name in upload folder
     var path = myFile.path; // full path of uploaded file
