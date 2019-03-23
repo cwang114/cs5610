@@ -5,6 +5,8 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
+const mongoose = require('mongoose');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,7 +26,7 @@ app.use(function(req, res, next) {
 // environment setting
 var env = process.env.NODE_ENV || 'development';
 app.set('env', env);
-var config = require('./env.json')[env];
+const config = require('./env.json')[env];
 console.log(config.BASE_URL);
 app.set('baseUrl', config.BASE_URL);
 
@@ -44,6 +46,10 @@ require('./server/app')(app);
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/my-project/index.html'));
 });
+
+// 
+console.log(config.DB_URL);
+var client = mongoose.connect(config.DB_URL, {useNewUrlParser: true});
 
 
 // Create HTTP server
