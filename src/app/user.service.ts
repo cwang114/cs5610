@@ -41,6 +41,8 @@ export class UserService {
     console.log('front user service findUserByCredentials() called');
     const url = this.baseUrl + this.userApiUrl + '?username=' + userName + '&password=' + password;
     console.log('base url is ' + this.baseUrl);
+    console.log('url is ' + url);
+    console.log(this.http.get<User>(url));
     return this.http.get<User>(url);
 
   }

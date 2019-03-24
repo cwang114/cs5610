@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   user: User;
 
   constructor(private userService: UserService, private router: ActivatedRoute, private outRouter: Router) {
-    this.user = new User('', '', '', '', '');
+    this.user = new User('', '', '', '');
   }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
     const username = this.profileForm.value.username;
     const firstname = this.profileForm.value.firstname;
     const lastname = this.profileForm.value.lastname;
-    const newUser = new User(this.user._id, username, this.user.password, firstname, lastname);
+    const newUser = new User(username, this.user.password, firstname, lastname);
     this.userService.updateUser(this.user._id, newUser)
       .subscribe(
         () => this.outRouter.navigate(['/user', this.user._id, 'website']));

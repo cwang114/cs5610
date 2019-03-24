@@ -43,12 +43,14 @@ module.exports = function (app) {
     userModel.createUser(user)
       .then(function (user) {
           res.status(200).send(user);
+          return user;
         },
         function (err) {
           console.log('create user error! ' + err);
-          res.sendStatus(400).send(err);
-        });
+          res.sendStatus(400);
+          return err;
 
+        });
   }
   function findUser(req, res) {
     let username = req.query.username;

@@ -15,27 +15,33 @@ module.exports = userModel;
 
 // functions go here
 function createUser(user) {
+  console.log('Mongoose: createUser() called');
   return userModel.create(user);
 }
 
 function findUserById(userId) {
+  console.log('Mongoose: findUserById() called: '+userId);
   return userModel.findById(userId);
 }
 
 function findUserByUsername(username) {
+  console.log('Mongoose: findUserByUsername() called');
   return userModel.findOne({username: username});
 }
 
 function findUserByCredentials(username, password) {
-  return userModel.find({username: username, password: password});
+  console.log('Mongoose: findUserByCredentials() called');
+  return userModel.findOne({username: username, password: password});
 
 }
 
 function updateUser(userId, user) {
+  console.log('Mongoose: updateUser() called');
   return userModel.updateOne({_id: userId}, user);
 }
 
 function deleteUser(userId) {
+  console.log('Mongoose: deleteUser() called');
   return userModel.deleteOne({_id: userId}, function (err) {
       if (err) {
         return handleError(err);

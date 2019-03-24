@@ -677,7 +677,7 @@ var LoginComponent = /** @class */ (function () {
         this.userService.findUserByCredentials(username, password)
             .subscribe(function (user) {
             if (user) {
-                // console.log(user);
+                console.log(user);
                 _this.router.navigate(['/user', user._id]);
             }
             else {
@@ -756,7 +756,7 @@ var ProfileComponent = /** @class */ (function () {
         this.userService = userService;
         this.router = router;
         this.outRouter = outRouter;
-        this.user = new src_app_model_User__WEBPACK_IMPORTED_MODULE_4__["User"]('', '', '', '', '');
+        this.user = new src_app_model_User__WEBPACK_IMPORTED_MODULE_4__["User"]('', '', '', '');
     }
     ProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -769,7 +769,7 @@ var ProfileComponent = /** @class */ (function () {
         var username = this.profileForm.value.username;
         var firstname = this.profileForm.value.firstname;
         var lastname = this.profileForm.value.lastname;
-        var newUser = new src_app_model_User__WEBPACK_IMPORTED_MODULE_4__["User"](this.user._id, username, this.user.password, firstname, lastname);
+        var newUser = new src_app_model_User__WEBPACK_IMPORTED_MODULE_4__["User"](username, this.user.password, firstname, lastname);
         this.userService.updateUser(this.user._id, newUser)
             .subscribe(function () { return _this.outRouter.navigate(['/user', _this.user._id, 'website']); });
     };
@@ -847,7 +847,7 @@ var RegisterComponent = /** @class */ (function () {
         var _this = this;
         var username = this.registerForm.value.username;
         var password = this.registerForm.value.password;
-        var user = new src_app_model_User__WEBPACK_IMPORTED_MODULE_5__["User"]('', username, password, '', '');
+        var user = new src_app_model_User__WEBPACK_IMPORTED_MODULE_5__["User"](username, password, '', '');
         this.userService.createUser(user)
             .subscribe(function (user) { return _this.router.navigate(['/user', user._id]); });
     };
@@ -1953,8 +1953,7 @@ var Page = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function() { return User; });
 var User = /** @class */ (function () {
-    function User(id, username, password, firstName, lastName) {
-        this._id = id;
+    function User(username, password, firstName, lastName) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -2188,6 +2187,8 @@ var UserService = /** @class */ (function () {
         console.log('front user service findUserByCredentials() called');
         var url = this.baseUrl + this.userApiUrl + '?username=' + userName + '&password=' + password;
         console.log('base url is ' + this.baseUrl);
+        console.log('url is ' + url);
+        console.log(this.http.get(url));
         return this.http.get(url);
     };
     UserService.prototype.updateUser = function (userId, user) {

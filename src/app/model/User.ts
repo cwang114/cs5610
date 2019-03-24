@@ -6,8 +6,7 @@ export class User {
   lastName: String;
 
 
-  constructor(id: String, username: String, password: String, firstName: String, lastName: String) {
-    this._id = id;
+  constructor(username: String, password: String, firstName: String, lastName: String) {
     this.username = username;
     this.password = password;
     this.firstName = firstName;

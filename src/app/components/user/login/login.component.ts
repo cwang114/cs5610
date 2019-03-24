@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (user: User) => {
           if (user) {
-            // console.log(user);
+            console.log(user);
             this.router.navigate(['/user', user._id]);
           } else {
             this.errorFlag = true;
