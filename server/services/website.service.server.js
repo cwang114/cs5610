@@ -28,7 +28,7 @@ module.exports = function (app) {
     websiteModel.find().exec(
       function (err, websites) {
         if (err) {
-          return res.sendStatus(400).send(err);
+          return res.status(400).send(err);
         }
         return res.json(websites);
       }
@@ -67,7 +67,7 @@ module.exports = function (app) {
     websiteModel.findWebsiteById(websiteId).exec(
       function (err, website) {
         if (err) {
-          return res.sendStatus(400).send(err);
+          return res.status(400).send(err);
         }
         if (website == null) {
           return res.sendStatus(404);
@@ -84,7 +84,7 @@ module.exports = function (app) {
     websiteModel.updateWebsite(websiteId, website).exec(
       function (err, website) {
         if (err) {
-          return res.sendStatus(400).send(err);
+          return res.status(400).send(err);
         }
         return res.status(200).send(website);
       }
@@ -99,8 +99,10 @@ module.exports = function (app) {
       function (err, website) {
         if (err) {
           return res.status(400).send(err);
+        } else {
+          return res.status(200).send(website);
         }
-        return res.sendStatus(200);
+
       }
     );
   }

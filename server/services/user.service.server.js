@@ -123,7 +123,7 @@ module.exports = function (app) {
         if (err) {
           return res.sendStatus(400).send(err);
         }
-        return res.sendStatus(200);
+        return res.status(200).send(user);
       }
     );
   }

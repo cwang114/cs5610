@@ -29,15 +29,8 @@ function createWebsiteForUser(userId, website) {
 
 function findAllWebsitesForUser(userId) {
   console.log('Mongoose: findAllWebsitesForUser() called');
-  return websiteModel.find({"_user": userId})
-    .populate('_user', '_id')       // Do not append all the user info here. Just populate user with its id.
-    .exec(
-      function (err, website) {
-        if (err) return handleError(err);
-        // console.log('The website\'s user is %s', website.user._id);
-        // prints "The author is Ian Fleming"
-      }
-    );
+  return websiteModel.find({_user: userId})
+    .populate('_user', '_id');      // Do not append all the user info here. Just populate user with its id.
 
 }
 
