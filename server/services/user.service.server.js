@@ -43,7 +43,7 @@ module.exports = function (app) {
     userModel.createUser(user)
       .then(function (user) {
           res.status(200).send(user);
-          return user;
+          return user;  // must return user here, in order to prevent further asynchronous calls.
         },
         function (err) {
           console.log('create user error! ' + err);

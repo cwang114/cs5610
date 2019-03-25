@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var websiteSchema = require('../website/website.schema.server');
 var userSchema = new mongoose.Schema({
 
   username: String,
@@ -9,7 +10,7 @@ var userSchema = new mongoose.Schema({
   phone: String,
   // leave the website [] empty
   // fill in other attributes
-  // websites:[websiteSchema],
+  websites:[websiteSchema],
   dateCreated: {type: Date, default: Date.now()}
 }, {collection: 'user'});
 module.exports = userSchema;

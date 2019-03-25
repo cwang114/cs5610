@@ -20,7 +20,7 @@ export class WebsiteEditComponent implements OnInit {
   constructor(private websiteService: WebsiteService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
-    this.oldWebsite = new Website('', '', '', '');
+    this.oldWebsite = new Website('', '', '');
   }
 
 
@@ -31,20 +31,20 @@ export class WebsiteEditComponent implements OnInit {
         this.userId = params['uid'];
         this.websiteId = params['wid'];
       });
-    this.websiteService.findWebsiteById(this.websiteId)
+    this.websiteService.findWebsiteById(this.userId, this.websiteId)
       .subscribe(
         website => this.oldWebsite = website);
   }
   updateWebsite() {
-    const website = new Website(this.websiteId, this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
-    this.websiteService.updateWebsite(this.websiteId, website)
+    const website = new Website(this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
+    this.websiteService.updateWebsite(this.userId, this.websiteId, website)
       .subscribe(
         () => this.goBack());
 
 
   }
   deleteWebsite() {
-    this.websiteService.deleteWebsite(this.websiteId).subscribe(
+    this.websiteService.deleteWebsite(this.userId, this.websiteId).subscribe(
       () => this.goBack()
     );
 

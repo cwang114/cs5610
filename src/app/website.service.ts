@@ -10,37 +10,45 @@ import {HttpClient} from '@angular/common/http';
 export class WebsiteService {
 
   baseUrl = environment.baseUrl;
-  websiteApiUrl = '/api/website/';
   userApiUrl = '/api/user/';
 
   constructor(private http: HttpClient) { }
+
+  constructFindUpdateDeleteUrl(userId, websiteId) {
+    return this.baseUrl + this.userApiUrl + userId + '/website/' + websiteId;
+  }
   createWebsite(website, userId) {
     console.log('front website service createWebsite() called');
+    // '/api/user/:userId/website'
     return this.http.post<Website>(
       this.baseUrl + this.userApiUrl + userId + '/website', website);
   }
 
   findWebsitesByUser(userId): Observable<Website[]> {
     console.log('front website service findWebsiteByUser() called');
+    // '/api/user/:userId/website'
     return this.http.get<Website[]>(this.baseUrl + this.userApiUrl + userId + '/website');
 
   }
-  findWebsiteById(websiteId) {
+  findWebsiteById(userId, websiteId) {
     console.log('front website service findwebsiteById() called');
     // Only need to call server's url to get the data.
-    return this.http.get<Website>(this.baseUrl + this.websiteApiUrl + websiteId);
+    // '/api/user/:userId/website/:websiteId'
+    return this.http.get<Website>(this.constructFindUpdateDeleteUrl(userId, websiteId));
 
 
   }
 
-  updateWebsite(websiteId, website) {
+  updateWebsite(userId, websiteId, website) {
     console.log('front website service updateWebsite() called');
-    return this.http.put<Website>(this.baseUrl + this.websiteApiUrl + websiteId, website);
+    // '/api/user/:userId/website/:websiteId'
+    return this.http.put<Website>(this.constructFindUpdateDeleteUrl(userId, websiteId), website);
   }
 
-  deleteWebsite(websiteId) {
+  deleteWebsite(userId, websiteId) {
     console.log('front website service deleteWebsite() called');
-    return this.http.delete<Website>(this.baseUrl + this.websiteApiUrl + websiteId);
+    // '/api/user/:userId/website/:websiteId'
+    return this.http.delete<Website>(this.constructFindUpdateDeleteUrl(userId, websiteId));
   }
 
 }

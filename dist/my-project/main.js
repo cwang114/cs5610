@@ -919,7 +919,7 @@ var WebsiteEditComponent = /** @class */ (function () {
         this.websiteService = websiteService;
         this.activatedRoute = activatedRoute;
         this.router = router;
-        this.oldWebsite = new src_app_model_Website__WEBPACK_IMPORTED_MODULE_4__["Website"]('', '', '', '');
+        this.oldWebsite = new src_app_model_Website__WEBPACK_IMPORTED_MODULE_4__["Website"]('', '', '');
     }
     WebsiteEditComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -929,18 +929,18 @@ var WebsiteEditComponent = /** @class */ (function () {
             _this.userId = params['uid'];
             _this.websiteId = params['wid'];
         });
-        this.websiteService.findWebsiteById(this.websiteId)
+        this.websiteService.findWebsiteById(this.userId, this.websiteId)
             .subscribe(function (website) { return _this.oldWebsite = website; });
     };
     WebsiteEditComponent.prototype.updateWebsite = function () {
         var _this = this;
-        var website = new src_app_model_Website__WEBPACK_IMPORTED_MODULE_4__["Website"](this.websiteId, this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
-        this.websiteService.updateWebsite(this.websiteId, website)
+        var website = new src_app_model_Website__WEBPACK_IMPORTED_MODULE_4__["Website"](this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
+        this.websiteService.updateWebsite(this.userId, this.websiteId, website)
             .subscribe(function () { return _this.goBack(); });
     };
     WebsiteEditComponent.prototype.deleteWebsite = function () {
         var _this = this;
-        this.websiteService.deleteWebsite(this.websiteId).subscribe(function () { return _this.goBack(); });
+        this.websiteService.deleteWebsite(this.userId, this.websiteId).subscribe(function () { return _this.goBack(); });
     };
     WebsiteEditComponent.prototype.goBack = function () {
         this.router.navigate(['/user', this.userId, 'website']);
@@ -1112,7 +1112,7 @@ var WebsiteNewComponent = /** @class */ (function () {
     };
     WebsiteNewComponent.prototype.saveWebsite = function () {
         var _this = this;
-        var website = new src_app_model_Website__WEBPACK_IMPORTED_MODULE_3__["Website"]('', this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
+        var website = new src_app_model_Website__WEBPACK_IMPORTED_MODULE_3__["Website"](this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
         this.websiteService.createWebsite(website, this.userId).subscribe(function () { return _this.router.navigate(['/user', _this.userId, 'website']); });
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1977,8 +1977,7 @@ var User = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Website", function() { return Website; });
 var Website = /** @class */ (function () {
-    function Website(_id, name, developerId, description) {
-        this._id = _id;
+    function Website(name, developerId, description) {
         this.name = name;
         this.developerId = developerId;
         this.description = description;
@@ -2234,29 +2233,36 @@ var WebsiteService = /** @class */ (function () {
     function WebsiteService(http) {
         this.http = http;
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].baseUrl;
-        this.websiteApiUrl = '/api/website/';
         this.userApiUrl = '/api/user/';
     }
+    WebsiteService.prototype.constructFindUpdateDeleteUrl = function (userId, websiteId) {
+        return this.baseUrl + this.userApiUrl + userId + '/website/' + websiteId;
+    };
     WebsiteService.prototype.createWebsite = function (website, userId) {
         console.log('front website service createWebsite() called');
+        // '/api/user/:userId/website'
         return this.http.post(this.baseUrl + this.userApiUrl + userId + '/website', website);
     };
     WebsiteService.prototype.findWebsitesByUser = function (userId) {
         console.log('front website service findWebsiteByUser() called');
+        // '/api/user/:userId/website'
         return this.http.get(this.baseUrl + this.userApiUrl + userId + '/website');
     };
-    WebsiteService.prototype.findWebsiteById = function (websiteId) {
+    WebsiteService.prototype.findWebsiteById = function (userId, websiteId) {
         console.log('front website service findwebsiteById() called');
         // Only need to call server's url to get the data.
-        return this.http.get(this.baseUrl + this.websiteApiUrl + websiteId);
+        // '/api/user/:userId/website/:websiteId'
+        return this.http.get(this.constructFindUpdateDeleteUrl(userId, websiteId));
     };
-    WebsiteService.prototype.updateWebsite = function (websiteId, website) {
+    WebsiteService.prototype.updateWebsite = function (userId, websiteId, website) {
         console.log('front website service updateWebsite() called');
-        return this.http.put(this.baseUrl + this.websiteApiUrl + websiteId, website);
+        // '/api/user/:userId/website/:websiteId'
+        return this.http.put(this.constructFindUpdateDeleteUrl(userId, websiteId), website);
     };
-    WebsiteService.prototype.deleteWebsite = function (websiteId) {
+    WebsiteService.prototype.deleteWebsite = function (userId, websiteId) {
         console.log('front website service deleteWebsite() called');
-        return this.http.delete(this.baseUrl + this.websiteApiUrl + websiteId);
+        // '/api/user/:userId/website/:websiteId'
+        return this.http.delete(this.constructFindUpdateDeleteUrl(userId, websiteId));
     };
     WebsiteService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

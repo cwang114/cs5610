@@ -23,7 +23,7 @@ export class WebsiteNewComponent implements OnInit {
       .subscribe( (params: any) => { this.userId = params['uid'];});
   }
   saveWebsite() {
-    const website = new Website('', this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
+    const website = new Website(this.websiteForm.value.newName, this.userId, this.websiteForm.value.newDescription);
     this.websiteService.createWebsite(website, this.userId).subscribe(
       () => this.router.navigate(['/user', this.userId, 'website'])
     );
