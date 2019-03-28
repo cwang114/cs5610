@@ -19,7 +19,7 @@ export class PageEditComponent implements OnInit {
   constructor(private pageService: PageService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
-    this.oldPage = new Page('', '', '', '');
+    this.oldPage = new Page('', '', '');
 
   }
 
@@ -31,7 +31,7 @@ export class PageEditComponent implements OnInit {
         this.websiteId = params['wid'];
         this.pageId = params['pid'];
       });
-    this.pageService.findPageById(this.pageId).subscribe(
+    this.pageService.findPageById(this.websiteId, this.pageId).subscribe(
       page => this.oldPage = page
     );
   }
@@ -39,13 +39,13 @@ export class PageEditComponent implements OnInit {
   updatePage() {
     const newName = this.pageForm.value.pageName;
     const newTitle = this.pageForm.value.pageTitle;
-    const page = new Page(this.pageId, newName, this.websiteId, newTitle);
-    this.pageService.updatePage(this.pageId, page).subscribe(
+    const page = new Page(newName, this.websiteId, newTitle);
+    this.pageService.updatePage(this.websiteId, this.pageId, page).subscribe(
       () => this.goBack()
     );
   }
   deletePage() {
-    this.pageService.deletePage(this.pageId).subscribe(
+    this.pageService.deletePage(this.websiteId, this.pageId).subscribe(
       () => this.goBack()
     );
   }

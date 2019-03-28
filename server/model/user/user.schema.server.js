@@ -8,8 +8,6 @@ var userSchema = new mongoose.Schema({
   lastName: String,
   email: String,
   phone: String,
-  // leave the website [] empty
-  // fill in other attributes
   websites:[websiteSchema],
   dateCreated: {type: Date, default: Date.now()}
 }, {collection: 'user'});

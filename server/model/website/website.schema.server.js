@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var pageSchema = require('../page/page.schema.server');
 var websiteSchema = new mongoose.Schema({
   _user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -6,7 +7,7 @@ var websiteSchema = new mongoose.Schema({
   },
   name: String,
   description: String,
-  // leave page schema blank
+  pages: [pageSchema],
   dateCreated: {type: Date, default: Date.now()}
 }, {collection: 'website'});
 

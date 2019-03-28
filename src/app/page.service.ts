@@ -9,10 +9,13 @@ import {Page} from './model/Page';
 })
 export class PageService {
   baseUrl = environment.baseUrl;
-  pageApiUrl = '/api/page/';
   websiteApiUrl = '/api/website/';
 
   constructor(private http: HttpClient) { }
+  constructFindUpdateDeleteUrl(websiteId, pageId) {
+    return this.baseUrl + this.websiteApiUrl + websiteId + '/page/' + pageId;
+  }
+
   createPage(page, websiteId) {
     console.log('front page service createPage() called');
     return this.http.post<Page>(
@@ -22,25 +25,28 @@ export class PageService {
 
   findPagesByWebsite(websiteId): Observable<Page[]> {
     console.log('front page service findPageByWebsite() called');
+    // '/api/website/:websiteId/page'
     return this.http.get<Page[]>(this.baseUrl + this.websiteApiUrl + websiteId + '/page');
 
   }
-
-  findPageById(pageId) {
+  findPageById(websiteId, pageId) {
     console.log('front page service findpageById() called');
     // Only need to call server's url to get the data.
-    return this.http.get<Page>(this.baseUrl + this.pageApiUrl + pageId);
+    // '/api/website/:websiteId/page/:pageId'
+    return this.http.get<Page>(this.constructFindUpdateDeleteUrl(websiteId, pageId));
 
 
   }
 
-  updatePage(pageId, page) {
+  updatePage(websiteId, pageId, page) {
     console.log('front page service updatePage() called');
-    return this.http.put<Page>(this.baseUrl + this.pageApiUrl + pageId, page);
+    // '/api/website/:websiteId/page/:pageId'
+    return this.http.put<Page>(this.constructFindUpdateDeleteUrl(websiteId, pageId), page);
   }
 
-  deletePage(pageId) {
+  deletePage(websiteId, pageId) {
     console.log('front page service deletePage() called');
-    return this.http.delete<Page>(this.baseUrl + this.pageApiUrl + pageId);
+    // '/api/website/:websiteId/page/:pageId'
+    return this.http.delete<Page>(this.constructFindUpdateDeleteUrl(websiteId, pageId));
   }
 }

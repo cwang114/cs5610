@@ -4,8 +4,7 @@ export class Page {
   websiteId: String;
   title: String;
 
-  constructor(_id: String, name: String, websiteId: String, description: String) {
-    this._id = _id;
+  constructor(name: String, websiteId: String, description: String) {
     this.name = name;
     this.websiteId = websiteId;
     this.title = description;

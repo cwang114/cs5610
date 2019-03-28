@@ -329,7 +329,7 @@ var PageEditComponent = /** @class */ (function () {
         this.pageService = pageService;
         this.activatedRoute = activatedRoute;
         this.router = router;
-        this.oldPage = new src_app_model_Page__WEBPACK_IMPORTED_MODULE_3__["Page"]('', '', '', '');
+        this.oldPage = new src_app_model_Page__WEBPACK_IMPORTED_MODULE_3__["Page"]('', '', '');
     }
     PageEditComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -340,18 +340,18 @@ var PageEditComponent = /** @class */ (function () {
             _this.websiteId = params['wid'];
             _this.pageId = params['pid'];
         });
-        this.pageService.findPageById(this.pageId).subscribe(function (page) { return _this.oldPage = page; });
+        this.pageService.findPageById(this.websiteId, this.pageId).subscribe(function (page) { return _this.oldPage = page; });
     };
     PageEditComponent.prototype.updatePage = function () {
         var _this = this;
         var newName = this.pageForm.value.pageName;
         var newTitle = this.pageForm.value.pageTitle;
-        var page = new src_app_model_Page__WEBPACK_IMPORTED_MODULE_3__["Page"](this.pageId, newName, this.websiteId, newTitle);
-        this.pageService.updatePage(this.pageId, page).subscribe(function () { return _this.goBack(); });
+        var page = new src_app_model_Page__WEBPACK_IMPORTED_MODULE_3__["Page"](newName, this.websiteId, newTitle);
+        this.pageService.updatePage(this.websiteId, this.pageId, page).subscribe(function () { return _this.goBack(); });
     };
     PageEditComponent.prototype.deletePage = function () {
         var _this = this;
-        this.pageService.deletePage(this.pageId).subscribe(function () { return _this.goBack(); });
+        this.pageService.deletePage(this.websiteId, this.pageId).subscribe(function () { return _this.goBack(); });
     };
     PageEditComponent.prototype.goBack = function () {
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
@@ -530,7 +530,7 @@ var PageNewComponent = /** @class */ (function () {
         var _this = this;
         var name = this.pageForm.value.pageName;
         var title = this.pageForm.value.pageTitle;
-        var page = new src_app_model_Page__WEBPACK_IMPORTED_MODULE_5__["Page"]('', name, this.websiteId, title);
+        var page = new src_app_model_Page__WEBPACK_IMPORTED_MODULE_5__["Page"](name, this.websiteId, title);
         this.pageService.createPage(page, this.websiteId).subscribe(function (page) { return _this.goBack(); });
     };
     PageNewComponent.prototype.goBack = function () {
@@ -1929,8 +1929,7 @@ var FlickrService = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Page", function() { return Page; });
 var Page = /** @class */ (function () {
-    function Page(_id, name, websiteId, description) {
-        this._id = _id;
+    function Page(name, websiteId, description) {
         this.name = name;
         this.websiteId = websiteId;
         this.title = description;
@@ -2042,29 +2041,35 @@ var PageService = /** @class */ (function () {
     function PageService(http) {
         this.http = http;
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].baseUrl;
-        this.pageApiUrl = '/api/page/';
         this.websiteApiUrl = '/api/website/';
     }
+    PageService.prototype.constructFindUpdateDeleteUrl = function (websiteId, pageId) {
+        return this.baseUrl + this.websiteApiUrl + websiteId + '/page/' + pageId;
+    };
     PageService.prototype.createPage = function (page, websiteId) {
         console.log('front page service createPage() called');
         return this.http.post(this.baseUrl + this.websiteApiUrl + websiteId + '/page', page);
     };
     PageService.prototype.findPagesByWebsite = function (websiteId) {
         console.log('front page service findPageByWebsite() called');
+        // '/api/website/:websiteId/page'
         return this.http.get(this.baseUrl + this.websiteApiUrl + websiteId + '/page');
     };
-    PageService.prototype.findPageById = function (pageId) {
+    PageService.prototype.findPageById = function (websiteId, pageId) {
         console.log('front page service findpageById() called');
         // Only need to call server's url to get the data.
-        return this.http.get(this.baseUrl + this.pageApiUrl + pageId);
+        // '/api/website/:websiteId/page/:pageId'
+        return this.http.get(this.constructFindUpdateDeleteUrl(websiteId, pageId));
     };
-    PageService.prototype.updatePage = function (pageId, page) {
+    PageService.prototype.updatePage = function (websiteId, pageId, page) {
         console.log('front page service updatePage() called');
-        return this.http.put(this.baseUrl + this.pageApiUrl + pageId, page);
+        // '/api/website/:websiteId/page/:pageId'
+        return this.http.put(this.constructFindUpdateDeleteUrl(websiteId, pageId), page);
     };
-    PageService.prototype.deletePage = function (pageId) {
+    PageService.prototype.deletePage = function (websiteId, pageId) {
         console.log('front page service deletePage() called');
-        return this.http.delete(this.baseUrl + this.pageApiUrl + pageId);
+        // '/api/website/:websiteId/page/:pageId'
+        return this.http.delete(this.constructFindUpdateDeleteUrl(websiteId, pageId));
     };
     PageService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
