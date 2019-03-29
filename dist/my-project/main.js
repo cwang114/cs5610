@@ -193,6 +193,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sortable_directive__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./sortable.directive */ "./src/app/sortable.directive.ts");
 /* harmony import */ var _components_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component */ "./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.ts");
 /* harmony import */ var _flickr_service__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./flickr.service */ "./src/app/flickr.service.ts");
+/* harmony import */ var ngx_quill__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ngx-quill */ "./node_modules/ngx-quill/fesm5/ngx-quill.js");
+
 
 
 
@@ -261,7 +263,8 @@ var AppModule = /** @class */ (function () {
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_27__["HttpClientModule"]
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_27__["HttpClientModule"],
+                ngx_quill__WEBPACK_IMPORTED_MODULE_31__["QuillModule"]
             ],
             providers: [_user_service__WEBPACK_IMPORTED_MODULE_21__["UserService"], _website_service__WEBPACK_IMPORTED_MODULE_22__["WebsiteService"], _page_service__WEBPACK_IMPORTED_MODULE_23__["PageService"], _widget_service__WEBPACK_IMPORTED_MODULE_24__["WidgetService"], _flickr_service__WEBPACK_IMPORTED_MODULE_30__["FlickrService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
@@ -1283,7 +1286,7 @@ var WidgetEditComponent = /** @class */ (function () {
         this.activatedRoute = activatedRoute;
         this.router = router;
         this.widgetService = widgetService;
-        this.widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_3__["Widget"]('', '');
+        this.widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_3__["Widget"]('', '', '', '', '', '');
     }
     WidgetEditComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1374,7 +1377,10 @@ var WidgetHeaderComponent = /** @class */ (function () {
         var size = +(this.widgetForm.value.newSize);
         this.widget.text = text;
         this.widget.size = size;
-        this.widgetService.updateWidget(this.pageId, this.widget._id, this.widget).subscribe(function () { return _this.goBack(); });
+        this.widgetService.updateWidget(this.pageId, this.widget._id, this.widget).subscribe(function (widget) {
+            console.log('update widget called in front end' + widget);
+            _this.goBack();
+        });
     };
     WidgetHeaderComponent.prototype.deleteWidget = function () {
         var _this = this;
@@ -2009,10 +2015,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Widget", function() { return Widget; });
 var Widget = /** @class */ (function () {
     function Widget(type, pageId, size, text, width, url) {
-        if (size === void 0) { size = 1; }
-        if (text === void 0) { text = 'text'; }
-        if (width === void 0) { width = '100%'; }
-        if (url === void 0) { url = 'url'; }
         this.type = type;
         this.pageId = pageId;
         this.size = size;

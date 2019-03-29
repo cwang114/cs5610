@@ -32,7 +32,10 @@ export class WidgetHeaderComponent implements OnInit {
     this.widget.text = text;
     this.widget.size = size;
     this.widgetService.updateWidget(this.pageId, this.widget._id, this.widget).subscribe(
-      () => this.goBack()
+      (widget) => {
+        console.log('update widget called in front end' + widget);
+        this.goBack();
+      }
     );
 
   }

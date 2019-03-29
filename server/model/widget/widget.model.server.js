@@ -31,10 +31,12 @@ function createWidget(pageId, widget) {
 }
 
 function findAllWidgetsForPage(pageId) {
-  console.log('Mongoose: findAllWidgetsForPage() called: pageId: '+pageId);
-  return widgetModel.find({_page: pageId})
-    .populate('_page', '_id');      // Do not append all the page info here. Just populate page with its id.
+  console.log('Mongoose: findAllWidgetsForPage() called: pageId: ' + pageId);
+  // Directly return the widgets array inside page.
+  return pageModel.findOne({_id: pageId}).then(function (page) {
+    return page.widgets;
 
+  });
 }
 
 function findWidgetById(widgetId) {
@@ -44,7 +46,23 @@ function findWidgetById(widgetId) {
 
 function updateWidget(widgetId, widget) {
   console.log('Mongoose: updateWidget() called');
-  return widgetModel.updateOne({_id: widgetId}, widget);
+  // first, find that widget in page, and update the page widget array.
+  pageModel.findOneAndUpdate(
+    {"_id": widget._page, "widgets._id": widgetId},
+    {
+      "$set": {
+        "widgets.$": widget
+      }
+    },
+    {returnNewDocument: true, useFindAndModify: false},
+  ).then(function (page) {
+    // Save page after updating.
+    return page.save();
+
+  });
+  // then, inside widget collection, update the widget and return.
+  return widgetModel.findOneAndUpdate({_id: widgetId}, widget, {useFindAndModify: false});
+
 }
 
 function deleteWidget(pageId, widgetId) {
@@ -55,7 +73,7 @@ function deleteWidget(pageId, widgetId) {
       // next, for the current page, delete this widget from page's widget list.
       pageModel.findPageById(pageId)
         .then(function (page) {
-          page.widgets.pull({ _id: responseWidget._id });
+          page.widgets.pull({_id: responseWidget._id});
           return page.save();
         });
       return responseWidget;
@@ -64,12 +82,21 @@ function deleteWidget(pageId, widgetId) {
   return widgetModel.deleteOne({_id: widgetId});
 
 
-
 }
 
 function reorderWidget(pageId, start, end) {
+
   console.log('Mongoose: reorderWidget() called, start is ' + start + ', end is ' + end);
-  // TODO: implement reorder widget
+  // first, find widget array inside current page.
+  return pageModel.findOneAndUpdate({_id: pageId}).then(function (page) {
+    // then, reorder in that widget array in the page.
+    widgetArray = page.widgets;
+    var startItem = widgetArray[start];
+    widgetArray.splice(start, 1);
+    widgetArray.splice(end, 0, startItem);
+    page.widgets = widgetArray;
+    return page.save();
+  });
 }
 
 function findAllWidgets() {

@@ -29,8 +29,8 @@ import {ProfilebarComponent} from './components/profilebar/profilebar.component'
 import {HttpClientModule} from '@angular/common/http';
 import { SortableDirective } from './sortable.directive';
 import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
-import {FlickrService} from "./flickr.service";
-
+import {FlickrService} from './flickr.service';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,8 @@ import {FlickrService} from "./flickr.service";
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    QuillModule
   ],
   providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
   bootstrap: [AppComponent]

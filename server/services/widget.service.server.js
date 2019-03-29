@@ -31,12 +31,7 @@ module.exports = function (app) {
   app.put('/api/page/:pageId/widget', sortWidget);  // '/page/:pageId/widget?initial=index1&final=index2'
   // route of upload the image
   app.post('/api/upload/', upload.single('imageAdded'), uploadImage);  // the upload.single has to include the name of file uploading element in html
-  app.get('/images/:fileName', (req, res) => {
-    var fileName = req.params["fileName"];
-    var localpath = __dirname+'/../../public/images/'+fileName;
-    var path = require('path');
-    res.sendFile(path.resolve(localpath));
-  });
+  app.get('/images/:fileName', getImage);
   app.get('/api/widget/all', findAllWidgets);     // only for testing
 
   // function list
@@ -52,8 +47,8 @@ module.exports = function (app) {
   }
 
   function createWidget(req, res) {
-    var widget = req.body;
-    var pageId = req.params['pageId'];
+    const widget = req.body;
+    const pageId = req.params['pageId'];
     widget._page = pageId;
     delete widget._id;
     widgetModel.createWidget(pageId, widget)
@@ -71,7 +66,7 @@ module.exports = function (app) {
   }
 
   function findWidgetsByPage(req, res) {
-    var pageId = req.params['pageId'];
+    const pageId = req.params['pageId'];
     widgetModel.findAllWidgetsForPage(pageId)
       .then(function (widgets) {
         return res.status(200).send(widgets);
@@ -80,7 +75,7 @@ module.exports = function (app) {
   }
 
   function findWidgetById(req, res){
-    var widgetId = req.params['widgetId'];
+    const widgetId = req.params['widgetId'];
     widgetModel.findWidgetById(widgetId).exec(
       function (err, widget) {
         if (err) {
@@ -96,12 +91,15 @@ module.exports = function (app) {
   }
 
   function updateWidget(req, res) {
-    var widgetId = req.params['widgetId'];
-    var widget = req.body;
+    const widgetId = req.params['widgetId'];
+    const pageId = req.params['pageId'];
+    let widget = req.body;
 
-    widgetModel.updateWidget(widgetId, widget).exec(
-      function (err, widget) {
+    widgetModel.updateWidget(widgetId, widget).then(
+      function (widget, err) {
         if (err) {
+          console.log('-----');
+          console.log(err);
           return res.status(400).send(err);
         }
         return res.status(200).send(widget);
@@ -110,8 +108,8 @@ module.exports = function (app) {
   }
 
   function deleteWidget(req, res) {
-    var widgetId = req.params['widgetId'];
-    var pageId = req.params['pageId'];
+    const widgetId = req.params['widgetId'];
+    const pageId = req.params['pageId'];
     widgetModel.deleteWidget(pageId, widgetId).exec(
       function (err, widget) {
         if (err) {
@@ -124,105 +122,77 @@ module.exports = function (app) {
     );
   }
 
-
-  // TODO: modify sort widget and upload image
   function sortWidget(req, res) {
-    var startIndex = req.query.initial;
-    var endIndex = req.query.final;
-    // console.log("The startIndex received is: "+startIndex);
-    // console.log("The endIndex received is: "+endIndex);
-
-    var widgetArray = req.body;
-    var startItem = widgetArray[startIndex];
-    widgetArray.splice(startIndex, 1);
-    widgetArray.splice(endIndex, 0, startItem);
-    widgets = updateOrder(widgets, widgetArray);
-    res.status(200).send(widgetArray);
+    const pageId = req.params['pageId'];
+    const startIndex = req.query.initial;
+    const endIndex = req.query.final;
+    widgetModel.reorderWidget(pageId, startIndex, endIndex);
+    return res.sendStatus(200);
   }
 
   function uploadImage(req, res) {
-    console.log("backend upload image called.")
+    console.log("backend upload image called.");
     // extract attributes of req.body
-    var widgetId = req.body.widgetId;
-    var width = req.body.width;
-    var userId = req.body.userId;
-    var websiteId = req.body.websiteId;
-    var widgetId = req.body.widgetId;
+    const widgetId = req.body.widgetId;
+    const width = req.body.width;
+    const userId = req.body.userId;
+    const websiteId = req.body.websiteId;
+    const pageId = req.body.pageId;
 
     // extract attributes from req.file
-    var myFile = req.file;
+    const myFile = req.file;
     console.log(myFile);
     if(myFile == null) {
       return;
     }
-    var originalname = myFile.originalname; // file name on user's computer
-    var filename = myFile.filename; // new file name in upload folder
-    var path = myFile.path; // full path of uploaded file
-    console.log("image path is: "+path);
-    var destination = myFile.destination; // folder where file is saved to
-    console.log("image destination is: "+destination);
+    const originalname = myFile.originalname; // file name on user's computer
+    const filename = myFile.filename; // new file name in upload folder
+    const path = myFile.path; // full path of uploaded file
+    console.log("image path is: " + path);
+    const destination = myFile.destination; // folder where file is saved to
+    console.log("image destination is: " + destination);
 
-    var size = myFile.size;
-    var mimetype = myFile.mimetype;
+    const size = myFile.size;
+    const mimetype = myFile.mimetype;
 
     // set the image new url to this image widget
-    var widgetString = getWidgetById(widgetId);
-    var widget = JSON.parse(widgetString);      // getWidgetById() returns a string!! need JSON.parse() to convert string to a valid json.
+    var alteredWidget = {};
+    widgetModel.findWidgetById(widgetId).exec(
+      function (err, widget) {
+        if (err) {
+          return res.status(400).send(err);
+        }
+        if (widget == null) {
+          return res.sendStatus(404);
+        }
+        alteredWidget = widget;
+        console.log('altered widget is '+ alteredWidget);
+      }
+    );
 
-
-    widget.url = app.settings.baseUrl+'/images/'+filename;
+    alteredWidget.url = app.settings.baseUrl+'/images/'+filename;
     // widget.url = 'images/'+filename;
-    console.log("widget url is "+widget.url);
+    console.log("widget url is " + alteredWidget.url);
 
-
-    updateWidgetById(widgetId, widget);
-    var callbackUrl = app.settings.baseUrl+"/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
+    // update the widget
+    widgetModel.updateWidget(widgetId, alteredWidget).then(
+      function (widget, err) {
+        if (err) {
+          console.log('-----');
+          console.log(err);
+        }
+      }
+    );
+    const callbackUrl = app.settings.baseUrl+"/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
     //console.log(app.settings.baseUrl);
     res.redirect(callbackUrl);
 
   }
-  function updateWidgetById(widgetId, widget) {
-    for (var i = 0; i < widgets.length; i++) {
-      if (widgets[i]._id === widgetId) {
-        widgets[i] = widget;
-        return;
-      }
-    }
-  }
 
-  function getWidgetById(widgetId) {
-    var curSite = null;
-    for (var w of widgets) {
-      if (w._id === widgetId) {
-        let size = (w.size === undefined) ? 1 : w.size;
-        let text = (w.text === undefined) ? "text" : w.text;
-        let width = (w.width === undefined) ? "100%" : w.width;
-        let url = (w.url === undefined) ? "" : w.url;
-
-        curSite = '{"_id":"'+ w._id.toString() +
-          '", "widgetType":"'+ w.widgetType.toString() +
-          '", "pageId":"' + w.pageId.toString() +
-          '", "size":'+ size +
-          ', "text":"' + text.toString() +
-          '", "width":"' + width.toString() +
-          '", "url":"' + url.toString() +'"}';
-        // console.log(curSite);
-        return curSite;
-      }
-    }
-    return curSite;
+  function getImage(req, res) {
+    const fileName = req.params['fileName'];
+    const localpath = __dirname + '/../../public/images/' + fileName;
+    const path = require('path');
+    res.sendFile(path.resolve(localpath));
   }
-  function updateOrder(widgets, internalArray) {
-    var ptr = 0;
-    var widgetPtr = 0;
-    while (ptr < internalArray.length) {
-      if (widgets[widgetPtr].pageId === internalArray[ptr].pageId) {
-        widgets[widgetPtr++] = internalArray[ptr++];
-      } else {
-        widgetPtr++;
-      }
-    }
-    return widgets;
-  }
-
-}
+};
