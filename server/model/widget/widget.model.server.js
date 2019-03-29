@@ -86,17 +86,33 @@ function deleteWidget(pageId, widgetId) {
 
 function reorderWidget(pageId, start, end) {
 
-  console.log('Mongoose: reorderWidget() called, start is ' + start + ', end is ' + end);
-  // first, find widget array inside current page.
-  return pageModel.findOneAndUpdate({_id: pageId}).then(function (page) {
-    // then, reorder in that widget array in the page.
-    widgetArray = page.widgets;
-    var startItem = widgetArray[start];
-    widgetArray.splice(start, 1);
-    widgetArray.splice(end, 0, startItem);
-    page.widgets = widgetArray;
-    return page.save();
-  });
+  // console.log('Mongoose: reorderWidget() called, start is ' + start + ', end is ' + end);
+  // // first, find widget array inside current page.
+  // return pageModel.findOneAndUpdate({_id: pageId}).then(function (page) {
+  //   // then, reorder in that widget array in the page.
+  //   widgetArray = page.widgets;
+  //   var startItem = widgetArray[start];
+  //   widgetArray.splice(start, 1);
+  //   widgetArray.splice(end, 0, startItem);
+  //   page.widgets = widgetArray;
+  //   return page.save();
+  // });
+  return pageModel.findPageById(pageId).exec(
+    function (err, page) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('altered page is ' + page);
+        var widgetArray = page.widgets;
+        console.log('widget array is ' + widgetArray);
+        var startItem = widgetArray[start];
+        widgetArray.splice(start, 1);
+        widgetArray.splice(end, 0, startItem);
+        page.widgets = widgetArray;
+        return page.save();
+      }
+    }
+  );
 }
 
 function findAllWidgets() {
