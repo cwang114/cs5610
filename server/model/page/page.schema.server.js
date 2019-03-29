@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var widgetSchema = require('../widget/widget.schema.server');
 var pageSchema = new mongoose.Schema({
   _website: {
     type: mongoose.Schema.Types.ObjectId,
@@ -7,7 +8,7 @@ var pageSchema = new mongoose.Schema({
   name: String,
   title: String,
   description: String,
-  // leave widget schema blank
+  widgets: [widgetSchema],
   dateCreated: {type: Date, default: Date.now()}
 }, {collection: 'page'});
 

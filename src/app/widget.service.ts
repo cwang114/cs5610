@@ -9,10 +9,12 @@ import {HttpClient} from '@angular/common/http';
 export class WidgetService {
 
   baseUrl = environment.baseUrl;
-  widgetApiUrl = '/api/widget/';
   pageApiUrl = '/api/page/';
 
   constructor(private http: HttpClient) { }
+  constructFindUpdateDeleteUrl(pageId, widgetId) {
+    return this.baseUrl + this.pageApiUrl + pageId + '/widget/' + widgetId;
+  }
   createWidget(widget, pageId) {
     console.log('front widget service createWidget() called');
     return this.http.post<Widget>(
@@ -25,20 +27,20 @@ export class WidgetService {
     return this.http.get<Widget[]>(this.baseUrl + this.pageApiUrl + pageId + '/widget');
 
   }
-  findWidgetById(widgetId) {
+  findWidgetById(pageId, widgetId) {
     console.log('front widget service findwidgetById() called');
     // Only need to call server's url to get the data.
-    return this.http.get<Widget>(this.baseUrl + this.widgetApiUrl + widgetId);
+    return this.http.get<Widget>(this.constructFindUpdateDeleteUrl(pageId, widgetId));
 
   }
-  updateWidget(widgetId, widget) {
+  updateWidget(pageId, widgetId, widget) {
     console.log('front widget service updateWidget() called');
-    return this.http.put<Widget>(this.baseUrl + this.widgetApiUrl + widgetId, widget);
+    return this.http.put<Widget>(this.constructFindUpdateDeleteUrl(pageId, widgetId), widget);
   }
 
-  deleteWidget(widgetId) {
+  deleteWidget(pageId, widgetId) {
     console.log('front widget service deleteWidget() called');
-    return this.http.delete<Widget>(this.baseUrl + this.widgetApiUrl + widgetId);
+    return this.http.delete<Widget>(this.constructFindUpdateDeleteUrl(pageId, widgetId));
   }
 
   reorderWidgets(startIndex: Number, endIndex: Number, pageId, widgets): Observable<Widget[]> {

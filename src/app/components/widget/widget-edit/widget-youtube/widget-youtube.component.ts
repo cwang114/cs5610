@@ -26,25 +26,25 @@ export class WidgetYoutubeComponent implements OnInit {
 
   }
   updateWidget() {
-    let text = this.widgetForm.value.newText;
-    let url = this.widgetForm.value.newUrl;
-    let width = this.widgetForm.value.newWidth;
+    const text = this.widgetForm.value.newText;
+    const url = this.widgetForm.value.newUrl;
+    const width = this.widgetForm.value.newWidth;
     this.widget.text = text;
     this.widget.url = url;
     this.widget.width = width;
-    this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+    this.widgetService.updateWidget(this.pageId, this.widget._id, this.widget).subscribe(
       () => this.goBack()
     );
 
   }
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widget._id).subscribe(
+    this.widgetService.deleteWidget(this.pageId, this.widget._id).subscribe(
       () => this.goBack());
   }
   displayWidgetText() {
     return this.widget.text;
   }
-  displayWidgetWidth(){
+  displayWidgetWidth() {
     return this.widget.width;
   }
   displayWidgetUrl() {

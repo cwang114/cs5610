@@ -1024,7 +1024,10 @@ var WebsiteListComponent = /** @class */ (function () {
             .subscribe(function (params) {
             _this.userId = params['uid'];
         });
-        this.websiteService.findWebsitesByUser(this.userId).subscribe(function (websites) { return _this.websites = websites; });
+        this.websiteService.findWebsitesByUser(this.userId).subscribe(function (websites) {
+            _this.websites = websites;
+            // console.log(this.websites);
+        });
     };
     WebsiteListComponent.prototype.goBack = function () {
         this.router.navigate(['/user', this.userId]);
@@ -1199,18 +1202,21 @@ var WidgetChooserComponent = /** @class */ (function () {
     };
     WidgetChooserComponent.prototype.goToWidgetEdit = function (widget) {
         var _this = this;
-        this.widgetService.createWidget(widget, this.pageId).subscribe(function (widget) { return _this.router.navigate(['user', _this.userId, 'website', _this.websiteId, 'page', _this.pageId, 'widget', widget._id]); });
+        this.widgetService.createWidget(widget, this.pageId).subscribe(function (widget) {
+            // console.log(widget);
+            _this.router.navigate(['user', _this.userId, 'website', _this.websiteId, 'page', _this.pageId, 'widget', widget._id]);
+        });
     };
     WidgetChooserComponent.prototype.goToHeader = function () {
-        var widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_4__["Widget"]("", "HEADING", this.pageId, 0, "", "", "");
+        var widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_4__["Widget"]('HEADING', this.pageId, 0, '', '', '');
         this.goToWidgetEdit(widget);
     };
     WidgetChooserComponent.prototype.goToImage = function () {
-        var widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_4__["Widget"]("", "IMAGE", this.pageId, 0, "", "", "");
+        var widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_4__["Widget"]('IMAGE', this.pageId, 0, '', '', '');
         this.goToWidgetEdit(widget);
     };
     WidgetChooserComponent.prototype.goToYoutube = function () {
-        var widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_4__["Widget"]("", "YOUTUBE", this.pageId, 0, "", "", "");
+        var widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_4__["Widget"]('YOUTUBE', this.pageId, 0, '', '', '');
         this.goToWidgetEdit(widget);
     };
     WidgetChooserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1248,7 +1254,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"widget.widgetType\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-youtube>\n  </div>\n</div>\n"
+module.exports = "<div [ngSwitch]=\"widget.type\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-youtube>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1277,7 +1283,7 @@ var WidgetEditComponent = /** @class */ (function () {
         this.activatedRoute = activatedRoute;
         this.router = router;
         this.widgetService = widgetService;
-        this.widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_3__["Widget"]('', '', '');
+        this.widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_3__["Widget"]('', '');
     }
     WidgetEditComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1288,7 +1294,7 @@ var WidgetEditComponent = /** @class */ (function () {
             _this.pageId = params['pid'];
             _this.widgetId = params['wgid'];
         });
-        this.widgetService.findWidgetById(this.widgetId).subscribe(function (widget) { return _this.widget = widget; });
+        this.widgetService.findWidgetById(this.pageId, this.widgetId).subscribe(function (widget) { return _this.widget = widget; });
     };
     WidgetEditComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1357,6 +1363,7 @@ var WidgetHeaderComponent = /** @class */ (function () {
         this.router = router;
     }
     WidgetHeaderComponent.prototype.ngOnInit = function () {
+        console.log('enter header page');
     };
     WidgetHeaderComponent.prototype.goBack = function () {
         this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
@@ -1367,11 +1374,11 @@ var WidgetHeaderComponent = /** @class */ (function () {
         var size = +(this.widgetForm.value.newSize);
         this.widget.text = text;
         this.widget.size = size;
-        this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(function () { return _this.goBack(); });
+        this.widgetService.updateWidget(this.pageId, this.widget._id, this.widget).subscribe(function () { return _this.goBack(); });
     };
     WidgetHeaderComponent.prototype.deleteWidget = function () {
         var _this = this;
-        this.widgetService.deleteWidget(this.widget._id).subscribe(function () { return _this.goBack(); });
+        this.widgetService.deleteWidget(this.pageId, this.widget._id).subscribe(function () { return _this.goBack(); });
     };
     WidgetHeaderComponent.prototype.displayWidgetText = function () {
         return this.widget.text;
@@ -1478,7 +1485,7 @@ var FlickrImageSearchComponent = /** @class */ (function () {
             _this.pageId = params['pid'];
             _this.widgetId = params['wgid'];
         });
-        this.widgetService.findWidgetById(this.widgetId).subscribe(function (widget) { return _this.widget = widget; });
+        this.widgetService.findWidgetById(this.pageId, this.widgetId).subscribe(function (widget) { return _this.widget = widget; });
     };
     FlickrImageSearchComponent.prototype.searchPhotos = function () {
         var _this = this;
@@ -1496,7 +1503,7 @@ var FlickrImageSearchComponent = /** @class */ (function () {
         var url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
         url += '/' + photo.id + '_' + photo.secret + '_m.jpg';
         this.widget.url = url;
-        this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(function () { return _this.goBack(); });
+        this.widgetService.updateWidget(this.pageId, this.widgetId, this.widget).subscribe(function () { return _this.goBack(); });
     };
     FlickrImageSearchComponent.prototype.goBack = function () {
         this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widgetId]);
@@ -1587,11 +1594,11 @@ var WidgetImageComponent = /** @class */ (function () {
         this.widget.text = text;
         this.widget.url = url;
         this.widget.width = width;
-        this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(function () { return _this.goBack(); });
+        this.widgetService.updateWidget(this.pageId, this.widget._id, this.widget).subscribe(function () { return _this.goBack(); });
     };
     WidgetImageComponent.prototype.deleteWidget = function () {
         var _this = this;
-        this.widgetService.deleteWidget(this.widget._id).subscribe(function () { return _this.goBack(); });
+        this.widgetService.deleteWidget(this.pageId, this.widget._id).subscribe(function () { return _this.goBack(); });
     };
     WidgetImageComponent.prototype.displayWidgetText = function () {
         return this.widget.text;
@@ -1703,11 +1710,11 @@ var WidgetYoutubeComponent = /** @class */ (function () {
         this.widget.text = text;
         this.widget.url = url;
         this.widget.width = width;
-        this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(function () { return _this.goBack(); });
+        this.widgetService.updateWidget(this.pageId, this.widget._id, this.widget).subscribe(function () { return _this.goBack(); });
     };
     WidgetYoutubeComponent.prototype.deleteWidget = function () {
         var _this = this;
-        this.widgetService.deleteWidget(this.widget._id).subscribe(function () { return _this.goBack(); });
+        this.widgetService.deleteWidget(this.pageId, this.widget._id).subscribe(function () { return _this.goBack(); });
     };
     WidgetYoutubeComponent.prototype.displayWidgetText = function () {
         return this.widget.text;
@@ -1775,7 +1782,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-light bg-light pb-2\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Widgets</span>\n\n  <!--to widget choose-->\n  <a class=\"ml-auto\" (click)=\"goToWidgetChoose()\" >\n    <span>\n      <i class=\"fas fa-plus dark\"></i>\n    </span>\n  </a>\n</nav>\n\n\n<!--list and switch-->\n<div appSortable (newIndexes) = \"onNewIndexes($event)\">\n<div class=\"container-fluid pt-0\"\n     *ngFor=\"let widget of widgets\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div [ngSwitch]=\"widget.widgetType\">\n\n          <div *ngSwitchCase=\"'HEADING'\">\n            <!--display the header-->\n            <p [ngStyle]=\"{'font-size': widget.size+'00%'}\">{{widget.text}}</p>\n          </div>\n\n          <div *ngSwitchCase=\"'YOUTUBE'\">\n            <iframe width=\"640\" height=\"360\" [src]=\"convertToSafeYoutubeUrl(widget.url)\" frameborder=\"0\" allowfullscreen></iframe>\n          </div>\n\n          <div *ngSwitchCase=\"'IMAGE'\">\n            <!--display the image-->\n            <img [src]=\"convertToSafeUrl(widget.url)\"/>\n          </div>\n\n          <div *ngSwitchCase=\"'HTML'\">\n            <!--display the html-->\n            Here should be html embedded page.\n          </div>\n        </div>\n      </td>\n      <td align=\"right\">\n        <a (click)=\"goToWidgetEdit(widget._id)\" ><i class=\"fas fa-cog\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n</div>\n\n<div class=\"p-3\">\n\n</div>\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n\n\n\n\n\n\n\n\n"
+module.exports = "<nav class=\"navbar navbar-light bg-light pb-2\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Widgets</span>\n\n  <!--to widget choose-->\n  <a class=\"ml-auto\" (click)=\"goToWidgetChoose()\" >\n    <span>\n      <i class=\"fas fa-plus dark\"></i>\n    </span>\n  </a>\n</nav>\n\n\n<!--list and switch-->\n<div appSortable (newIndexes) = \"onNewIndexes($event)\">\n<div class=\"container-fluid pt-0\"\n     *ngFor=\"let widget of widgets\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div [ngSwitch]=\"widget.type\">\n\n          <div *ngSwitchCase=\"'HEADING'\">\n            <!--display the header-->\n            <p [ngStyle]=\"{'font-size': widget.size+'00%'}\">{{widget.text}}</p>\n          </div>\n\n          <div *ngSwitchCase=\"'YOUTUBE'\">\n            <iframe width=\"640\" height=\"360\" [src]=\"convertToSafeYoutubeUrl(widget.url)\" frameborder=\"0\" allowfullscreen></iframe>\n          </div>\n\n          <div *ngSwitchCase=\"'IMAGE'\">\n            <!--display the image-->\n            <img [src]=\"convertToSafeUrl(widget.url)\"/>\n          </div>\n\n          <div *ngSwitchCase=\"'HTML'\">\n            <!--display the html-->\n            Here should be html embedded page.\n          </div>\n        </div>\n      </td>\n      <td align=\"right\">\n        <a (click)=\"goToWidgetEdit(widget._id)\" ><i class=\"fas fa-cog\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n</div>\n\n<div class=\"p-3\">\n\n</div>\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n\n\n\n\n\n\n\n\n"
 
 /***/ }),
 
@@ -1817,8 +1824,10 @@ var WidgetListComponent = /** @class */ (function () {
             _this.websiteId = params['wid'];
             _this.pageId = params['pid'];
         });
-        this.widgetService.findWidgetsByPage(this.pageId).subscribe(function (widgets) { return _this.widgets = widgets; });
-        console.log(this.widgets);
+        this.widgetService.findWidgetsByPage(this.pageId).subscribe(function (widgets) {
+            _this.widgets = widgets;
+            console.log(_this.widgets);
+        });
     };
     // get the array from sortable.directive.js.
     WidgetListComponent.prototype.onNewIndexes = function (newIndexes) {
@@ -1844,8 +1853,8 @@ var WidgetListComponent = /** @class */ (function () {
         if (id.indexOf('watch?v=') !== -1) {
             id = id.substring(8);
         }
-        url = "https://www.youtube.com/embed/" + id;
-        //console.log(url);
+        url = 'https://www.youtube.com/embed/' + id;
+        // console.log(url);
         return this.convertToSafeUrl(url);
     };
     WidgetListComponent.prototype.convertToSafeUrl = function (url) {
@@ -1999,13 +2008,12 @@ var Website = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Widget", function() { return Widget; });
 var Widget = /** @class */ (function () {
-    function Widget(_id, widgetType, pageId, size, text, width, url) {
+    function Widget(type, pageId, size, text, width, url) {
         if (size === void 0) { size = 1; }
         if (text === void 0) { text = 'text'; }
         if (width === void 0) { width = '100%'; }
         if (url === void 0) { url = 'url'; }
-        this._id = _id;
-        this.widgetType = widgetType;
+        this.type = type;
         this.pageId = pageId;
         this.size = size;
         this.url = url;
@@ -2304,9 +2312,11 @@ var WidgetService = /** @class */ (function () {
     function WidgetService(http) {
         this.http = http;
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].baseUrl;
-        this.widgetApiUrl = '/api/widget/';
         this.pageApiUrl = '/api/page/';
     }
+    WidgetService.prototype.constructFindUpdateDeleteUrl = function (pageId, widgetId) {
+        return this.baseUrl + this.pageApiUrl + pageId + '/widget/' + widgetId;
+    };
     WidgetService.prototype.createWidget = function (widget, pageId) {
         console.log('front widget service createWidget() called');
         return this.http.post(this.baseUrl + this.pageApiUrl + pageId + '/widget', widget);
@@ -2315,18 +2325,18 @@ var WidgetService = /** @class */ (function () {
         console.log('front widget service findWidgetByPage() called');
         return this.http.get(this.baseUrl + this.pageApiUrl + pageId + '/widget');
     };
-    WidgetService.prototype.findWidgetById = function (widgetId) {
+    WidgetService.prototype.findWidgetById = function (pageId, widgetId) {
         console.log('front widget service findwidgetById() called');
         // Only need to call server's url to get the data.
-        return this.http.get(this.baseUrl + this.widgetApiUrl + widgetId);
+        return this.http.get(this.constructFindUpdateDeleteUrl(pageId, widgetId));
     };
-    WidgetService.prototype.updateWidget = function (widgetId, widget) {
+    WidgetService.prototype.updateWidget = function (pageId, widgetId, widget) {
         console.log('front widget service updateWidget() called');
-        return this.http.put(this.baseUrl + this.widgetApiUrl + widgetId, widget);
+        return this.http.put(this.constructFindUpdateDeleteUrl(pageId, widgetId), widget);
     };
-    WidgetService.prototype.deleteWidget = function (widgetId) {
+    WidgetService.prototype.deleteWidget = function (pageId, widgetId) {
         console.log('front widget service deleteWidget() called');
-        return this.http.delete(this.baseUrl + this.widgetApiUrl + widgetId);
+        return this.http.delete(this.constructFindUpdateDeleteUrl(pageId, widgetId));
     };
     WidgetService.prototype.reorderWidgets = function (startIndex, endIndex, pageId, widgets) {
         console.log('front widget service reorder Widget() called');

@@ -37,10 +37,11 @@ export class WidgetListComponent implements OnInit {
         this.pageId = params['pid'];
       });
     this.widgetService.findWidgetsByPage(this.pageId).subscribe(
-      widgets => this.widgets = widgets
+      widgets => {
+        this.widgets = widgets;
+        console.log(this.widgets);
+      }
     );
-    console.log(this.widgets);
-
   }
 
   // get the array from sortable.directive.js.
@@ -67,14 +68,14 @@ export class WidgetListComponent implements OnInit {
   convertToSafeYoutubeUrl(url) {
     // first get the id of url
     // the url must have /embed endpoint so that youtube server will allow this connection
-    var res = url.split('\/');
+    const res = url.split('\/');
     // console.log(res);
     let id = res[res.length - 1];
     if (id.indexOf('watch?v=') !== -1) {
       id = id.substring(8);
     }
-    url = "https://www.youtube.com/embed/" + id;
-    //console.log(url);
+    url = 'https://www.youtube.com/embed/' + id;
+    // console.log(url);
     return this.convertToSafeUrl(url);
   }
 

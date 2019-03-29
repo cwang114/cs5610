@@ -23,7 +23,8 @@ function createPage(websiteId, page) {
         .then(function (website) {
           website.pages.push(responsePage);
           return website.save();
-        })
+        });
+      return responsePage;
     });
 }
 

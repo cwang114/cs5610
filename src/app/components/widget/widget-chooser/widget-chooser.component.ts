@@ -14,8 +14,8 @@ export class WidgetChooserComponent implements OnInit {
   websiteId: String;
   pageId: String;
 
-  constructor(private widgetService: WidgetService, 
-              private router: Router, 
+  constructor(private widgetService: WidgetService,
+              private router: Router,
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -34,22 +34,25 @@ export class WidgetChooserComponent implements OnInit {
   }
   goToWidgetEdit(widget) {
     this.widgetService.createWidget(widget, this.pageId).subscribe(
-      widget => this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', widget._id])
+      (widget) => {
+        // console.log(widget);
+        this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', widget._id]);
+      }
 
   );
 
   }
-  goToHeader(){
-    let widget = new Widget("", "HEADING", this.pageId, 0, "", "", "");
+  goToHeader() {
+    const widget = new Widget( 'HEADING', this.pageId, 0, '', '', '');
     this.goToWidgetEdit(widget);
   }
   goToImage() {
-    let widget = new Widget("", "IMAGE", this.pageId, 0, "", "", "");
+    const widget = new Widget( 'IMAGE', this.pageId, 0, '', '', '');
     this.goToWidgetEdit(widget);
 
   }
   goToYoutube() {
-    let widget = new Widget("", "YOUTUBE", this.pageId, 0, "", "", "");
+    const widget = new Widget('YOUTUBE', this.pageId, 0, '', '', '');
     this.goToWidgetEdit(widget);
 
   }

@@ -20,27 +20,27 @@ export class WidgetHeaderComponent implements OnInit {
   constructor(private widgetService: WidgetService, private router: Router) { }
 
   ngOnInit() {
-
+    console.log('enter header page');
   }
   goBack() {
     this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
 
   }
   updateWidget() {
-    let text = this.widgetForm.value.newText;
-    let size = +(this.widgetForm.value.newSize);
+    const text = this.widgetForm.value.newText;
+    const size = +(this.widgetForm.value.newSize);
     this.widget.text = text;
     this.widget.size = size;
-    this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+    this.widgetService.updateWidget(this.pageId, this.widget._id, this.widget).subscribe(
       () => this.goBack()
     );
 
   }
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widget._id).subscribe(
-      () => this.goBack() 
+    this.widgetService.deleteWidget(this.pageId, this.widget._id).subscribe(
+      () => this.goBack()
     );
-    
+
   }
   displayWidgetText() {
     return this.widget.text;

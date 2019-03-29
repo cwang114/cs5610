@@ -1,4 +1,4 @@
-<div [ngSwitch]="widget.widgetType">
+<div [ngSwitch]="widget.type">
   <div *ngSwitchCase="'HEADING'">
     <app-widget-header [widget]="widget" [widgetId]="widgetId" [userId]="userId" [websiteId]="websiteId" [pageId]="pageId"></app-widget-header>
   </div>

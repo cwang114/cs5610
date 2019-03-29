@@ -35,7 +35,7 @@ export class FlickrImageSearchComponent implements OnInit {
         this.pageId = params['pid'];
         this.widgetId = params['wgid'];
       });
-    this.widgetService.findWidgetById(this.widgetId).subscribe(
+    this.widgetService.findWidgetById(this.pageId, this.widgetId).subscribe(
       widget => this.widget = widget
     );
   }
@@ -56,7 +56,7 @@ export class FlickrImageSearchComponent implements OnInit {
     let url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
     url += '/' + photo.id + '_' + photo.secret + '_m.jpg';
     this.widget.url = url;
-    this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(
+    this.widgetService.updateWidget(this.pageId, this.widgetId, this.widget).subscribe(
       () => this.goBack());
   }
   goBack() {
