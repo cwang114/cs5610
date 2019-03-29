@@ -127,7 +127,7 @@ module.exports = function (app) {
     const startIndex = req.query.initial;
     const endIndex = req.query.final;
     widgetModel.reorderWidget(pageId, startIndex, endIndex);
-    return res.sendStatus(200);
+    return res.status(200).send({});
   }
 
   function uploadImage(req, res) {
