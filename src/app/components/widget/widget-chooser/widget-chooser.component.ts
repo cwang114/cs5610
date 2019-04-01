@@ -43,18 +43,20 @@ export class WidgetChooserComponent implements OnInit {
 
   }
   goToHeader() {
-    const widget = new Widget( 'HEADING', this.pageId, 0, '', '', '');
+    const widget = new Widget( 'HEADING', this.pageId, 0, '', '', '', '');
     this.goToWidgetEdit(widget);
   }
   goToImage() {
-    const widget = new Widget( 'IMAGE', this.pageId, 0, '', '', '');
+    const widget = new Widget( 'IMAGE', this.pageId, 0, '', '', '', '');
     this.goToWidgetEdit(widget);
-
   }
   goToYoutube() {
-    const widget = new Widget('YOUTUBE', this.pageId, 0, '', '', '');
+    const widget = new Widget('YOUTUBE', this.pageId, 0, '', '', '', '');
     this.goToWidgetEdit(widget);
-
+  }
+  goToHtml() {
+    const widget = new Widget('HTML', this.pageId, 0, '', '', '', '');
+    this.goToWidgetEdit(widget);
   }
 
 }

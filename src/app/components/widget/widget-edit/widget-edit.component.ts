@@ -18,7 +18,7 @@ export class WidgetEditComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private widgetService: WidgetService) {
-    this.widget = new Widget('', '', '', '', '', '');
+    this.widget = new Widget('', '', '', '', '', '', '');
   }
 
   ngOnInit() {

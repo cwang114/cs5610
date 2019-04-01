@@ -102,9 +102,9 @@ function reorderWidget(pageId, start, end) {
       if (err) {
         console.log(err);
       } else {
-        console.log('altered page is ' + page);
+        // console.log('altered page is ' + page);
         var widgetArray = page.widgets;
-        console.log('widget array is ' + widgetArray);
+        // console.log('widget array is ' + widgetArray);
         var startItem = widgetArray[start];
         widgetArray.splice(start, 1);
         widgetArray.splice(end, 0, startItem);

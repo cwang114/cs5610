@@ -1,15 +1,17 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import {Widget} from 'src/app/model/Widget';
-import {Router} from '@angular/router';
-import {WidgetService} from 'src/app/widget.service';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {Widget} from '../../../../model/Widget';
+import {WidgetService} from '../../../../widget.service';
+import {Router} from '@angular/router';
+import { QuillModule } from 'ngx-quill';
+
 
 @Component({
-  selector: 'app-widget-header',
-  templateUrl: './widget-header.component.html',
-  styleUrls: ['./widget-header.component.css']
+  selector: 'app-widget-html',
+  templateUrl: './widget-html.component.html',
+  styleUrls: ['./widget-html.component.css']
 })
-export class WidgetHeaderComponent implements OnInit {
+export class WidgetHtmlComponent implements OnInit {
 
   @ViewChild('f') widgetForm: NgForm;
   @Input() userId: String;
@@ -17,6 +19,7 @@ export class WidgetHeaderComponent implements OnInit {
   @Input() pageId: String;
   @Input() widgetId: String;
   @Input() widget: Widget;
+
   constructor(private widgetService: WidgetService, private router: Router) { }
 
   ngOnInit() {
@@ -27,9 +30,9 @@ export class WidgetHeaderComponent implements OnInit {
   }
   updateWidget() {
     const text = this.widgetForm.value.newText;
-    const size = +(this.widgetForm.value.newSize);
+    const name = this.widgetForm.value.newName;
     this.widget.text = text;
-    this.widget.size = size;
+    this.widget.name = name;
     this.widgetService.updateWidget(this.pageId, this.widget._id, this.widget).subscribe(
       (widget) => {
         console.log('update widget called in front end' + widget);
@@ -44,11 +47,11 @@ export class WidgetHeaderComponent implements OnInit {
     );
 
   }
+  displayWidgetName() {
+    return this.widget.name;
+  }
   displayWidgetText() {
     return this.widget.text;
-  }
-  displayWidgetSize() {
-    return this.widget.size.toString();
   }
 
 }

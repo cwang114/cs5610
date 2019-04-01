@@ -31,7 +31,8 @@ import { SortableDirective } from './sortable.directive';
 import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 import {FlickrService} from './flickr.service';
 import { QuillModule } from 'ngx-quill';
-
+import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
+import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +53,9 @@ import { QuillModule } from 'ngx-quill';
     WidgetYoutubeComponent,
     ProfilebarComponent,
     SortableDirective,
-    FlickrImageSearchComponent
+    FlickrImageSearchComponent,
+    WidgetHtmlComponent,
+    WidgetTextComponent
   ],
   imports: [
     RouterModule,

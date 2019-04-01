@@ -1,7 +1,7 @@
 module.exports = function (app) {
 
   var multer = require('multer'); // npm install multer --save
-  var upload = multer({dest: __dirname+'/../../public/images'});
+  var upload = multer({dest: __dirname + '/../../public/images'});
 
   // fake data
   // var widgets = [
@@ -74,7 +74,7 @@ module.exports = function (app) {
 
   }
 
-  function findWidgetById(req, res){
+  function findWidgetById(req, res) {
     const widgetId = req.params['widgetId'];
     widgetModel.findWidgetById(widgetId).exec(
       function (err, widget) {
@@ -142,7 +142,7 @@ module.exports = function (app) {
     // extract attributes from req.file
     const myFile = req.file;
     console.log(myFile);
-    if(myFile == null) {
+    if (myFile == null) {
       return;
     }
     const originalname = myFile.originalname; // file name on user's computer
@@ -166,11 +166,11 @@ module.exports = function (app) {
           return res.sendStatus(404);
         }
         alteredWidget = widget;
-        console.log('altered widget is '+ alteredWidget);
+        console.log('altered widget is ' + alteredWidget);
       }
     );
 
-    alteredWidget.url = app.settings.baseUrl+'/images/'+filename;
+    alteredWidget.url = app.settings.baseUrl + '/images/' + filename;
     // widget.url = 'images/'+filename;
     console.log("widget url is " + alteredWidget.url);
 
@@ -183,7 +183,7 @@ module.exports = function (app) {
         }
       }
     );
-    const callbackUrl = app.settings.baseUrl+"/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
+    const callbackUrl = app.settings.baseUrl + "/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
     //console.log(app.settings.baseUrl);
     res.redirect(callbackUrl);
 
