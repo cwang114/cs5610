@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from 'src/app/user.service';
 import {User} from 'src/app/model/User';
@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
         user => this.user = user);
 
   }
+
   saveAndDisplayWebsites() {
     const username = this.profileForm.value.username;
     const firstname = this.profileForm.value.firstname;
@@ -36,6 +37,10 @@ export class ProfileComponent implements OnInit {
         () => this.outRouter.navigate(['/user', this.user._id, 'website']));
   }
 
+  logout() {
+    this.userService.logout().subscribe(
+      (data: any) => this.outRouter.navigate(['/login']));
+  }
 
 
 }

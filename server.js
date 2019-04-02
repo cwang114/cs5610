@@ -6,8 +6,11 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const passport = require('passport');
 
-
+// body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -22,6 +25,18 @@ app.use(function(req, res, next) {
     // express will pass the header settings to all
     next();
 });
+
+// express-session
+app.use(cookieParser());
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: process.env.SESSION_SECRET || 'keyboardman'
+}));
+
+// Passport JS
+app.use(passport.initialize());
+app.use(passport.session());
 
 // environment setting
 var env = process.env.NODE_ENV || 'development';
@@ -47,7 +62,7 @@ app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/my-project/index.html'));
 });
 
-// 
+// DB URL
 console.log(config.DB_URL);
 var client = mongoose.connect(config.DB_URL, {useNewUrlParser: true});
 

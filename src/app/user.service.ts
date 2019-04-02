@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from './model/User';
-
+import 'rxjs/Rx';
 // finally the service could get the backend data from a remote server, which is an asynchronous operation.
 
 import {environment} from '../environments/environment';
@@ -16,6 +16,9 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  options = {
+    withCredentials: true
+  };
   baseUrl = environment.baseUrl;
   userApiUrl = '/api/user';
 
@@ -37,14 +40,34 @@ export class UserService {
 
   }
 
-  findUserByCredentials(userName, password): Observable<User> {
-    console.log('front user service findUserByCredentials() called');
-    const url = this.baseUrl + this.userApiUrl + '?username=' + userName + '&password=' + password;
-    console.log('base url is ' + this.baseUrl);
-    console.log('url is ' + url);
-    console.log(this.http.get<User>(url));
-    return this.http.get<User>(url);
+  // findUserByCredentials(userName, password): Observable<User> {
+  //   console.log('front user service findUserByCredentials() called');
+  //   const url = this.baseUrl + this.userApiUrl + '?username=' + userName + '&password=' + password;
+  //   console.log('base url is ' + this.baseUrl);
+  //   console.log('url is ' + url);
+  //   console.log(this.http.get<User>(url));
+  //   return this.http.get<User>(url);
+  //
+  // }
 
+  login(username: String, password: String) {
+    console.log('front user service login() called');
+    const body = {
+      username: username,
+      password: password
+    };
+    return this.http.post(this.baseUrl + '/api/login', body, this.options).map(
+      (res: Response) => {
+        return res;
+      });
+  }
+
+  logout() {
+    this.options.withCredentials = true;
+    return this.http.post(this.baseUrl + '/api/logout', '', this.options).map(
+      (res: Response) => {
+      return res;
+    });
   }
 
   updateUser(userId, user): Observable<User> {
