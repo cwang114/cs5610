@@ -6,7 +6,7 @@ var widgetSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum : ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT']
+    enum : ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'TEXT']
   },
   name: String,
   text: String,

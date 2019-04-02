@@ -58,5 +58,9 @@ export class WidgetChooserComponent implements OnInit {
     const widget = new Widget('HTML', this.pageId, 0, '', '', '', '');
     this.goToWidgetEdit(widget);
   }
+  goToText() {
+    const widget = new Widget('TEXT', this.pageId, 0, '', '', '', '');
+    this.goToWidgetEdit(widget);
+  }
 
 }

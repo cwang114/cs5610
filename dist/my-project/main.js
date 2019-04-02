@@ -1166,7 +1166,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-light bg-light pb-2\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Choose Widget</span>\n\n</nav>\n\n<div class=\"container-fluid pt-2\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div><a (click)=\"goToHeader()\">Header</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a href=\"#\">Label</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a (click)=\"goToHtml()\">HTML</a></div>\n      </td>\n    </tr>\n\n\n    <tr>\n      <td>\n        <div><a href=\"#\">Text Input</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a href=\"#\">Link</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a href=\"#\">Button</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a (click)=\"goToImage()\">Image</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a (click)=\"goToYoutube()\">YouTube</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a href=\"#\">Data Table</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a href=\"#\">Repeater</a></div>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n\n</div> <!-- container-fluid.// -->\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n"
+module.exports = "<nav class=\"navbar navbar-light bg-light pb-2\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Choose Widget</span>\n\n</nav>\n\n<div class=\"container-fluid pt-2\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div><a (click)=\"goToHeader()\">Header</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a href=\"#\">Label</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a (click)=\"goToHtml()\">HTML</a></div>\n      </td>\n    </tr>\n\n\n    <tr>\n      <td>\n        <div><a (click)=\"goToText()\">Text Input</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a href=\"#\">Link</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a href=\"#\">Button</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a (click)=\"goToImage()\">Image</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a (click)=\"goToYoutube()\">YouTube</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a href=\"#\">Data Table</a></div>\n      </td>\n    </tr>\n\n    <tr>\n      <td>\n        <div><a href=\"#\">Repeater</a></div>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n\n</div> <!-- container-fluid.// -->\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n"
 
 /***/ }),
 
@@ -1232,6 +1232,10 @@ var WidgetChooserComponent = /** @class */ (function () {
         var widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_4__["Widget"]('HTML', this.pageId, 0, '', '', '', '');
         this.goToWidgetEdit(widget);
     };
+    WidgetChooserComponent.prototype.goToText = function () {
+        var widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_4__["Widget"]('TEXT', this.pageId, 0, '', '', '', '');
+        this.goToWidgetEdit(widget);
+    };
     WidgetChooserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-widget-chooser',
@@ -1267,7 +1271,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"widget.type\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-youtube>\n  </div>\n  <div *ngSwitchCase=\"'HTML'\">\n    <app-widget-html [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-html>\n  </div>\n\n\n</div>\n"
+module.exports = "<div [ngSwitch]=\"widget.type\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-header>\n  </div>\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-image>\n  </div>\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-youtube>\n  </div>\n  <div *ngSwitchCase=\"'HTML'\">\n    <app-widget-html [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-html>\n  </div>\n  <div *ngSwitchCase=\"'TEXT'\">\n    <app-widget-text [widget]=\"widget\" [widgetId]=\"widgetId\" [userId]=\"userId\" [websiteId]=\"websiteId\" [pageId]=\"pageId\"></app-widget-text>\n  </div>\n\n\n</div>\n"
 
 /***/ }),
 
@@ -1296,7 +1300,7 @@ var WidgetEditComponent = /** @class */ (function () {
         this.activatedRoute = activatedRoute;
         this.router = router;
         this.widgetService = widgetService;
-        this.widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_3__["Widget"]('', '', '', '', '', '', '');
+        this.widget = new src_app_model_Widget__WEBPACK_IMPORTED_MODULE_3__["Widget"]('', '', 0, '', '', '', '');
     }
     WidgetEditComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1795,7 +1799,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  widget-text works!\n</p>\n"
+module.exports = "<nav class=\"navbar navbar-light bg-light pb-2\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Widget Edit</span>\n\n  <a class=\"ml-auto\" (click)=\"updateWidget()\" >\n    <span>\n      <i class=\"fas fa-check dark\"></i>\n    </span>\n  </a>\n</nav>\n\n\n<!--main body-->\n<div class=\"container-fluid pt-2\">\n\n  <!--<form #f=\"ngForm\">-->\n    <!--<div class=\"form-group\">-->\n      <!--<label for=\"headername\" class=\"font-weight-bold\">Name</label>-->\n      <!--<input id=\"headername\"-->\n             <!--name=\"newName\"-->\n             <!--type=\"text\"-->\n             <!--class=\"form-control\"-->\n             <!--placeholder=\"Widget Name\"-->\n             <!--[ngModel]=\"displayWidgetName()\"-->\n             <!--#newName=\"ngModel\">-->\n    <!--</div> &lt;!&ndash; form-group// &ndash;&gt;-->\n\n    <!--<div class=\"form-group\">-->\n      <!--<quill-editor [(ngModel)]=\"widget.text\" name=\"newText\"></quill-editor>-->\n    <!--</div> &lt;!&ndash; form-group// &ndash;&gt;-->\n\n    <!--<div class=\"form-group\">-->\n      <!--<a class=\"btn btn-danger btn-block\" (click)=\"deleteWidget()\" role=\"button\">Delete</a>-->\n    <!--</div>-->\n  <!--</form>-->\n  Text\n  <input [(ngModel)]=\"widget.text\" class=\"form-control\"/>\n  Rows\n  <input [(ngModel)]=\"widget.rows\" class=\"form-control\" type=\"number\"/>\n  <label for=\"Name\">Name</label>\n  <div>\n    <input [(ngModel)]=\"widget.name\" type=\"text\" class=\"form-control\" id=\"Name\" name=\"name\" placeholder=\"Name\">\n  </div>\n  Placeholder\n  <input [(ngModel)]=\"widget.placeholder\" class=\"form-control\" required/>\n  <p></p>\n  <div class=\"input-group\">\n    <input type=\"text\" readonly value=\"Formatted\" class=\"form-control\"/>\n    <span class=\"input-group-addon\">\n      <input [(ngModel)]=\"widget.formatted\" type=\"checkbox\"/>\n    </span>\n  </div>\n\n  <div class=\"form-group\">\n  <a class=\"btn btn-danger btn-block\" (click)=\"deleteWidget()\" role=\"button\">Delete</a>\n  </div>\n</div>\n\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n"
 
 /***/ }),
 
@@ -1811,20 +1815,74 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetTextComponent", function() { return WidgetTextComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _model_Widget__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../model/Widget */ "./src/app/model/Widget.ts");
+/* harmony import */ var _widget_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../widget.service */ "./src/app/widget.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
 
 
 var WidgetTextComponent = /** @class */ (function () {
-    function WidgetTextComponent() {
+    function WidgetTextComponent(widgetService, router) {
+        this.widgetService = widgetService;
+        this.router = router;
     }
     WidgetTextComponent.prototype.ngOnInit = function () {
     };
+    WidgetTextComponent.prototype.goBack = function () {
+        this.router.navigate(['user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    };
+    WidgetTextComponent.prototype.updateWidget = function () {
+        var _this = this;
+        // const text = this.widgetForm.value.newText;
+        // const url = this.widgetForm.value.newUrl;
+        // const width = this.widgetForm.value.newWidth;
+        // this.widget.text = text;
+        // this.widget.url = url;
+        // this.widget.width = width;
+        this.widgetService.updateWidget(this.pageId, this.widget._id, this.widget).subscribe(function () { return _this.goBack(); });
+    };
+    WidgetTextComponent.prototype.deleteWidget = function () {
+        var _this = this;
+        this.widgetService.deleteWidget(this.pageId, this.widget._id).subscribe(function () { return _this.goBack(); });
+    };
+    WidgetTextComponent.prototype.displayWidgetText = function () {
+        return this.widget.text;
+    };
+    WidgetTextComponent.prototype.displayWidgetWidth = function () {
+        return this.widget.width;
+    };
+    WidgetTextComponent.prototype.displayWidgetUrl = function () {
+        return this.widget.url;
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], WidgetTextComponent.prototype, "userId", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], WidgetTextComponent.prototype, "websiteId", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], WidgetTextComponent.prototype, "pageId", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], WidgetTextComponent.prototype, "widgetId", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _model_Widget__WEBPACK_IMPORTED_MODULE_2__["Widget"])
+    ], WidgetTextComponent.prototype, "widget", void 0);
     WidgetTextComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-widget-text',
             template: __webpack_require__(/*! ./widget-text.component.html */ "./src/app/components/widget/widget-edit/widget-text/widget-text.component.html"),
             styles: [__webpack_require__(/*! ./widget-text.component.css */ "./src/app/components/widget/widget-edit/widget-text/widget-text.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_widget_service__WEBPACK_IMPORTED_MODULE_3__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], WidgetTextComponent);
     return WidgetTextComponent;
 }());
@@ -1967,7 +2025,7 @@ module.exports = ".youtube-widget {\n  position: relative;\n  padding-bottom: 56
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-light bg-light pb-2\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Widgets</span>\n\n  <!--to widget choose-->\n  <a class=\"ml-auto\" (click)=\"goToWidgetChoose()\" >\n    <span>\n      <i class=\"fas fa-plus dark\"></i>\n    </span>\n  </a>\n</nav>\n\n\n<!--list and switch-->\n<div appSortable (newIndexes) = \"onNewIndexes($event)\">\n<div class=\"container-fluid pt-0\"\n     *ngFor=\"let widget of widgets\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div [ngSwitch]=\"widget.type\">\n\n          <div *ngSwitchCase=\"'HEADING'\">\n            <!--display the header-->\n            <p [ngStyle]=\"{'font-size': widget.size+'00%'}\">{{widget.text}}</p>\n          </div>\n\n          <div *ngSwitchCase=\"'YOUTUBE'\" class=\"youtube-widget\">\n            <iframe width=\"640\" height=\"360\" [src]=\"convertToSafeYoutubeUrl(widget.url)\" frameborder=\"0\" allowfullscreen></iframe>\n          </div>\n\n          <div *ngSwitchCase=\"'IMAGE'\">\n            <!--display the image-->\n            <img [src]=\"convertToSafeUrl(widget.url)\"/>\n          </div>\n\n          <div *ngSwitchCase=\"'HTML'\">\n            <!--display the html-->\n            <p>{{widget.text}}</p>\n          </div>\n        </div>\n      </td>\n      <td align=\"right\">\n        <a (click)=\"goToWidgetEdit(widget._id)\" ><i class=\"fas fa-cog\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n</div>\n\n<div class=\"p-3\">\n\n</div>\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n\n\n\n\n\n\n\n\n"
+module.exports = "<nav class=\"navbar navbar-light bg-light pb-2\">\n\n  <a (click)=\"goBack()\">\n    <span>\n      <i class=\"fas fa-chevron-left dark\"></i>\n    </span>\n  </a>\n\n  <span class=\"navbar-brand font-weight-bold mr-auto ml-3 dark\">Widgets</span>\n\n  <!--to widget choose-->\n  <a class=\"ml-auto\" (click)=\"goToWidgetChoose()\" >\n    <span>\n      <i class=\"fas fa-plus dark\"></i>\n    </span>\n  </a>\n</nav>\n\n\n<!--list and switch-->\n<div appSortable (newIndexes) = \"onNewIndexes($event)\">\n<div class=\"container-fluid pt-0\"\n     *ngFor=\"let widget of widgets\">\n  <table class=\"table table-borderless\">\n    <tbody>\n    <tr>\n      <td>\n        <div [ngSwitch]=\"widget.type\">\n\n          <div *ngSwitchCase=\"'HEADING'\">\n            <!--display the header-->\n            <p [ngStyle]=\"{'font-size': widget.size+'00%'}\">{{widget.text}}</p>\n          </div>\n\n          <div *ngSwitchCase=\"'YOUTUBE'\" class=\"youtube-widget\">\n            <iframe width=\"640\" height=\"360\" [src]=\"convertToSafeYoutubeUrl(widget.url)\" frameborder=\"0\" allowfullscreen></iframe>\n          </div>\n\n          <div *ngSwitchCase=\"'IMAGE'\">\n            <!--display the image-->\n            <img [src]=\"convertToSafeUrl(widget.url)\"/>\n          </div>\n\n          <div *ngSwitchCase=\"'HTML'\">\n            <!--display the html-->\n            <p>{{widget.text}}</p>\n          </div>\n          <div *ngSwitchCase=\"'TEXT'\">\n            <div *ngIf=\"widget.formatted\">\n              <quill-editor [(ngModel)]=\"widget.text\" name=\"text\"></quill-editor>\n            </div>\n            <input *ngIf=\"!widget.formatted && (!widget.rows || widget.rows===1)\"\n                   placeholder=\"{{widget.placeholder}}\"\n                   class=\"form-control\"/>\n            <textarea *ngIf=\"!widget.formatted && (widget.rows > 1)\"\n                      rows=\"{{widget.rows}}\"\n                      placeholder=\"{{widget.placeholder}}\"\n                      class=\"form-control\">{{widget.text}}</textarea>\n          </div>\n        </div>\n      </td>\n      <td align=\"right\">\n        <a (click)=\"goToWidgetEdit(widget._id)\" ><i class=\"fas fa-cog\"></i></a>\n      </td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n</div>\n\n<div class=\"p-3\">\n\n</div>\n<app-profilebar [curUserId]=\"userId\"></app-profilebar>\n\n\n\n\n\n\n\n\n\n"
 
 /***/ }),
 
@@ -2193,14 +2251,17 @@ var Website = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Widget", function() { return Widget; });
 var Widget = /** @class */ (function () {
-    function Widget(type, pageId, size, text, width, url, name) {
+    function Widget(type, pageId, size, url, width, name, text) {
         this.type = type;
         this.pageId = pageId;
         this.size = size;
         this.url = url;
         this.width = width;
-        this.text = text;
         this.name = name;
+        this.text = text;
+        this.rows = 0;
+        this.deletable = true;
+        this.formatted = false;
     }
     return Widget;
 }());

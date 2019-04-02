@@ -1,3 +1,65 @@
-<p>
-  widget-text works!
-</p>
+<nav class="navbar navbar-light bg-light pb-2">
+
+  <a (click)="goBack()">
+    <span>
+      <i class="fas fa-chevron-left dark"></i>
+    </span>
+  </a>
+
+  <span class="navbar-brand font-weight-bold mr-auto ml-3 dark">Widget Edit</span>
+
+  <a class="ml-auto" (click)="updateWidget()" >
+    <span>
+      <i class="fas fa-check dark"></i>
+    </span>
+  </a>
+</nav>
+
+
+<!--main body-->
+<div class="container-fluid pt-2">
+
+  <!--<form #f="ngForm">-->
+    <!--<div class="form-group">-->
+      <!--<label for="headername" class="font-weight-bold">Name</label>-->
+      <!--<input id="headername"-->
+             <!--name="newName"-->
+             <!--type="text"-->
+             <!--class="form-control"-->
+             <!--placeholder="Widget Name"-->
+             <!--[ngModel]="displayWidgetName()"-->
+             <!--#newName="ngModel">-->
+    <!--</div> &lt;!&ndash; form-group// &ndash;&gt;-->
+
+    <!--<div class="form-group">-->
+      <!--<quill-editor [(ngModel)]="widget.text" name="newText"></quill-editor>-->
+    <!--</div> &lt;!&ndash; form-group// &ndash;&gt;-->
+
+    <!--<div class="form-group">-->
+      <!--<a class="btn btn-danger btn-block" (click)="deleteWidget()" role="button">Delete</a>-->
+    <!--</div>-->
+  <!--</form>-->
+  Text
+  <input [(ngModel)]="widget.text" class="form-control"/>
+  Rows
+  <input [(ngModel)]="widget.rows" class="form-control" type="number"/>
+  <label for="Name">Name</label>
+  <div>
+    <input [(ngModel)]="widget.name" type="text" class="form-control" id="Name" name="name" placeholder="Name">
+  </div>
+  Placeholder
+  <input [(ngModel)]="widget.placeholder" class="form-control" required/>
+  <p></p>
+  <div class="input-group">
+    <input type="text" readonly value="Formatted" class="form-control"/>
+    <span class="input-group-addon">
+      <input [(ngModel)]="widget.formatted" type="checkbox"/>
+    </span>
+  </div>
+
+  <div class="form-group">
+  <a class="btn btn-danger btn-block" (click)="deleteWidget()" role="button">Delete</a>
+  </div>
+</div>
+
+<app-profilebar [curUserId]="userId"></app-profilebar>
