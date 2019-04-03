@@ -19,6 +19,18 @@ module.exports = function (app) {
   // passport JS
   var passport = require('passport');
   var LocalStrategy = require('passport-local').Strategy;
+  var FacebookStrategy = require('passport-facebook').Strategy;
+  var facebookConfig = {
+    // client id: the appId in facebook developer app.
+    clientID: process.env.FACEBOOK_CLIENT_ID || '2142830432464373',
+
+    // client secret: the secret in settings -> basic -> App Secret.
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET || 'bccce688bdd9605ab3edb592a5764d20',
+
+    // callbackURL: products Facebook Login settings -> Client OAuth Settings -> valid OAuth redirect URLs
+    // the callback URL is customized by self. template: http://localhost:3000/auth/facebook/callback.
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL || app.settings.baseUrl + '/auth/facebook/callback/'
+  };
   // Store an encrypted representation of the user in a cookie.
   // This will allow Passport to maintain session information for the currently logged in user.
   passport.serializeUser(serializeUser);
@@ -57,7 +69,38 @@ module.exports = function (app) {
       });
   }
 
+  // implement facebook login strategy
+  passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+  function facebookStrategy(token, refreshToken, profile, done) {
+    console.log('Backend: facebook strategy called');
+    userModel.findUserByFacebookId(profile.id)
+      .then(function (user) {
+        if (user) {
+          return done(null, user);
+        } else {
+          var names = profile.displayName.split(" ");
+          var newFacebookUser = {
+            lastName: names[1],
+            firstName: names[0],
+            email: profile.emails ? profile.emails[0].value : "",
+            facebook: {
+              id: profile.id,
+              token: token
+            }
+          };
+          return userModel.createUser(newFacebookUser);
+
+        }
+      }, function (err) {
+        if (err) {
+          return done(err);
+        }
+      });
+  }
+
   // api list
+  // local strategy
   app.post('/api/login', passport.authenticate('local'), login);
   app.post('/api/logout', logout);
   app.post('/api/register', register);
@@ -69,6 +112,21 @@ module.exports = function (app) {
   app.get('/api/user/:userid', findUserById);
   app.put('/api/user/:userid', updateUser);
   app.delete('/api/user/:userid', deleteUser);
+
+  // facebook strategy
+  app.get('/facebook/login', passport.authenticate('facebook', {scope: 'email'}));
+  // facebook strategy call back
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook',
+      {failureRedirect: '/login'}),
+    function(req, res) {
+      // Successful authentication, redirect to profile page with user id.
+      // console.log(req.user._id);
+      const id = req.user._id;
+      const url = '/user/' + id;
+      return res.redirect(url);
+    });
+
 
   // functions
   function login(req, res) {
@@ -140,21 +198,8 @@ module.exports = function (app) {
     userModel.findUserByUsername(username).exec(
       function (err, user) {
         if (err) {
-          return res.sendStatus(400).send(err);
-        }
-        if (user == null) {
-          return res.sendStatus(404);
-        }
-        return res.status(200).send(user);
-      }
-    );
-  }
-
-  function findUserByCred(res, username, password) {
-    userModel.findUserByCredentials(username, password).exec(
-      function (err, user) {
-        if (err) {
-          return res.sendStatus(400).send(err);
+          console.log(err);
+          return res.status(400).send(err);
         }
         if (user == null) {
           return res.sendStatus(404);
@@ -170,7 +215,7 @@ module.exports = function (app) {
     userModel.findUserById(userId).exec(
       function (err, user) {
         if (err) {
-          return res.sendStatus(400).send(err);
+          return res.status(400).send(err);
         }
         return res.json(user);
       }

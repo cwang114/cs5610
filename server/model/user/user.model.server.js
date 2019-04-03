@@ -6,6 +6,7 @@ var userModel = mongoose.model('User', userSchema);
 // userService at server side will call this function
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
+userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.updateUser = updateUser;
@@ -22,6 +23,11 @@ function createUser(user) {
 function findUserById(userId) {
   console.log('Mongoose: findUserById() called: '+userId);
   return userModel.findById(userId);
+}
+
+function findUserByFacebookId(facebookId) {
+  console.log('Mongoose: findUserByFBId() called: ' + facebookId);
+  return userModel.findOne({'facebook.id': facebookId});
 }
 
 function findUserByUsername(username) {
