@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Widget} from '../../../../model/Widget';
-import {WidgetService} from '../../../../widget.service';
+import {WidgetService} from '../../../../services/widget.service';
 import {Router} from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 

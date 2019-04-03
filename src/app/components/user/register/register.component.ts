@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {UserService} from 'src/app/user.service';
+import {UserService} from 'src/app/services/user.service';
 import {Router} from '@angular/router';
 import {User} from 'src/app/model/User';
 
@@ -21,9 +21,21 @@ export class RegisterComponent implements OnInit {
     const username = this.registerForm.value.username;
     const password = this.registerForm.value.password;
     const user = new User(username, password, '', '');
-    this.userService.createUser(user)
+    // this.userService.createUser(user)
+    //   .subscribe(
+    //     (user) => this.router.navigate(['/user', user._id]));
+    this.userService.register(username, password)
       .subscribe(
-        (user) => this.router.navigate(['/user', user._id]));
+        (user: any) => {
+          // console.log(data);
+          this.router.navigate(['/user', user._id]);
+          return;
+          },
+        (error: any) => {
+          // this.error = error._body;
+          console.log(error);
+        }
+        );
 
   }
 }

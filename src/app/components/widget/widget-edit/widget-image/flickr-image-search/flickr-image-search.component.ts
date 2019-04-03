@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FlickrService} from '../../../../../flickr.service';
+import {FlickrService} from '../../../../../services/flickr.service';
 import {Widget} from '../../../../../model/Widget';
 import {ActivatedRoute, Router} from '@angular/router';
-import {WidgetService} from '../../../../../widget.service';
+import {WidgetService} from '../../../../../services/widget.service';
 
 @Component({
   selector: 'app-flickr-image-search',

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {PageService} from 'src/app/page.service';
+import {PageService} from 'src/app/services/page.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Page} from 'src/app/model/Page';
 

@@ -20,19 +20,21 @@ import {WidgetEditComponent} from './components/widget/widget-edit/widget-edit.c
 import {WidgetHeaderComponent} from './components/widget/widget-edit/widget-header/widget-header.component';
 import {WidgetImageComponent} from './components/widget/widget-edit/widget-image/widget-image.component';
 import {WidgetYoutubeComponent} from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
-import {UserService} from './user.service';
-import {WebsiteService} from './website.service';
-import {PageService} from './page.service';
-import {WidgetService} from './widget.service';
+import {UserService} from './services/user.service';
+import {WebsiteService} from './services/website.service';
+import {PageService} from './services/page.service';
+import {WidgetService} from './services/widget.service';
 import {RouterModule} from '@angular/router';
 import {ProfilebarComponent} from './components/profilebar/profilebar.component';
 import {HttpClientModule} from '@angular/common/http';
-import { SortableDirective } from './sortable.directive';
+import { SortableDirective } from './services/sortable.directive';
 import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
-import {FlickrService} from './flickr.service';
+import {FlickrService} from './services/flickr.service';
 import { QuillModule } from 'ngx-quill';
 import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
+import {AuthGuard} from './services/auth-guard.service';
+import {SharedService} from './services/shared.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +67,7 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
     HttpClientModule,
     QuillModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, AuthGuard, SharedService],
   bootstrap: [AppComponent]
 })
 // @NgModule({

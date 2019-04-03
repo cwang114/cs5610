@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {WidgetService} from 'src/app/widget.service';
+import {WidgetService} from 'src/app/services/widget.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from 'src/app/model/Widget';
 import {DomSanitizer} from '@angular/platform-browser';
-import {SortableDirective} from 'src/app/sortable.directive';
+import {SortableDirective} from 'src/app/services/sortable.directive';
 
 @Component({
   selector: 'app-widget-list',

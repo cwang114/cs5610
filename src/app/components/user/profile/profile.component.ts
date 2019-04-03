@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from 'src/app/user.service';
+import {UserService} from 'src/app/services/user.service';
 import {User} from 'src/app/model/User';
 import {NgForm} from '@angular/forms';
 

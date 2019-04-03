@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import {Widget} from 'src/app/model/Widget';
 import {NgForm} from '@angular/forms';
-import {WidgetService} from 'src/app/widget.service';
+import {WidgetService} from 'src/app/services/widget.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../../../environments/environment';
 

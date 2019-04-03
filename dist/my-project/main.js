@@ -49,6 +49,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_widget_widget_chooser_widget_chooser_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/widget/widget-chooser/widget-chooser.component */ "./src/app/components/widget/widget-chooser/widget-chooser.component.ts");
 /* harmony import */ var _components_widget_widget_edit_widget_edit_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-edit.component */ "./src/app/components/widget/widget-edit/widget-edit.component.ts");
 /* harmony import */ var _components_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component */ "./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.ts");
+/* harmony import */ var _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/auth-guard.service */ "./src/app/services/auth-guard.service.ts");
+
 
 
 
@@ -70,7 +72,7 @@ var routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: _components_user_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'register', component: _components_user_register_register_component__WEBPACK_IMPORTED_MODULE_4__["RegisterComponent"] },
-    { path: 'user/:uid', component: _components_user_profile_profile_component__WEBPACK_IMPORTED_MODULE_5__["ProfileComponent"] },
+    { path: 'user/:uid', component: _components_user_profile_profile_component__WEBPACK_IMPORTED_MODULE_5__["ProfileComponent"], canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"]] },
     { path: 'user/:uid/website', component: _components_website_website_list_website_list_component__WEBPACK_IMPORTED_MODULE_6__["WebsiteListComponent"] },
     { path: 'user/:uid/website/new', component: _components_website_website_new_website_new_component__WEBPACK_IMPORTED_MODULE_7__["WebsiteNewComponent"] },
     { path: 'user/:uid/website/:wid', component: _components_website_website_edit_website_edit_component__WEBPACK_IMPORTED_MODULE_8__["WebsiteEditComponent"] },
@@ -183,19 +185,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_widget_widget_edit_widget_header_widget_header_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-header/widget-header.component */ "./src/app/components/widget/widget-edit/widget-header/widget-header.component.ts");
 /* harmony import */ var _components_widget_widget_edit_widget_image_widget_image_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-image/widget-image.component */ "./src/app/components/widget/widget-edit/widget-image/widget-image.component.ts");
 /* harmony import */ var _components_widget_widget_edit_widget_youtube_widget_youtube_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-youtube/widget-youtube.component */ "./src/app/components/widget/widget-edit/widget-youtube/widget-youtube.component.ts");
-/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./user.service */ "./src/app/user.service.ts");
-/* harmony import */ var _website_service__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./website.service */ "./src/app/website.service.ts");
-/* harmony import */ var _page_service__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./page.service */ "./src/app/page.service.ts");
-/* harmony import */ var _widget_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget.service */ "./src/app/widget.service.ts");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./services/user.service */ "./src/app/services/user.service.ts");
+/* harmony import */ var _services_website_service__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./services/website.service */ "./src/app/services/website.service.ts");
+/* harmony import */ var _services_page_service__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./services/page.service */ "./src/app/services/page.service.ts");
+/* harmony import */ var _services_widget_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./services/widget.service */ "./src/app/services/widget.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _components_profilebar_profilebar_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/profilebar/profilebar.component */ "./src/app/components/profilebar/profilebar.component.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _sortable_directive__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./sortable.directive */ "./src/app/sortable.directive.ts");
+/* harmony import */ var _services_sortable_directive__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./services/sortable.directive */ "./src/app/services/sortable.directive.ts");
 /* harmony import */ var _components_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component */ "./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.ts");
-/* harmony import */ var _flickr_service__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./flickr.service */ "./src/app/flickr.service.ts");
+/* harmony import */ var _services_flickr_service__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./services/flickr.service */ "./src/app/services/flickr.service.ts");
 /* harmony import */ var ngx_quill__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ngx-quill */ "./node_modules/ngx-quill/fesm5/ngx-quill.js");
 /* harmony import */ var _components_widget_widget_edit_widget_html_widget_html_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-html/widget-html.component */ "./src/app/components/widget/widget-edit/widget-html/widget-html.component.ts");
 /* harmony import */ var _components_widget_widget_edit_widget_text_widget_text_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/widget/widget-edit/widget-text/widget-text.component */ "./src/app/components/widget/widget-edit/widget-text/widget-text.component.ts");
+/* harmony import */ var _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./services/auth-guard.service */ "./src/app/services/auth-guard.service.ts");
+/* harmony import */ var _services_shared_service__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./services/shared.service */ "./src/app/services/shared.service.ts");
+
+
 
 
 
@@ -259,7 +265,7 @@ var AppModule = /** @class */ (function () {
                 _components_widget_widget_edit_widget_image_widget_image_component__WEBPACK_IMPORTED_MODULE_19__["WidgetImageComponent"],
                 _components_widget_widget_edit_widget_youtube_widget_youtube_component__WEBPACK_IMPORTED_MODULE_20__["WidgetYoutubeComponent"],
                 _components_profilebar_profilebar_component__WEBPACK_IMPORTED_MODULE_26__["ProfilebarComponent"],
-                _sortable_directive__WEBPACK_IMPORTED_MODULE_28__["SortableDirective"],
+                _services_sortable_directive__WEBPACK_IMPORTED_MODULE_28__["SortableDirective"],
                 _components_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_29__["FlickrImageSearchComponent"],
                 _components_widget_widget_edit_widget_html_widget_html_component__WEBPACK_IMPORTED_MODULE_32__["WidgetHtmlComponent"],
                 _components_widget_widget_edit_widget_text_widget_text_component__WEBPACK_IMPORTED_MODULE_33__["WidgetTextComponent"]
@@ -272,7 +278,7 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_27__["HttpClientModule"],
                 ngx_quill__WEBPACK_IMPORTED_MODULE_31__["QuillModule"]
             ],
-            providers: [_user_service__WEBPACK_IMPORTED_MODULE_21__["UserService"], _website_service__WEBPACK_IMPORTED_MODULE_22__["WebsiteService"], _page_service__WEBPACK_IMPORTED_MODULE_23__["PageService"], _widget_service__WEBPACK_IMPORTED_MODULE_24__["WidgetService"], _flickr_service__WEBPACK_IMPORTED_MODULE_30__["FlickrService"]],
+            providers: [_services_user_service__WEBPACK_IMPORTED_MODULE_21__["UserService"], _services_website_service__WEBPACK_IMPORTED_MODULE_22__["WebsiteService"], _services_page_service__WEBPACK_IMPORTED_MODULE_23__["PageService"], _services_widget_service__WEBPACK_IMPORTED_MODULE_24__["WidgetService"], _services_flickr_service__WEBPACK_IMPORTED_MODULE_30__["FlickrService"], _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_34__["AuthGuard"], _services_shared_service__WEBPACK_IMPORTED_MODULE_35__["SharedService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
         // @NgModule({
@@ -325,7 +331,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var src_app_model_Page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/Page */ "./src/app/model/Page.ts");
-/* harmony import */ var src_app_page_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/page.service */ "./src/app/page.service.ts");
+/* harmony import */ var src_app_services_page_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/page.service */ "./src/app/services/page.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
@@ -381,7 +387,7 @@ var PageEditComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./page-edit.component.html */ "./src/app/components/page/page-edit/page-edit.component.html"),
             styles: [__webpack_require__(/*! ./page-edit.component.css */ "./src/app/components/page/page-edit/page-edit.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_page_service__WEBPACK_IMPORTED_MODULE_4__["PageService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_page_service__WEBPACK_IMPORTED_MODULE_4__["PageService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], PageEditComponent);
@@ -427,7 +433,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_page_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/page.service */ "./src/app/page.service.ts");
+/* harmony import */ var src_app_services_page_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/page.service */ "./src/app/services/page.service.ts");
 
 
 
@@ -468,7 +474,7 @@ var PageListComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            src_app_page_service__WEBPACK_IMPORTED_MODULE_3__["PageService"]])
+            src_app_services_page_service__WEBPACK_IMPORTED_MODULE_3__["PageService"]])
     ], PageListComponent);
     return PageListComponent;
 }());
@@ -512,7 +518,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var src_app_page_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/page.service */ "./src/app/page.service.ts");
+/* harmony import */ var src_app_services_page_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/page.service */ "./src/app/services/page.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_model_Page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/Page */ "./src/app/model/Page.ts");
 
@@ -555,7 +561,7 @@ var PageNewComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./page-new.component.html */ "./src/app/components/page/page-new/page-new.component.html"),
             styles: [__webpack_require__(/*! ./page-new.component.css */ "./src/app/components/page/page-new/page-new.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_page_service__WEBPACK_IMPORTED_MODULE_3__["PageService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_page_service__WEBPACK_IMPORTED_MODULE_3__["PageService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], PageNewComponent);
@@ -668,16 +674,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var src_app_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/user.service */ "./src/app/user.service.ts");
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/user.service */ "./src/app/services/user.service.ts");
+/* harmony import */ var _services_shared_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/shared.service */ "./src/app/services/shared.service.ts");
+
 
 
 
 
 
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(router, userService) {
+    function LoginComponent(router, userService, sharedService) {
         this.router = router;
         this.userService = userService;
+        this.sharedService = sharedService;
     }
     LoginComponent.prototype.ngOnInit = function () {
     };
@@ -698,9 +707,10 @@ var LoginComponent = /** @class */ (function () {
         //     }
         //   );
         // calling client side userservice to send login information
-        console.log('data', username);
+        // console.log('data', username);
         this.userService.login(username, password).subscribe(function (user) {
             // console.log('In login() component, the front end service returns: ' + user);
+            _this.sharedService.user = user;
             _this.router.navigate(['/user', user._id]);
         }, function (error) {
             console.log(error);
@@ -716,7 +726,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/components/user/login/login.component.html"),
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/components/user/login/login.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_services_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"], _services_shared_service__WEBPACK_IMPORTED_MODULE_5__["SharedService"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -760,7 +770,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/user.service */ "./src/app/user.service.ts");
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/user.service */ "./src/app/services/user.service.ts");
 /* harmony import */ var src_app_model_User__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/User */ "./src/app/model/User.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 
@@ -805,7 +815,7 @@ var ProfileComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./profile.component.html */ "./src/app/components/user/profile/profile.component.html"),
             styles: [__webpack_require__(/*! ./profile.component.css */ "./src/app/components/user/profile/profile.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], ProfileComponent);
     return ProfileComponent;
 }());
@@ -849,7 +859,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var src_app_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/user.service */ "./src/app/user.service.ts");
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/user.service */ "./src/app/services/user.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_model_User__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/model/User */ "./src/app/model/User.ts");
 
@@ -870,8 +880,18 @@ var RegisterComponent = /** @class */ (function () {
         var username = this.registerForm.value.username;
         var password = this.registerForm.value.password;
         var user = new src_app_model_User__WEBPACK_IMPORTED_MODULE_5__["User"](username, password, '', '');
-        this.userService.createUser(user)
-            .subscribe(function (user) { return _this.router.navigate(['/user', user._id]); });
+        // this.userService.createUser(user)
+        //   .subscribe(
+        //     (user) => this.router.navigate(['/user', user._id]));
+        this.userService.register(username, password)
+            .subscribe(function (user) {
+            // console.log(data);
+            _this.router.navigate(['/user', user._id]);
+            return;
+        }, function (error) {
+            // this.error = error._body;
+            console.log(error);
+        });
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('f'),
@@ -883,7 +903,7 @@ var RegisterComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./register.component.html */ "./src/app/components/user/register/register.component.html"),
             styles: [__webpack_require__(/*! ./register.component.css */ "./src/app/components/user/register/register.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], RegisterComponent);
     return RegisterComponent;
 }());
@@ -926,7 +946,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WebsiteEditComponent", function() { return WebsiteEditComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_website_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/website.service */ "./src/app/website.service.ts");
+/* harmony import */ var src_app_services_website_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/website.service */ "./src/app/services/website.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_model_Website__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/Website */ "./src/app/model/Website.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
@@ -983,7 +1003,7 @@ var WebsiteEditComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./website-edit.component.html */ "./src/app/components/website/website-edit/website-edit.component.html"),
             styles: [__webpack_require__(/*! ./website-edit.component.css */ "./src/app/components/website/website-edit/website-edit.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_website_service__WEBPACK_IMPORTED_MODULE_2__["WebsiteService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_website_service__WEBPACK_IMPORTED_MODULE_2__["WebsiteService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], WebsiteEditComponent);
@@ -1029,7 +1049,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_website_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/website.service */ "./src/app/website.service.ts");
+/* harmony import */ var src_app_services_website_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/website.service */ "./src/app/services/website.service.ts");
 
 
 
@@ -1069,7 +1089,7 @@ var WebsiteListComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./website-list.component.html */ "./src/app/components/website/website-list/website-list.component.html"),
             styles: [__webpack_require__(/*! ./website-list.component.css */ "./src/app/components/website/website-list/website-list.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_website_service__WEBPACK_IMPORTED_MODULE_3__["WebsiteService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_website_service__WEBPACK_IMPORTED_MODULE_3__["WebsiteService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], WebsiteListComponent);
@@ -1114,7 +1134,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WebsiteNewComponent", function() { return WebsiteNewComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_website_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/website.service */ "./src/app/website.service.ts");
+/* harmony import */ var src_app_services_website_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/website.service */ "./src/app/services/website.service.ts");
 /* harmony import */ var src_app_model_Website__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/Website */ "./src/app/model/Website.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
@@ -1150,7 +1170,7 @@ var WebsiteNewComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./website-new.component.html */ "./src/app/components/website/website-new/website-new.component.html"),
             styles: [__webpack_require__(/*! ./website-new.component.css */ "./src/app/components/website/website-new/website-new.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_website_service__WEBPACK_IMPORTED_MODULE_2__["WebsiteService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_website_service__WEBPACK_IMPORTED_MODULE_2__["WebsiteService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], WebsiteNewComponent);
@@ -1195,7 +1215,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetChooserComponent", function() { return WidgetChooserComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_widget_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/widget.service */ "./src/app/widget.service.ts");
+/* harmony import */ var src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/widget.service */ "./src/app/services/widget.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_model_Widget__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/model/Widget */ "./src/app/model/Widget.ts");
 
@@ -1255,7 +1275,7 @@ var WidgetChooserComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./widget-chooser.component.html */ "./src/app/components/widget/widget-chooser/widget-chooser.component.html"),
             styles: [__webpack_require__(/*! ./widget-chooser.component.css */ "./src/app/components/widget/widget-chooser/widget-chooser.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_widget_service__WEBPACK_IMPORTED_MODULE_2__["WidgetService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_2__["WidgetService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
     ], WidgetChooserComponent);
@@ -1302,7 +1322,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_model_Widget__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/Widget */ "./src/app/model/Widget.ts");
-/* harmony import */ var src_app_widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/widget.service */ "./src/app/widget.service.ts");
+/* harmony import */ var src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/widget.service */ "./src/app/services/widget.service.ts");
 
 
 
@@ -1334,7 +1354,7 @@ var WidgetEditComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            src_app_widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"]])
+            src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"]])
     ], WidgetEditComponent);
     return WidgetEditComponent;
 }());
@@ -1379,7 +1399,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_model_Widget__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/Widget */ "./src/app/model/Widget.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/widget.service */ "./src/app/widget.service.ts");
+/* harmony import */ var src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/widget.service */ "./src/app/services/widget.service.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 
 
@@ -1448,7 +1468,7 @@ var WidgetHeaderComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./widget-header.component.html */ "./src/app/components/widget/widget-edit/widget-header/widget-header.component.html"),
             styles: [__webpack_require__(/*! ./widget-header.component.css */ "./src/app/components/widget/widget-edit/widget-header/widget-header.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], WidgetHeaderComponent);
     return WidgetHeaderComponent;
 }());
@@ -1493,7 +1513,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _model_Widget__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../model/Widget */ "./src/app/model/Widget.ts");
-/* harmony import */ var _widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../widget.service */ "./src/app/widget.service.ts");
+/* harmony import */ var _services_widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../services/widget.service */ "./src/app/services/widget.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
@@ -1562,7 +1582,7 @@ var WidgetHtmlComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./widget-html.component.html */ "./src/app/components/widget/widget-edit/widget-html/widget-html.component.html"),
             styles: [__webpack_require__(/*! ./widget-html.component.css */ "./src/app/components/widget/widget-edit/widget-html/widget-html.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], WidgetHtmlComponent);
     return WidgetHtmlComponent;
 }());
@@ -1605,9 +1625,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FlickrImageSearchComponent", function() { return FlickrImageSearchComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _flickr_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../flickr.service */ "./src/app/flickr.service.ts");
+/* harmony import */ var _services_flickr_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../services/flickr.service */ "./src/app/services/flickr.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../widget.service */ "./src/app/widget.service.ts");
+/* harmony import */ var _services_widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../services/widget.service */ "./src/app/services/widget.service.ts");
 
 
 
@@ -1660,10 +1680,10 @@ var FlickrImageSearchComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./flickr-image-search.component.html */ "./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.html"),
             styles: [__webpack_require__(/*! ./flickr-image-search.component.css */ "./src/app/components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_flickr_service__WEBPACK_IMPORTED_MODULE_2__["FlickrService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_flickr_service__WEBPACK_IMPORTED_MODULE_2__["FlickrService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
-            _widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"]])
+            _services_widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"]])
     ], FlickrImageSearchComponent);
     return FlickrImageSearchComponent;
 }());
@@ -1708,7 +1728,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_model_Widget__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/model/Widget */ "./src/app/model/Widget.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var src_app_widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/widget.service */ "./src/app/widget.service.ts");
+/* harmony import */ var src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/widget.service */ "./src/app/services/widget.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../../environments/environment */ "./src/environments/environment.ts");
 
@@ -1785,7 +1805,7 @@ var WidgetImageComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./widget-image.component.html */ "./src/app/components/widget/widget-edit/widget-image/widget-image.component.html"),
             styles: [__webpack_require__(/*! ./widget-image.component.css */ "./src/app/components/widget/widget-edit/widget-image/widget-image.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], WidgetImageComponent);
     return WidgetImageComponent;
 }());
@@ -1829,7 +1849,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _model_Widget__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../model/Widget */ "./src/app/model/Widget.ts");
-/* harmony import */ var _widget_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../widget.service */ "./src/app/widget.service.ts");
+/* harmony import */ var _services_widget_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/widget.service */ "./src/app/services/widget.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
@@ -1895,7 +1915,7 @@ var WidgetTextComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./widget-text.component.html */ "./src/app/components/widget/widget-edit/widget-text/widget-text.component.html"),
             styles: [__webpack_require__(/*! ./widget-text.component.css */ "./src/app/components/widget/widget-edit/widget-text/widget-text.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_widget_service__WEBPACK_IMPORTED_MODULE_3__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_widget_service__WEBPACK_IMPORTED_MODULE_3__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], WidgetTextComponent);
     return WidgetTextComponent;
 }());
@@ -1940,7 +1960,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var src_app_model_Widget__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/model/Widget */ "./src/app/model/Widget.ts");
-/* harmony import */ var src_app_widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/widget.service */ "./src/app/widget.service.ts");
+/* harmony import */ var src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/widget.service */ "./src/app/services/widget.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
@@ -2011,7 +2031,7 @@ var WidgetYoutubeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./widget-youtube.component.html */ "./src/app/components/widget/widget-edit/widget-youtube/widget-youtube.component.html"),
             styles: [__webpack_require__(/*! ./widget-youtube.component.css */ "./src/app/components/widget/widget-edit/widget-youtube/widget-youtube.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_4__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], WidgetYoutubeComponent);
     return WidgetYoutubeComponent;
 }());
@@ -2054,7 +2074,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetListComponent", function() { return WidgetListComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_widget_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/widget.service */ "./src/app/widget.service.ts");
+/* harmony import */ var src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/widget.service */ "./src/app/services/widget.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 
@@ -2128,55 +2148,12 @@ var WidgetListComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./widget-list.component.html */ "./src/app/components/widget/widget-list/widget-list.component.html"),
             styles: [__webpack_require__(/*! ./widget-list.component.css */ "./src/app/components/widget/widget-list/widget-list.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_widget_service__WEBPACK_IMPORTED_MODULE_2__["WidgetService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_widget_service__WEBPACK_IMPORTED_MODULE_2__["WidgetService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["DomSanitizer"]])
     ], WidgetListComponent);
     return WidgetListComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/flickr.service.ts":
-/*!***********************************!*\
-  !*** ./src/app/flickr.service.ts ***!
-  \***********************************/
-/*! exports provided: FlickrService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FlickrService", function() { return FlickrService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-
-
-
-var FlickrService = /** @class */ (function () {
-    function FlickrService(http) {
-        this.http = http;
-        this.key = 'cdd9cd0a484bf17de077345955ee8ee7';
-        this.secret = 'cc8b43548165c919';
-        this.flickerUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT';
-    }
-    FlickrService.prototype.searchPhotos = function (searchTerm) {
-        var url = this.flickerUrl
-            .replace('API_KEY', this.key)
-            .replace('TEXT', searchTerm);
-        console.log('Inside front end service, the url is ' + url);
-        return this.http.get(url, { responseType: 'text' });
-    };
-    FlickrService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-            providedIn: 'root'
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
-    ], FlickrService);
-    return FlickrService;
 }());
 
 
@@ -2283,10 +2260,90 @@ var Widget = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/page.service.ts":
-/*!*********************************!*\
-  !*** ./src/app/page.service.ts ***!
-  \*********************************/
+/***/ "./src/app/services/auth-guard.service.ts":
+/*!************************************************!*\
+  !*** ./src/app/services/auth-guard.service.ts ***!
+  \************************************************/
+/*! exports provided: AuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user.service */ "./src/app/services/user.service.ts");
+
+
+
+
+var AuthGuard = /** @class */ (function () {
+    function AuthGuard(userService, router) {
+        this.userService = userService;
+        this.router = router;
+    }
+    AuthGuard.prototype.canActivate = function () {
+        return this.userService.loggedIn();
+    };
+    AuthGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+    ], AuthGuard);
+    return AuthGuard;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/flickr.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/services/flickr.service.ts ***!
+  \********************************************/
+/*! exports provided: FlickrService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FlickrService", function() { return FlickrService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
+
+var FlickrService = /** @class */ (function () {
+    function FlickrService(http) {
+        this.http = http;
+        this.key = 'cdd9cd0a484bf17de077345955ee8ee7';
+        this.secret = 'cc8b43548165c919';
+        this.flickerUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT';
+    }
+    FlickrService.prototype.searchPhotos = function (searchTerm) {
+        var url = this.flickerUrl
+            .replace('API_KEY', this.key)
+            .replace('TEXT', searchTerm);
+        console.log('Inside front end service, the url is ' + url);
+        return this.http.get(url, { responseType: 'text' });
+    };
+    FlickrService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+    ], FlickrService);
+    return FlickrService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/page.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/services/page.service.ts ***!
+  \******************************************/
 /*! exports provided: PageService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2295,7 +2352,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageService", function() { return PageService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 
 
@@ -2348,10 +2405,38 @@ var PageService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/sortable.directive.ts":
-/*!***************************************!*\
-  !*** ./src/app/sortable.directive.ts ***!
-  \***************************************/
+/***/ "./src/app/services/shared.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/services/shared.service.ts ***!
+  \********************************************/
+/*! exports provided: SharedService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SharedService", function() { return SharedService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var SharedService = /** @class */ (function () {
+    function SharedService() {
+        this.user = '';
+    }
+    SharedService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
+    ], SharedService);
+    return SharedService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/sortable.directive.ts":
+/*!************************************************!*\
+  !*** ./src/app/services/sortable.directive.ts ***!
+  \************************************************/
 /*! exports provided: SortableDirective */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2413,10 +2498,10 @@ var SortableDirective = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/user.service.ts":
-/*!*********************************!*\
-  !*** ./src/app/user.service.ts ***!
-  \*********************************/
+/***/ "./src/app/services/user.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/services/user.service.ts ***!
+  \******************************************/
 /*! exports provided: UserService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2425,9 +2510,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var rxjs_Rx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/Rx */ "./node_modules/rxjs-compat/_esm5/Rx.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs_Rx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/Rx */ "./node_modules/rxjs-compat/_esm5/Rx.js");
+/* harmony import */ var _shared_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shared.service */ "./src/app/services/shared.service.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
 
 
 
@@ -2435,18 +2524,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var UserService = /** @class */ (function () {
-    function UserService(http) {
+    function UserService(http, router, sharedService) {
         this.http = http;
+        this.router = router;
+        this.sharedService = sharedService;
         this.options = {
-            withCredentials: true
+            withCredentials: false
         };
-        this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl;
+        this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl;
         this.userApiUrl = '/api/user';
     }
-    UserService.prototype.createUser = function (user) {
-        console.log('front user service createUser() called');
-        return this.http.post(this.baseUrl + this.userApiUrl, user);
-    };
+    // createUser(user): Observable<User> {
+    //   console.log('front user service createUser() called');
+    //   return this.http.post<User>(this.baseUrl + this.userApiUrl, user);
+    // }
     UserService.prototype.findUserById = function (userId) {
         console.log('front user service findUserById() called');
         // Only need to call server's url to get the data.
@@ -2465,20 +2556,51 @@ var UserService = /** @class */ (function () {
     //   return this.http.get<User>(url);
     //
     // }
+    UserService.prototype.register = function (username, password) {
+        this.options.withCredentials = true;
+        var user = {
+            username: username,
+            password: password
+        };
+        return this.http.post(this.baseUrl + '/api/register', user, this.options)
+            .map(function (res) {
+            return res;
+        });
+    };
     UserService.prototype.login = function (username, password) {
         console.log('front user service login() called');
+        this.options.withCredentials = true;
         var body = {
             username: username,
             password: password
         };
         return this.http.post(this.baseUrl + '/api/login', body, this.options).map(function (res) {
+            console.log('Inside login() response, res is ' + res);
             return res;
         });
     };
     UserService.prototype.logout = function () {
-        this.options.withCredentials = true;
         return this.http.post(this.baseUrl + '/api/logout', '', this.options).map(function (res) {
             return res;
+        });
+    };
+    UserService.prototype.loggedIn = function () {
+        var _this = this;
+        return this.http.get(this.baseUrl + '/api/loggedIn', this.options)
+            // return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)
+            .map(function (res) {
+            var user = JSON.stringify(res);
+            console.log('Inside loggedIn(), the user is ' + user);
+            if (user !== '0') {
+                // console.log('Inside loggedIn(), the user is ' + user);
+                console.log(_this.sharedService);
+                _this.sharedService.user = user; // setting user so as to share with all components
+                return true;
+            }
+            else {
+                _this.router.navigate(['/login']);
+                return false;
+            }
         });
     };
     UserService.prototype.updateUser = function (userId, user) {
@@ -2493,7 +2615,7 @@ var UserService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _shared_service__WEBPACK_IMPORTED_MODULE_4__["SharedService"]])
     ], UserService);
     return UserService;
 }());
@@ -2502,10 +2624,10 @@ var UserService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/website.service.ts":
-/*!************************************!*\
-  !*** ./src/app/website.service.ts ***!
-  \************************************/
+/***/ "./src/app/services/website.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/services/website.service.ts ***!
+  \*********************************************/
 /*! exports provided: WebsiteService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2514,7 +2636,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WebsiteService", function() { return WebsiteService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 
 
@@ -2568,10 +2690,10 @@ var WebsiteService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/widget.service.ts":
-/*!***********************************!*\
-  !*** ./src/app/widget.service.ts ***!
-  \***********************************/
+/***/ "./src/app/services/widget.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/services/widget.service.ts ***!
+  \********************************************/
 /*! exports provided: WidgetService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2580,7 +2702,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetService", function() { return WidgetService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 
 

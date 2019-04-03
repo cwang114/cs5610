@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Widget} from 'src/app/model/Widget';
-import {WidgetService} from 'src/app/widget.service';
+import {WidgetService} from 'src/app/services/widget.service';
 import {Router} from '@angular/router';
 
 @Component({

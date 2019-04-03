@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {UserService} from 'src/app/user.service';
+import {UserService} from 'src/app/services/user.service';
 import {User} from 'src/app/model/User';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   errorFlag: boolean;
   errorMsg: string;
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService, private sharedService: SharedService) {
   }
 
   ngOnInit() {
@@ -40,10 +41,11 @@ export class LoginComponent implements OnInit {
     //   );
 
     // calling client side userservice to send login information
-    console.log('data', username);
+    // console.log('data', username);
     this.userService.login(username, password).subscribe(
       (user: any) => {
         // console.log('In login() component, the front end service returns: ' + user);
+        this.sharedService.user = user;
         this.router.navigate(['/user', user._id]);
       }, (error: any) => {
         console.log(error);
