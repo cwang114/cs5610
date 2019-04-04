@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
-
+var bcrypt = require("bcrypt-nodejs");
 var userModel = mongoose.model('User', userSchema);
 
 // userService at server side will call this function
@@ -63,7 +63,9 @@ function findAllUsers() {
   userModel.find(function (err, user) {
     console.log(user);
   })
+
 }
+
 
 
 

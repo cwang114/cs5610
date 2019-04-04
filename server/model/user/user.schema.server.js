@@ -16,4 +16,5 @@ var userSchema = new mongoose.Schema({
     token: String
   }
 }, {collection: 'user'});
+
 module.exports = userSchema;

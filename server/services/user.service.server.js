@@ -16,6 +16,9 @@ module.exports = function (app) {
   // db
   const userModel = require('../model/user/user.model.server');
 
+  // encrypt
+  var bcrypt = require("bcrypt-nodejs");
+
   // passport JS
   var passport = require('passport');
   var LocalStrategy = require('passport-local').Strategy;
@@ -52,22 +55,21 @@ module.exports = function (app) {
   passport.use(new LocalStrategy(localStrategy));
 
   function localStrategy(username, password, done) {
-    userModel.findUserByCredentials(username, password).then(
+    userModel.findUserByUsername(username).then(
       function (user) {
-        if (user == null) {
-          return done(null, false);
-        }
-        if (user.username === username && user.password === password) {
+        if (user && bcrypt.compareSync(password, user.password)) {
+          console.log('password valid!');
           return done(null, user);
         } else {
+          console.log('password failed.');
           return done(null, false);
         }
-      }, function (err) {
-        if (err) {
-          return done(err);
-        }
+      }, function (err){
+        console.log('err is ' + err);
+        return done(err);
       });
   }
+
 
   // implement facebook login strategy
   passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
@@ -119,7 +121,7 @@ module.exports = function (app) {
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook',
       {failureRedirect: '/login'}),
-    function(req, res) {
+    function (req, res) {
       // Successful authentication, redirect to profile page with user id.
       // console.log(req.user._id);
       const id = req.user._id;
@@ -146,7 +148,8 @@ module.exports = function (app) {
 
   function register(req, res) {
     var user = req.body;
-    userModel.createUser(user).then(
+    user.password = bcrypt.hashSync(user.password);
+    return userModel.createUser(user).then(
       function (user) {
         if (user) {
           req.login(user, function (err) {
